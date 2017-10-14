@@ -91,7 +91,8 @@ C. Expert -> All steps from B & adapt and extend desired solution
 
 #### Lecture 3 Disclamer
 
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data...
+By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
+
 
 Further risks and ways to mitigate them:
 
@@ -109,6 +110,8 @@ F. Special characters. You may accidentally loose text information during encryp
 
 G. Storing your private key public or keepin it together with encrypted information. Make sure you don't 'commit' private key to a public repository when using Version Control
 
+H. Memory areas of computer storing the key are not securely cleaned after use. This may pose a risk to your data integrity when using this method on public computer
+
 
 
 
@@ -116,17 +119,64 @@ G. Storing your private key public or keepin it together with encrypted informat
 
 #### Lecture 4 basic encryption
 
-Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on encryption process but without overcomplication. My goal of the course is to let you easily use cryptography to your advantage. I believe you should just have basic understanding on the process **WHAT** and know **HOW** to use it. 
+Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on Cryptography. I am not going to overcomplicate things. My goal is to let you easily use cryptography to your advantage. I believe you should just  **WHAT** this process is all about and to know **HOW** to use it. 
+We will not be covering **WHY** this process is working like that. However if you are curious and want to learn more you may of course learn more deeper in details yourself.
 
-study how it works but how to use it to our advantage. You may find a link to wiki article if you want to learn more...
+This lecture will be containing 3 parts:
+
+* History and application in industry
+* Paradox of Cryptography
+* Possible future
 
 Let me just very briefly discuss on this fascinating subject... in easy and digestable way
 
-I think the first time I came across encryption myself was long time ago. I remember as a kids we were playing games with piece of paper with matrices underneeth that it was possible to rotate in order to encrypt and decrypt the message. A kind of very basic example but quite fun to play... for example this one... https://i.pinimg.com/736x/11/01/21/11012101d70299dd32c7c4cfbb915aa6--detective-theme-detective-crafts.jpg
+##### History and application in industry
 
-It was very fun to create secret messages at these times... just for fun.  Then all those stories about WW2 that entire success of army operations was almost relying on encryption methods!!! Today encryption is a very hot topic because potential advantages for economy, industry and even politics! Well, internet communication is today totally relying on this topic!!!
+From Wikipedia "Cryptography or cryptology (from Greek κρυπτός kryptós, "hidden, secret"; and γράφειν graphein, "writing", or -λογία -logia, "study", respectively[1]) is the practice and study of techniques for secure communication in the presence of third parties called adversaries.[2] More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages"
 
-I believe that majoirty of world population does have a minimum idea about the encryption in general.  However I believe that very tify fraction of the world population are really capable to use it themselves. Themselves I mean using some sort of software and be capable to encrypt/decrypt their secrets... For example I was talking to my friend today and he told me that all his passwords he just keeping in his head. Just having four passwords that are recycled amond emails accounts, social networks accounts, online banks, and so on
+I prefer more simple example: 
+
+I need to communicate to my friend xiao one simple message: "Let us go for a coffee to the bar..." I am in the office and all my colleagues are there as well. I don't want them to know what is our plan.
+
+Me and Xiao are knowing chinese so I would write this message to Xiao in Chinese... "讓我們去吧台喝咖啡吧"
+
+That's it! Here only me and Xiao knowing to decrypt this message, others not! Well, they may still but this would require them to crack our code!!!
+
+Cryptography may be more simple. You can just agree with Xiao beforehand about special key words that will have double meaning. For example you can agree together that once you say "weekend" and "forest" together these words would mean "cofee" and "bar" respectively. So you could just simply mention in the free talk to Xiao something like: "Oh this weekend it's going to be a very sunny day. It would be great to spend some time to hike in "Forest"... Others will think that you are just talking about weekend. They will not immediately guess anything if you and then Xiao will leave the office to go to the bar and getting coffee... They may still guess something if you will repeat this trick several time in the week, right?
+
+Advance of computers allowed to bring more functionality and use cases for cryptography:
+
+* secrecy of communication - nobody can read
+* message ingegrity check - insure that nobody modified your message
+* secure computation - compute result without knowing who contributed with inputs
+* authentification - process of confirming identity
+* etc
+
+Today encryption is a very hot topic because potential advantages for economy, industry and even politics! Well, internet communication is today totally relying on this topic!!! 
+
+##### Paradoxes of cryptography
+
+First paradox for me is called "use blindly"
+
+// plot // Y - Min Lower Possibility of applied use, Max High Possibility of applied use; X - % of population 
+
+// show that low fraction of population can apply cryptography, have deeper knowledge, many knows about cryptography, 99% are using it without knowing how it works...
+
+I believe that majoirty of world population does have a minimum idea about the encryption in general. Significant fraction of people are using encryption unintentionally but without deeper understanding on the process. However I believe that very tify fraction of the world population are really capable to use it themselves and consiously. 
+
+This is what I call paradox! People are knowing and using it. Trust it almost blindly. For example Let's have a look to Whats Up messenger. Open this app on your phone, go to settings, Security, then read what is written. Then click on "Learn more..." Scroll down and see the tab "Get the details". Please now post publicly who of you went to this screen before watching this lecture!!!???
+
+Another paradox which I call "I don't know that it's so simple" is about the fact that cryptography is very accessible for almost anybody but we are just not using it!
+
+I was asking my colleagues and friends if they are using cryptosoftware and the answr that I usually have is that they are keep 3 passwords in their head and just recycling them. Most of them just believe it's too complicated to use encryption software of any kind
+
+Third paradox I call is "secret conspiracy".
+
+Have you heard about fears that someone knows "secret master key" to any crypto algorythm or application?
+
+Pretty amazing right? 
+
+
 
 
 
