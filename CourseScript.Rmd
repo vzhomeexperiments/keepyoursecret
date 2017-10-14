@@ -116,7 +116,9 @@ G. Storing your private key public or keepin it together with encrypted informat
 
 #### Lecture 4 basic encryption
 
-Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on encryption process but without overcomplication. My goal of the course is not really study how it works but how to use it to our advantage. You may find a link to wiki article if you want to learn more...
+Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on encryption process but without overcomplication. My goal of the course is to let you easily use cryptography to your advantage. I believe you should just have basic understanding on the process WHAT and know HOW to use it. 
+
+study how it works but how to use it to our advantage. You may find a link to wiki article if you want to learn more...
 
 Let me just very briefly discuss on this fascinating subject... in easy and digestable way
 
