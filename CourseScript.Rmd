@@ -1,6 +1,8 @@
 ---
 title: "Keep Your Secret"
-output: html_notebook
+output:
+  word_document: default
+  html_notebook: default
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
@@ -208,7 +210,7 @@ str(private_key)
 
 you can access each element just by adding dollar sign and the element of the list. For example if I type private underscore key dolalr type i will get a type of the key:
 ```{r}
-key2000$type
+private_key$type
 ```
 
 notice we have there some important elements. one of them is a public key on this we will talk in the next lecture and data. What we can see as well that data list of the public key is also a part of the data of the private key...
@@ -367,7 +369,7 @@ private_key <- read_key(file = "private.key", password = "udemy")
 If I would not provide my password argument R Studio will ask me this password in the interactive mode
 
 ```{r}
-private_key <- read_key(file = "private.key")
+#private_key <- read_key(file = "private.key")
 ```
 
 Now check it out in the Environment our exact same key will be back!!!
@@ -474,8 +476,8 @@ str(secret_encrypted)
 It is a list containing three elements and it is our message that is encrypted. We can't now read it back without a private key.
 
 ```{r}
-# attempting to unserialize 
-original <- unserialize(secret_encrypted$data)
+# attempting to unserialize will result in error
+#original <- unserialize(secret_encrypted$data)
 # error...
 ```
 
@@ -745,7 +747,7 @@ time_taken_dencrypt1x
 
 * file with double size 234Byte
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # measure time required to encrypt the object...
 start.time <- Sys.time()
 
@@ -764,7 +766,7 @@ time_taken_encrypt2x <- end.time - start.time
 time_taken_encrypt2x
 ```
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # measure time required to dencrypt the object...
 start.time <- Sys.time()
 
@@ -792,7 +794,7 @@ time_taken_dencrypt2x
 
 * file with 10x size 1100Byte
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # measure time required to encrypt the object...
 start.time <- Sys.time()
 
@@ -811,7 +813,7 @@ time_taken_encrypt10x <- end.time - start.time
 time_taken_encrypt10x
 ```
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # measure time required to dencrypt the object...
 start.time <- Sys.time()
 
@@ -839,7 +841,7 @@ time_taken_dencrypt10x
 
 Summing up our time
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # relation of time to encrypt / decrypt vs file size
 data.frame(SizeBytes = c(126, 234, 1100),
                      TimeSecsEncr = c(time_taken_encrypt1x, time_taken_encrypt2x, time_taken_encrypt10x),
@@ -1052,7 +1054,7 @@ We will now move to the next subject of the agenda which is to know how can we..
 
 I have a passwords saved in csv file which you can see here... this list can be also found in the materials of this lecture. Feel free to use this or create any other siutable file with dummy data that you can use to practice before applying this concept to the real data... The two chunks of code will do the job. First chunk of code is designed to work using a public key while second chunk can be used with a private key...
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### ENCRYPT ####
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
@@ -1088,7 +1090,7 @@ Instead we will move to the next chapter which is to Decrypt our passwords and w
 
 The code required to decrypt our secret is available below. We are reading the file into the R environment and then decrypting it with a function decrypt_envelope. After that we can unserialize it and write to the file that we can read again. Make sure you are pausing the video and fully understand what is going to happen
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### DECRYPT ####
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
@@ -1128,7 +1130,7 @@ Let's start with Mac OS... if you are using PC Windows feel free to jump to the 
 Put in any usb key and verify that you have disk displayed in the desktop. If it's not present launch disk utility app. Essentially you can format your disk and erase all data on it... I have formatted my disk as MS-DOS FAT file system and named my drive PDMS-DOS. I will then simply copy my private key there:
 
 I will execute this code in R Studio
-```{r}
+```{r, eval=FALSE, include=FALSE}
 ## Storing your key on the USB Drive
 # writing private key on Mac USB key
 read_key("private.key", password = "udemy") %>% 
@@ -1149,7 +1151,7 @@ Let's now simulate the process of encryption usign a public key located in the u
 
 Our file with passwords is located in the R Project Directory [home work place this file in the desktop...and modify script] I will go to the script core code usb mac os dot r and try to execute the code needed to encrypt this file. 
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### ENCRYPT ####
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
@@ -1170,7 +1172,7 @@ read_csv2("PasswordList.csv") %>%
 
 In this case I am using a public key file located in my usb key. Once done I will also execute one more line of code to actually delete the original file with password. Notice that I have constructed a little protection here and I will only remove file in case my encrypted object does exists...
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # NB: remove original file with secrets
 # check first if encrypted data is exist
 if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
@@ -1178,7 +1180,7 @@ if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
 
 I can then keep my encrypted copy of data named PasswordList.Encrypted in any place I like. But let's review the second part of code that will allow me recover my information or we will perform decryption process... the code is exactly the same as in the previous lecture with the only exception that now we are looking to read private key file from the usb drive.
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### DECRYPT ####
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
@@ -1214,7 +1216,7 @@ In this lecture we will review how to store your own presonal private key on the
 Put in any usb key and verify that you have disk displayed in My Computer folder. I would recommend you to format your disk and erase all data on it... I have formatted my disk as MS-DOS FAT file system and named my drive PDMS-DOS. I will then simply copy my private key there:
 
 I will execute this code in R Studio
-```{r}
+```{r, eval=FALSE, include=FALSE}
 ## Storing your key on the USB Drive
 # writing private key on Mac USB key
 read_key("private.key", password = "udemy") %>% 
@@ -1235,7 +1237,7 @@ Let's now simulate the process of encryption usign a public key located in the u
 
 Our file with passwords is located in the R Project Directory [home work place this file in the desktop...and modify script] I will go to the script core code usb mac os dot r and try to execute the code needed to encrypt this file. 
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### ENCRYPT ####
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
@@ -1256,7 +1258,7 @@ read_csv2("PasswordList.csv") %>%
 
 In this case I am using a public key file located in my usb key. Once done I will also execute one more line of code to actually delete the original file with password. Notice that I have constructed a little protection here and I will only remove file in case my encrypted object does exists...
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # NB: remove original file with secrets
 # check first if encrypted data is exist
 if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
@@ -1264,7 +1266,7 @@ if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
 
 I can then keep my encrypted copy of data named PasswordList.Encrypted in any place I like. But let's review the second part of code that will allow me recover my information or we will perform decryption process... the code is exactly the same as in the previous lecture with the only exception that now we are looking to read private key file from the usb drive.
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #### DECRYPT ####
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
@@ -1299,7 +1301,7 @@ Let's define procedure of usage to encrypt data and store encrypted data on the 
 
 // Encrypting document with passwords
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # Summary of steps to generate encrypted message and store it to the file
 library(tidyverse)
 # get public 
@@ -1319,7 +1321,7 @@ read_csv2("PasswordList.csv") %>%
 
 To read the passwords back using the private key:
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
 
@@ -1342,7 +1344,7 @@ On WINDOWS...
 
 Same procedure would be applicable for Windows the only difference is a path to the USB key...
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 # writing private key on PC Windows USB key (replace with your specific key)
 private_key <- read_key("private.key", password = "udemy")
 write_pem(private_key, path = "F:/PDMS-DOS/private.key", password = "udemy")
