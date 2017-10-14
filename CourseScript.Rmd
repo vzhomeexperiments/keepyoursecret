@@ -190,9 +190,17 @@ Have you heard about fears that someone knows "secret master key" to any crypto 
 
 Pretty amazing right? 
 
+##### Possible future
 
+Some immaginable future can bring the following advancements based on computer powered crypto existence...
 
-
+* cryptoidentity - what about assigning a cryptogenerated key to every person, to every document to every car, medical drug?
+* cryptocurrency - think about possible economy where cryptocurrencies are emmitted by everystate, by every big company, by every household. No traditional papermoney but crypto coins... Think about millions types of cryptocurrencies...
+* cryptolanguage - all words, objects, verbs are translated to corresponding cryptocode...?
+* cryptogenetics - DNA of species are decoded and encrypted
+* cryptologistics - sending physical goods without being able to trace back the owner and reciever. Only both reciever and sender knows each other...
+* cryptocommunication - persons will talk to each other in the street using encrypted communication. This might happen at the time when brain will be connected to processor to augment calculating capacity...
+... what possible vision of crypto... on your mind??? Write your thoughts in the course discussion board!!!
 
 #### Lecture 5 Get R Statistical Software
 
