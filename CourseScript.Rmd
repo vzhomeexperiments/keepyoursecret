@@ -117,9 +117,9 @@ H. Memory areas of computer storing the key are not securely cleaned after use. 
 
 ### Section 2 Basics on encryption and tools
 
-#### Lecture 4 basic encryption
+#### Lecture 4 Basic Cryptorgraphy
 
-Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on Cryptography. I am not going to overcomplicate things. My goal is to let you easily use cryptography to your advantage. I believe you should just  **WHAT** this process is all about and to know **HOW** to use it. 
+Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on Cryptography. I am not going to overcomplicate things. I would like to stress the fact that I am not a security expert. My goal is to let you easily use cryptography to your advantage. I believe you should just know **WHAT** this process is all about and to know **HOW** to use it. 
 We will not be covering **WHY** this process is working like that. However if you are curious and want to learn more you may of course learn more deeper in details yourself.
 
 This lecture will be containing 3 parts:
@@ -128,11 +128,22 @@ This lecture will be containing 3 parts:
 * Paradox of Cryptography
 * Possible future
 
+My goal of this lecture is to spark more curiosity in your understanding about cryptography
+
 Let me just very briefly discuss on this fascinating subject... in easy and digestable way
 
 ##### History and application in industry
 
-From Wikipedia "Cryptography or cryptology (from Greek κρυπτός kryptós, "hidden, secret"; and γράφειν graphein, "writing", or -λογία -logia, "study", respectively[1]) is the practice and study of techniques for secure communication in the presence of third parties called adversaries.[2] More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages"
+From Wikipedia "Cryptography or cryptology (from Greek κρυπτός kryptós, "hidden, secret"; and γράφειν graphein, "writing", or -λογία -logia, "study", respectively[1]) is the practice and study of techniques for secure communication in the presence of third parties called adversaries.[2] More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages". 
+
+I would list critical elements of the thing:
+
+* Secret owner and exchanging party -  Group of people that need to privately exchange secret
+* Secret itself - piece of secret information
+* Adversary - person that is looking to obtain secret information
+* Communication protocol - specific method of transforming information from/to decrypted/encrypted state (usually known to restricted group of persons or sometimes public)
+* Encrypted information - piece of information 
+* Key to use communication protocol - specific key required to encrypt information
 
 I prefer more simple example: 
 
@@ -142,11 +153,14 @@ Me and Xiao are knowing chinese so I would write this message to Xiao in Chinese
 
 That's it! Here only me and Xiao knowing to decrypt this message, others not! Well, they may still but this would require them to crack our code!!!
 
+Please pause the video for a second and think where are the critical elements of Cryptography in this case!!!
+
 Cryptography may be more simple. You can just agree with Xiao beforehand about special key words that will have double meaning. For example you can agree together that once you say "weekend" and "forest" together these words would mean "cofee" and "bar" respectively. So you could just simply mention in the free talk to Xiao something like: "Oh this weekend it's going to be a very sunny day. It would be great to spend some time to hike in "Forest"... Others will think that you are just talking about weekend. They will not immediately guess anything if you and then Xiao will leave the office to go to the bar and getting coffee... They may still guess something if you will repeat this trick several time in the week, right?
 
-Advance of computers allowed to bring more functionality and use cases for cryptography:
+This method may be used when you need to communicate without exposing fact that you are actually encrypting the message!!! once again pause the video and think what are the key elements of Cryptography in this example!!!???
 
-* secrecy of communication - nobody can read
+Advance of computers allowed to bring more functionality and use cases for cryptography apart of just secrecy of communication:
+
 * message ingegrity check - insure that nobody modified your message
 * secure computation - compute result without knowing who contributed with inputs
 * authentification - process of confirming identity
