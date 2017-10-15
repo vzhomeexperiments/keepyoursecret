@@ -47,6 +47,9 @@ So please check it up and see how we can tackle this problem!
 
 #### Lecture 1 Introduction
 
+I am not going to overcomplicate things. I would like to stress the fact that I am not a security expert. My goal is to let you easily use cryptography to your advantage. I believe you should just know **WHAT** this process is all about and to know **HOW** to use it. 
+We will not be covering **WHY** this process is working like that. However if you are curious and want to learn more you may of course learn more deeper in details yourself.
+
 Hello and thank you for spending your time here. This is an introduction video to the course keep your secrets under control. In the next few minutes my goal is to explain you what will be in this course and how can you benefit from it
 
 what:
@@ -119,45 +122,52 @@ H. Memory areas of computer storing the key are not securely cleaned after use. 
 
 #### Lecture 4 Basic Cryptorgraphy
 
-Hello Thank you for continuing the course. In this lecture I would give you some intuitive understanding on Cryptography. I am not going to overcomplicate things. I would like to stress the fact that I am not a security expert. My goal is to let you easily use cryptography to your advantage. I believe you should just know **WHAT** this process is all about and to know **HOW** to use it. 
-We will not be covering **WHY** this process is working like that. However if you are curious and want to learn more you may of course learn more deeper in details yourself.
+Hello Thank you for joining the course. In this lecture I would give you some intuitive understanding on Cryptography and specifically to Public Key Cryptography.
 
-This lecture will be containing 3 parts:
+Aditionally I would try to share with you the paradox I have in my mind. At the end of this lecture I hope to inspire you to revert this paradox.
 
-* History and application in industry
-* Paradox of Cryptography
-* Possible future
+Let's get started...
 
-My goal of this lecture is to spark more curiosity in your understanding about cryptography
+What you can learn From Wikipedia is that "Cryptography or cryptology" is coming from greek that means writing hidden secret. This is a study on how to do so...
 
-Let me just very briefly discuss on this fascinating subject... in easy and digestable way
+In english its about how to make sure that adversaries are not able to read your private messages. I just marked here some elements of the story...
 
-##### History and application in industry
+Simply put we want to make sure that Secret owner can send a message to the exchanging party without the possibility of adversary to read the message... The parties are using special communication protocol that is capable to transform their message back and forth. 
 
-From Wikipedia "Cryptography or cryptology (from Greek κρυπτός kryptós, "hidden, secret"; and γράφειν graphein, "writing", or -λογία -logia, "study", respectively[1]) is the practice and study of techniques for secure communication in the presence of third parties called adversaries.[2] More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages". 
+Pay attention that in the course we will call clear text information as DECRYPTED and this abracadabra information and Encrypted...
 
-I would list critical elements of the thing:
+In this course we will exploit usage of Public Key Cryptography in order to keep our credentials like bunch or passwords safe and secure. Also we will look how to exchange some credentials in the encrypted form with your friends or collaborators. You will also be able to think of many other ways of exploiting obtain knowledge
 
-* Secret owner and exchanging party -  Group of people that need to privately exchange secret
-* Secret itself - piece of secret information
-* Adversary - person that is looking to obtain secret information
-* Communication protocol - specific method of transforming information from/to decrypted/encrypted state (usually known to restricted group of persons or sometimes public)
-* Encrypted information - piece of information 
-* Key to use communication protocol - specific key required to encrypt information
+Again from wikipedia Public Key Cryptography is any cryptographic system that uses pairs of keys:
 
-I prefer more simple example: 
+public keys which can be disseminated widely or known to public, and private keys which are known only to the owner
 
-I need to communicate to my friend xiao one simple message: "Let us go for a coffee to the bar..." I am in the office and all my colleagues are there as well. I don't want them to know what is our plan.
+In this case secret owner (on the left) is encrypting the secret using public key and exchanging party (on the right). The reciever is decrypting information with his own private key. Please pay attention that owner of the keys in this case is not the person that have original secret!!!
 
-Me and Xiao are knowing chinese so I would write this message to Xiao in Chinese... "讓我們去吧台喝咖啡吧"
+This is just a person that shared a pulic key to the secret owner.
 
-That's it! Here only me and Xiao knowing to decrypt this message, others not! Well, they may still but this would require them to crack our code!!!
+If our person want to answer secretely, it is possible, but now another set of key needs to be used! Pause the video and think about it for a minute... I have also intentionally placed a public key in the pocket of adversary but it might not
 
-Please pause the video for a second and think where are the critical elements of Cryptography in this case!!!
+You see now that person who have both keys needs to be able to generate those and we will briefly look in to how it is made...
 
-Cryptography may be more simple. You can just agree with Xiao beforehand about special key words that will have double meaning. For example you can agree together that once you say "weekend" and "forest" together these words would mean "cofee" and "bar" respectively. So you could just simply mention in the free talk to Xiao something like: "Oh this weekend it's going to be a very sunny day. It would be great to spend some time to hike in "Forest"... Others will think that you are just talking about weekend. They will not immediately guess anything if you and then Xiao will leave the office to go to the bar and getting coffee... They may still guess something if you will repeat this trick several time in the week, right?
+Essentially the person who generates the keys is doing so by taking a large random number and produces those key using key generating software. Again, I put here the adversary who might eventuanlly have a public key... in the event that person has shared that openly...
 
-This method may be used when you need to communicate without exposing fact that you are actually encrypting the message!!! once again pause the video and think what are the key elements of Cryptography in this example!!!???
+Further in the course we will have a look about the fact that very great attention is neede to manage private and public keys.
+
+Let me also talk very shortly about paradox I see around cryptography. 
+
+If I ask myself simple question about how is using cryptography I would probably get this answer:
+
+* the majority of population are either unaware or not using intentionally. They may just recycle passwords and keep them in their heads
+* paradox is that very tiny fraction of people are exploiting this technology. They know exacty what is happening and they are aware about risks.
+
+My goal is to attempt to change that and provide that knowledge. Give a chance to freely use open source software for larger fraction of people.
+
+With that said I hope you now have better insights on what is cryptography, public key cryptography and you are ready to learn to be better and use it to your advantage!!!
+
+I hope to see you in the next lectures!
+
+
 
 Advance of computers allowed to bring more functionality and use cases for cryptography apart of just secrecy of communication:
 
