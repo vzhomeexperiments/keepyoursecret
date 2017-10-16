@@ -1,0 +1,201 @@
+---
+title: "Keep your secrets under control - Cryptography for All"
+output:
+  word_document: default
+  html_notebook: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+# Keep your secrets under control - Cryptography for All"
+
+#### Disclamer
+
+By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
+
+#### Lecture 6 - generate your private key and store it
+
+Welcome back to the course. In this lecture we will focus on just two things:
+
+* understanding how to create our private key using **openssl** library
+* how to store your **Private Key** as a File in the Computer File System
+
+Let us define four learning objectives for this lecture:
+
+- understand how to generate private key
+- look what is the structure of private key
+- write our key to the file
+- understanding that **Loosing Private Key == Loosing your data**
+
+We will go very slowly with every step so you can follow it in your own pace. For those who already advanced in R and perhaps don't need such detailed explanations feel free to jump to the end of this lecture to review the code chunk you need to use to create the key.
+
+Open your R Studio and create a new script. Start loading a package with a command `library(openssl)`. Inside this library we have function that can create our private key... this function is named `rsa_keygen()`. By typing **?keygen** you can read help for this function 
+
+```{r}
+# load openssl library
+library(openssl)
+
+# read function documentation
+?keygen
+
+```
+
+Now we can simply type private underscore key and generate our key by typing:
+
+```{r}
+# generating private key
+private_key <- rsa_keygen()
+```
+
+Let's understand what happened now. First of all Look to the Environment. YOu have just generated an object named 'private_key'. I want to draw your full attention now: this is a UNIQUE key. If you run command again this will be ANOTHER key. So be careful!!! 
+
+Secondly lets understand what kind of object we just generated... If you look to environment again you will find that this is a list of 4. You can easily see what is inside of this list by using str function. Just type str open parentesis private underscore key and close parentesis... this way you will see a summary on what is in the list
+
+```{r}
+# understand what is in the key
+str(private_key)
+```
+
+you can access each element just by adding dollar sign and the element of the list. For example if I type private underscore key dolalr type i will get a type of the key:
+
+```{r}
+private_key$type
+```
+
+notice we have there some important elements. one of them is a **public key** on this we will talk in the next lecture and data. What we can see as well that data list of the **public key** is also a part of the data of the **private key**...
+
+Let us also make an experiment and tryto play with bits parameters. first we will try to specify bits parameter to be 2000. We call it key2000. After generating this key we will look the structure...
+
+```{r}
+key2000 <- rsa_keygen(bits = 2000)
+str(key2000)
+```
+
+now we will do the same for bits 5000 ...
+
+```{r}
+key5000 <- rsa_keygen(bits = 5000)
+str(key5000)
+```
+
+what differences can you see? You see the lenght of the elements is different...
+
+
+```{r}
+length(key2000$data$n)
+length(key5000$data$n)
+```
+
+If you want to see what is in this long number you can of course simply print it:
+
+```{r}
+private_key$data$n
+```
+
+You can of course study your private key further but we will now concentrate on the way we can keep and retain our key. In fact we should store this key somehow. In fact this will be very important as we can loose the access to our information if we accidentally delete our private key!!! So to store the key we can use another function named write_pem to actually write our password to the file. 
+
+to use this function we must supply the private key we just generated, the name of the file and the password. 
+
+
+Note that we can provide here not only the file name but also a path where we want to keep our file... It is possible to set up a password as well. This way we will restrict our system to read our key from file... this will obviously further increase security
+
+This way we can simply write our file by executing the function write underscore pem. I will now provide password to be 'udemy'
+
+```{r}
+write_pem(x = private_key, path = "private.key", password = "udemy")
+```
+
+After executing this function you should go to the Files tab of the project and you will find your file there. You can do whatever you want with this key but I will make the following. I will save my private key to the usb key. For that I will add a path to the usb key to the function...
+
+```{r}
+#write_pem(x = private_key, path = "USB/private.key", password = "udemy")
+```
+
+Once I am TOTALLY sure that my private key is saved to the file I must delete the private key from the environment. To do this we can run function rm and provide names of the elements we want to remove.
+
+```{r}
+# delete the private key
+rm(private_key)
+```
+
+If you are using R studio you can also delete everything from the environment using a brush icon.
+
+We now have one last and important learning objective: is about loosing our private key... Well, it's the same effect as you simply forget your password and there is no one who can help you to reset it. Risk is to have a data you will never decrypt that is it! Remember this was yourself who generated it so it's up to you how to keep this file in a way you never loose it... For the purpose of the course I will be using a usb stick where I will keep my private key for my private secrets!!!
+
+At this time let's officially conclude this lecture by making a quick summary:
+
+- understand how to generate private key
+We can generate our UNIQUE private key by using command rsa_keygen and set number of bits we want for our key
+
+- look what is the structure of private key
+This way we will create a list with important parameters including part of it will be a public key
+
+- write our key to the file
+In order to store our key outside of computer we can store it to the file. We can still protect our private key file with a password. Once our private key is in the file we must delete our private key from the r studio environment
+
+- risks of loosing keys = risk of loosing your data
+BE very CAREFUL to not loosing your key file. It's not a simple file but a UNIQUE file make sure you have this under control!!!
+
+And before we end this lecture I will just summarise the code you need to generate your private key, write it to the file and delete it from R environment
+
+```{r}
+library(tidyverse)
+openssl::rsa_keygen(bits = 2099) %>% 
+write_pem(path = "private.key", password = "udemy")
+```
+
+
+That is all for this lecture where we discussed about private keys how to create, what they contain and how to manage them... I will be looking forward to welcome you to the next lecture where we will talk about using private key to generate public key
+
+#####################  ////////////// some more research//////////// #################
+* dsa_keygen
+* ec_keygen
+
+```{r}
+ecKey521 <- ec_keygen(curve = "P-521")
+ecKey384 <- ec_keygen(curve = "P-384")
+ecKey256 <- ec_keygen(curve = "P-256")
+```
+
+structure of these file
+
+```{r}
+str(ecKey256)
+str(ecKey384)
+str(ecKey521)
+```
+
+* dsa_keygen
+
+```{r}
+dsaKey1024 <- dsa_keygen(bits = 1024)
+dsaKey2024 <- dsa_keygen(bits = 2024)
+```
+
+structure of these file
+
+```{r}
+str(dsaKey1024)
+str(dsaKey2024)
+```
+
+##### // Some more research -- > trying to generate exact same private key...
+```{r}
+set.seed(1)
+myPrivateKey1 <- rsa_keygen()
+set.seed(1)
+myPrivateKey2 <- rsa_keygen()
+
+# are they equal?
+identical(myPrivateKey1, myPrivateKey2)
+```
+
+```{r}
+str(myPrivateKey1)
+
+```
+
+```{r}
+str(myPrivateKey2)
+```
+

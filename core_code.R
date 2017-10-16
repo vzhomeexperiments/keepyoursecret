@@ -1,5 +1,5 @@
 # R Script to Encrypt/Decrypt information
-# ONLY FOR TRAINING PURPOSES
+# ONLY FOR TRAINING PURPOSES. RISK OF LOOSING INFORMATION. ALWAYS TRY ON DUMMY DATA FIRST
 # UDEMY Course: "Keep Your Secrets Under Your Control"
 # (C) 2017 Vladimir Zhbanko, vz.home.experiments@gmail.com
 # Enjoying the code? Join the course https://udemy.com/keep-secret-under-control
