@@ -3,6 +3,7 @@ title: "Keep your secrets under control - Cryptography for All"
 output:
   word_document: default
   html_notebook: default
+  html_document: default
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
@@ -15,17 +16,13 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 6 - generate your private key and store it
 
-Welcome back to the course. In this lecture we will focus on just two things:
+Welcome back to the course. In this lecture we will focus on several things:
 
 * understanding how to create our private key using **openssl** library
+* getting to know structure of the **Private Key**
 * how to store your **Private Key** as a File in the Computer File System
 
-Let us define four learning objectives for this lecture:
-
-- understand how to generate private key
-- look what is the structure of private key
-- write our key to the file
-- understanding that **Loosing Private Key == Loosing your data**
+The MUST remember takeaway for this lecture is the understanding that **Loosing Private Key == Loosing your data**
 
 We will go very slowly with every step so you can follow it in your own pace. For those who already advanced in R and perhaps don't need such detailed explanations feel free to jump to the end of this lecture to review the code chunk you need to use to create the key.
 
@@ -47,16 +44,17 @@ Now we can simply type private underscore key and generate our key by typing:
 private_key <- rsa_keygen()
 ```
 
-Let's understand what happened now. First of all Look to the Environment. YOu have just generated an object named 'private_key'. I want to draw your full attention now: this is a UNIQUE key. If you run command again this will be ANOTHER key. So be careful!!! 
+Let's understand what happened now. First of all Look to the `Environment`. YOu have just generated an object named `'private_key'`. I want to draw your full attention now: this is a **UNIQUE** key. If you run command again this will be **ANOTHER** key. **So be really careful!!!** 
 
-Secondly lets understand what kind of object we just generated... If you look to environment again you will find that this is a list of 4. You can easily see what is inside of this list by using str function. Just type str open parentesis private underscore key and close parentesis... this way you will see a summary on what is in the list
+Secondly, lets understand what kind of object we just generated... If you look to environment again you will find that this is a list of 4. You can easily see what is inside of this list by using `str()` function. Just type `summary(private_key)` or `str(private_key)` ... this way you will see a summary and structure on what is in the list
 
 ```{r}
 # understand what is in the key
 str(private_key)
+summary(private_key)
 ```
 
-you can access each element just by adding dollar sign and the element of the list. For example if I type private underscore key dolalr type i will get a type of the key:
+you can access each element just by adding dollar sign and the element of the list. For example if I type `private_key$type` i will get a type of the key:
 
 ```{r}
 private_key$type
@@ -64,27 +62,6 @@ private_key$type
 
 notice we have there some important elements. one of them is a **public key** on this we will talk in the next lecture and data. What we can see as well that data list of the **public key** is also a part of the data of the **private key**...
 
-Let us also make an experiment and tryto play with bits parameters. first we will try to specify bits parameter to be 2000. We call it key2000. After generating this key we will look the structure...
-
-```{r}
-key2000 <- rsa_keygen(bits = 2000)
-str(key2000)
-```
-
-now we will do the same for bits 5000 ...
-
-```{r}
-key5000 <- rsa_keygen(bits = 5000)
-str(key5000)
-```
-
-what differences can you see? You see the lenght of the elements is different...
-
-
-```{r}
-length(key2000$data$n)
-length(key5000$data$n)
-```
 
 If you want to see what is in this long number you can of course simply print it:
 
@@ -92,14 +69,14 @@ If you want to see what is in this long number you can of course simply print it
 private_key$data$n
 ```
 
-You can of course study your private key further but we will now concentrate on the way we can keep and retain our key. In fact we should store this key somehow. In fact this will be very important as we can loose the access to our information if we accidentally delete our private key!!! So to store the key we can use another function named write_pem to actually write our password to the file. 
 
-to use this function we must supply the private key we just generated, the name of the file and the password. 
+You can of course study your `private key` further but we will now concentrate on the way we can **keep and retain** our key. In fact we should store this key somehow. In fact this will be very important as we can loose the access to our information if we accidentally delete our private key!!! So to store the key we can use another function named **write_pem()** to actually write our password to the file. 
 
+to use this function we must supply the private key we just generated, the name of the file and the `password` [optional].
 
 Note that we can provide here not only the file name but also a path where we want to keep our file... It is possible to set up a password as well. This way we will restrict our system to read our key from file... this will obviously further increase security
 
-This way we can simply write our file by executing the function write underscore pem. I will now provide password to be 'udemy'
+This way we can simply write our file by executing the function **write_pem()**. I will now provide password to be 'udemy'
 
 ```{r}
 write_pem(x = private_key, path = "private.key", password = "udemy")
@@ -147,7 +124,32 @@ write_pem(path = "private.key", password = "udemy")
 
 That is all for this lecture where we discussed about private keys how to create, what they contain and how to manage them... I will be looking forward to welcome you to the next lecture where we will talk about using private key to generate public key
 
-#####################  ////////////// some more research//////////// #################
+
+##### ################  ////////////// some more research, optional read...//////////// #################
+
+Let us also make an experiment and try to play with `bits` parameter. First we will try to specify `bits` parameter to be **2000**. We call it `key2000`. After generating this key we will look the structure...
+
+```{r}
+key2000 <- rsa_keygen(bits = 2000)
+str(key2000)
+```
+
+now we will do the same for bits 5000 ...
+
+```{r}
+key5000 <- rsa_keygen(bits = 5000)
+str(key5000)
+```
+
+what differences can you see? You see the lenght of the elements is different...
+
+
+```{r}
+length(key2000$data$n)
+length(key5000$data$n)
+```
+
+
 * dsa_keygen
 * ec_keygen
 
@@ -180,6 +182,7 @@ str(dsaKey2024)
 ```
 
 ##### // Some more research -- > trying to generate exact same private key...
+
 ```{r}
 set.seed(1)
 myPrivateKey1 <- rsa_keygen()
@@ -189,6 +192,8 @@ myPrivateKey2 <- rsa_keygen()
 # are they equal?
 identical(myPrivateKey1, myPrivateKey2)
 ```
+
+Keys are really different...
 
 ```{r}
 str(myPrivateKey1)
