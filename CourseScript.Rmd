@@ -11,7 +11,18 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 
 ### Promo
 
-Hello and welcome to the course Keep yOUr secrets under control! This course is about applied cryptography in a way that you decide how yuo generate your private key, with which software you do it and more importantly you control entire process yourself!!! At the end of the course you will be able to create your own Private Keys, be capable to encrypt and decrypt your information. At the end of this course you will be able to securely store your passwords, secret thoughts or share credentials over the internet...
+Welcome to the course Keep yOUr secrets under control! 
+
+I have created this course because I believe that so many people are either completely anaware about this fascinating technology or they are using it inadvertly without any deeper understanding.
+
+While not being computer developer or programmer I can easily exploit this technology to my advantage and I am passionate to share my knowledge wiht you...
+
+This is my Private Key which I use to generate my Public Key that looks like this. I can use it to encrypt my user credentials. 
+And decrypt it when needed with my private key
+
+In this course you will learn how clear and surprisingly simple the process can be using open source totally unlocked R Statistical Software...
+
+ At the end of this course you will be able to securely store your passwords, secret thoughts or share credentials over the internet...
 
 You may ask me, why to reinvent the wheel? Encryption software was already invented and can be used even for free!
 
