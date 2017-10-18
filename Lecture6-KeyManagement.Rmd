@@ -35,14 +35,14 @@ library(openssl)
 
 ```
 
-Now we can simply type private underscore key and generate our key by typing:
+Now we can simply type private_key and generate our key by typing:
 
 ```{r}
 # generating private key
 private_key <- rsa_keygen()
 ```
 
-Let's understand what happened now. First of all Look to the `Environment`. YOu have just generated an object named `'private_key'`. I want to draw your full attention now: this is a **UNIQUE** key. If you run command again this will be **ANOTHER** key. **So be really careful!!!** 
+Let's understand what happened now. First of all Look to the `Environment`. You have just generated an object named `'private_key'`. I want to draw your full attention now: this is a **UNIQUE** key. If you run command again this will be **ANOTHER** key. **So be really careful!!!**. 
 
 Secondly, lets understand what kind of object we just generated... If you look to environment again you will find that this is a list of 4. You can easily see what is inside of this list by using `str()` function. Just type `summary(private_key)` or `str(private_key)` ... this way you will see a summary and structure on what is in the list
 

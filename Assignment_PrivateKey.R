@@ -14,7 +14,7 @@ library(tidyverse)
 
 #### Create PRIVATE KEY  ####
 # generate your private key (NB: make sure to do back up copy!!!)
-private_key <- rsa_keygen(bits = 12346)
+private_key <- rsa_keygen(bits = 1234)
 
 # understand structure of the private key
 str(private_key)
