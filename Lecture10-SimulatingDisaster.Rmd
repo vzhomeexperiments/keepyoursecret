@@ -28,7 +28,12 @@ I will group these disasters into 2 categories:
 
 ##### Keys becoming public...
 
-* 
+* Submitting your private key or passphrases to public repository
+* Loosing control on USB keys or computers with Private Key
+
+Please feel free to suggest other risks you think of either in question board of the course or by sending private message...
+
+
 
 
 
