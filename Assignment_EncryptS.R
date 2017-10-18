@@ -27,10 +27,12 @@ read_key(file = "private.key", password = "udemy") %>%
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
 
-# before running code we remove encrypted information
+## Task 1 - Check your File System for the file with Encrypted Information:
+# Review code below that will delete object with encrypted information
 if(file.exists("PasswordList.Encrypted")){file.remove("PasswordList.Encrypted")}
 
-## Encrypt with PUBLIC key (e.g. send this code to collaborator)
+## Task 2 - Encrypting with 'public.key' - review code
+# Encrypt with PUBLIC key may be required when encryption process is executed by your collaborator
 read_csv("PasswordsLIST.csv") %>% 
   # serialize the object
   serialize(connection = NULL) %>% 
@@ -39,17 +41,27 @@ read_csv("PasswordsLIST.csv") %>%
   # write encrypted data to File
   write_rds("PasswordList.Encrypted")
 
-# ## Encrypt with PRIVATE key (e.g. use this code yourself)
-# read_csv("PasswordsLIST.csv") %>% 
-#   # serialize the object
-#   serialize(connection = NULL) %>% 
-#   # encrypt the object, NB: R will interactively ask you password
-#   encrypt_envelope("private.key") %>% 
-#   # write encrypted data to File
-#   write_rds("PasswordList.Encrypted")
+## Task 3 - Encrypting with 'private.key' suggested when you encrypt information yourself
+# you can reduce risk of loosing information if you encrypt with your private key...
+read_csv("PasswordsLIST.csv") %>%
+  # serialize the object
+  serialize(connection = NULL) %>%
+  # encrypt the object, NB: R will interactively ask you password
+  encrypt_envelope("private.key") %>%
+  # write encrypted data to File
+  write_rds("PasswordList.Encrypted")
 
+## Task 4 - Removing original file in clear text if the encrypted object is created
+# check first if encrypted data is exist and we have our 'private.key' with us!!!
+if(file.exists("PasswordList.Encrypted") &&
+   file.exists("private.key")) {file.remove("PasswordsLIST.csv")}
 
-# NB: remove original file with secrets
-# check first if encrypted data is exist
-if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordsLIST.csv")}
-
+## Task 5 - Encrypt data contained in the object 'mtcars'...
+# use provided code snippets and encrypt dataframe 'mtcars'. Name the encrypted file as 'mtcars.Encrypted'
+mtcars %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("mtcars.Encrypted")
