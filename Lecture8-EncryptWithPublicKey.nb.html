@@ -187,24 +187,24 @@ $(document).ready(function () {
 <li>we will serialize and encrypt this object</li>
 <li>we will then write this encrypted object to the file</li>
 </ul>
-<p>To roll things interesting. We will look at the situation that I have a simple file with passwords. This will be our <strong>secret</strong> we will want to encrypt. This ‘dummy’ secret is stored in the file ‘PasswordList.csv’. Feel free to open this file. It is a table where one column contains user name and anothe column contains passwords. What we will need to do next is to provide this file to a coding machine which will be our <strong>R Statistical Software</strong> and functions provided by package <strong>openssl</strong>. This software will digest this object and encrypt it using a <strong>public key</strong>. And obviously next we will write encrypted file back to the folder in a form of the file…</p>
+<p>To roll things interesting. We will look at the situation that I have a simple file with passwords. This will be our <strong>secret</strong> we will want to encrypt. This ‘dummy’ secret is stored in the file ‘PasswordsLIST.csv’. Feel free to open this file. It is a table where one column contains user name and anothe column contains passwords. What we will need to do next is to provide this file to a coding machine which will be our <strong>R Statistical Software</strong> and functions provided by package <strong>openssl</strong>. This software will digest this object and encrypt it using a <strong>public key</strong>. And obviously next we will write encrypted file back to the folder in a form of the file…</p>
 <p>By the end of this lecture we will reach the state to have our secret encrypted and packed to the file to be stored or shared securely…</p>
 <p>I would like to mention for more experienced users to scroll video quicker if you understand our code and for others please pause the video and try to repeat this code by yourself…</p>
 <p>We will start with a reminder not to use any business critical or personal information during the course. Remember that this course is just providing you education and you should use dummy data for practice not real one. Otherwise there is a chance that you can render your data unusable and loose it completely. Only start using material from the course once you are totally understand your actions</p>
 <p>once we are ready we can start acutally to read our file</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBvYmplY3QgdG8gZW5jcnlwdFxubGlicmFyeSh0aWR5dmVyc2UpXG5zZWNyZXRfY2xlYXJUZXh0IDwtIHJlYWRfY3N2MihcIlBhc3N3b3JkTGlzdC5jc3ZcIilcbiMgdmlldyBvdXIgc2VjcmV0Li4uXG5zZWNyZXRfY2xlYXJUZXh0XG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBvYmplY3QgdG8gZW5jcnlwdFxubGlicmFyeSh0aWR5dmVyc2UpXG5zZWNyZXRfY2xlYXJUZXh0IDwtIHJlYWRfY3N2KFwiUGFzc3dvcmRzTElTVC5jc3ZcIiwgbG9jYWxlID0gKVxuIyB2aWV3IG91ciBzZWNyZXQuLi5cbnNlY3JldF9jbGVhclRleHRcbmBgYCJ9 -->
 <pre class="r"><code># object to encrypt
 library(tidyverse)
-secret_clearText &lt;- read_csv2(&quot;PasswordList.csv&quot;)
+secret_clearText &lt;- read_csv(&quot;PasswordsLIST.csv&quot;, locale = )
 # view our secret...
 secret_clearText</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6M30sInJkZiI6Ikg0c0lBQUFBQUFBQUEzMVF6VXJEUUJEZS9HaG9vRnJ3QmZUZ0xSdG9LdjdjZzlDRElJTFE2elpaWTJqY2hFMUs5RmJmeEtQZVZIeUR2RUI4SUJ0bjR5NlVwWGpJN09TYmIrYWIrVzdDV2VET1hJU1FpU3dib2dXcGJVSXdrSTBHNG4xRXlEcm9BWVJHOEFGakpRckhWMCtYWkVGdlM4cW40ZGdyU0ZuaU91Y3hIZ2VURTl4OE5pL05hL08yalJ4NFBhL3ZhTi9iaisvbjlndGZuSitkU3NtalRmTEVJL05Ja3Z2Sm9sZmJjU2ZLb0N6M1U2QWJrNHI0ZDV3OFVKM09BTlBwSXlGM09BMjlheGkxUldQQTg5cFhqVU5oMkFwQzEzVS84S3cxc3BNWFZab3pvSnJDT2tmVE1yZ0c3QytaR0IzajZIN0pGamdRNjB2TDBULzVVT2JXUm03OHJXSjFVc0tSRXJ1VUpTbWp5b0tNekdtbXRvV2pTcEtvbWxNVHpsS1d5Tjg5T0x5LzJ5OTR5aXJsTHFDbFgrVVZVVlBjS004VTBqdUMxcitGcVBiU1hnSUFBQT09In0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6M30sInJkZiI6Ikg0c0lBQUFBQUFBQUE1VlN3VTdDTUJndWJEaVpRVkhqZlltSk41YUFQb0FIdkJsak1DWmNTMWRZdzJoSld6SzU0WnQ0OUtqR04rQUY4SUZrdHFNbFk4YURTOXIrL2I1dlgvLy9iM3ZkZnNmdit3Q0FLbkJjTlRzcWRLdHFxZ0FYMVBYNkJJQnpxbEUxbW1vNGhxak5CT1lQeFUydnVMa3R5WThtOHlFYzQrc0pKRW1JMk1UQVo1QXlHV01lL29PMHhtQ2hSU2ZMbCtXckdoK3RkdWZ5cWlVRUZvWTVua0loY25EMXRuci9lbDU5R3Q5RFRXemtjSUNpVXFZWDk0cE5HWStDbE1nNEVGT01DRXlDQkVwQ0F4UkREcEhFWEJoMXNLdEdjejVQQ1BxdE85L1JzWm5jR2hla3U2MnZvVVQ5WTdLem9COUJDY01oaHhOY2xsT0ZXYmxyd1AxSGRSZDNXbXhFTjdxTmxyUTVtZjFCRnd2RXlWUVNSa3ZtZGM3UzBCN1EwTzlsb2FZc3k3N1ZzaTZKUFpaYktHbFZ2eHl2VkVLRmw0RG1qR3JycUlYaUdSMjNPbTFkWjg1dnZyL2lob21kUXV4dWNuRXljNFpuenRqRGRFVG90ZzBKSEdEYkJrOVZKZURJY2w0S09TVjBaQitMcWp3dlBKeHlRcVc5Qm9XS1VESUpyWXVQV0dLUnZDVmcvUU91NVZuV1hnTUFBQT09In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["User ID,Password"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"MyFakeUserID1,pass-word-1234-<U+00F2><U+00E0><U+00E8><U+00E9>"},{"1":"MyFakeUserID2,word-pass-<U+0430><U+0431><U+0441><U+0434>-9876"},{"1":"MyFakeUserID3,abcd-pass-1234-word"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+{"columns":[{"label":["UserName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Email"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Password"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Description"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"userS","2":"myfake@mail.com","3":"<U+00E0><U+00E8><U+00E0><U+00F2>-1234-sses","4":"Password with special latin characters"},{"1":"userR","2":"another.fake@mail.com","3":"pass1234-<U+0430><U+0431><U+0441><U+0434>","4":"Password with cyrylic characters"},{"1":"userL","2":"another.fake@mail.com","3":"pass-1234-abcd","4":"Password without special characters"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -222,56 +222,79 @@ secret_clearText</code></pre>
 <p>Pay attention how this data is look like! I have included there some characters that I took from cyrilic and latin keyboard layout…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUF3dHlpVERpaXVCaVlHQmdZbUJtQVpMTVFDWUxFNUJnWkdCaDRBVFJGUXdNek1KZ0FRWUdBYkJDaGdhUWhLcHZwVnRpZG1wb2NXcVJwNHVoVGtGaWNiRnVlWDVSaXE2aGtiR0o3dUZOaHhjY1huRjRKVGJGUmpwZ2RXQWRGelpjMkhpeDhjSVdYVXNMY3pNMHExbVRjNEJLb05iQ0JMbFNFa3NTOWRLS0VuTlQwWlhuQWNYUWxRdUFyRlR3ZE5FSkFCb0ZzaFpORTJkUmZya2VUQ012eUhzTlFPTC8vLy8vZ05RL05NWHMrUVVsbWZsNVFLVk1vQkJoUmJPTHNRaE5nTDgwRDJSMGltNXlSbWxldHE0NXlQblFrR1NBV3NjSUNWRTRteEZpSmZOL3FGR3NVS1BZVXZQU00vTlNZVjdOU1V4S3pZRnkrSUJlQVB0QXI2QW9NNjhFRms1QTBXSzlrdnlTUkpnNnJ1VDhISmdJMkc4TS93QnZOVWtXL3dFQUFBPT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MSwibnJvdyI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVFTMjdDTUJDZC9BcEVLdlJ6amtUaWM0UWVvR0xGMWszY0VqWFlrVzFFbC9RbVhYWlpFRGZnQXVtRkVzYkdadUdGeCtNM3oyL216ZkpsTlV0WEtRQ0VFTVVZSTB6akVFTUFNWXowL1FVUVBSc0E0TUVRWWE4TFQrZWY4eStlWXphZHpSZVpsRlRheW1ORHBEUmcrOWNlL3IvYms2ZVpGRFV5cko0RDA1SW9rcjhMc3FFK25TSG0wNGV2S0xIam92VElJOEYzdWZ0d3IrZmRZK2o3dnNPcjg4Z0QzcWlLTTZTRzJtTGk5UWlFQjB5MlRFdVhXYkhlc3M5c29jZTJxd0hiTHJpdTZKWUgxNVpSYjZVU0szVkgyVWZGcUxOWWt6ZGEyOGNZTFJnSGVTTXFwdHgrRUpXNTRvbzRYbHJ3MmlIR0czUVhqNEJwNzlBQkFBQT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["User ID,Password"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"MyFakeUserID1,pass-word-1234-<U+00F2><U+00E0><U+00E8><U+00E9>"},{"1":"MyFakeUserID2,word-pass-<U+0430><U+0431><U+0441><U+0434>-9876"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+{"columns":[{"label":["Password"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"<U+00E0><U+00E8><U+00E0><U+00F2>-1234-sses"},{"1":"pass1234-<U+0430><U+0431><U+0441><U+0434>"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>This data now needs to be encrypted. Before we do that however we need to “serialize” this data. This is required to convert our message to “standard” form for the algorithm to encrypt the “message”. We will not go too deep into explanations here and just taking this as granted. What we know however is that the result of this operation. It will be a vector of specific length. Elements of the vector will be numbers/characters</p>
+<p>This is because Encoding is different and not UTF-8. The file we will encrypt will get returned as it was however I just wanted to pay your attention to that as you will be aware</p>
+<p>At this stage we are having our data in the object called <strong>secret_clearText</strong>. This data now needs to be encrypted. Before we do that however we need to “serialize” this data.</p>
+<ul>
+<li>now we will serialize and encrypt this object</li>
+</ul>
+<p>This is required to convert our message to “standard” form for the algorithm to encrypt the “message”. We will not go too deep into explanations here and just taking this as granted. What we know however is that the result of this operation. It will be a vector of specific length. Elements of the vector will be numbers/characters</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXJpYWxpemUgdGhlIG9iamVjdFxuc2VjcmV0X3NlcmlhbGl6ZWQgPC0gc2VyaWFsaXplKHNlY3JldF9jbGVhclRleHQsIE5VTEwpXG5oZWFkKHNlY3JldF9zZXJpYWxpemVkLCAyMClcbmxlbmd0aChzZWNyZXRfc2VyaWFsaXplZClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXJpYWxpemUgdGhlIG9iamVjdFxuc2VjcmV0X3NlcmlhbGl6ZWQgPC0gc2VyaWFsaXplKHNlY3JldF9jbGVhclRleHQsIE5VTEwpXG4jIHZpZXcgdG9wIDIwIGVsZW1lbnRzIG9mIHRoZSB2ZWN0b3JcbmhlYWQoc2VjcmV0X3NlcmlhbGl6ZWQsIDIwKVxuYGBgIn0= -->
 <pre class="r"><code># serialize the object
 secret_serialized &lt;- serialize(secret_clearText, NULL)
-head(secret_serialized, 20)
+# view top 20 elements of the vector
+head(secret_serialized, 20)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSA1OCAwYSAwMCAwMCAwMCAwMiAwMCAwMyAwNCAwMCAwMCAwMiAwMyAwMCAwMCAwMCAwMyAxMyAwMCAwMFxuIn0= -->
+<pre><code> [1] 58 0a 00 00 00 02 00 03 04 00 00 02 03 00 00 00 03 13 00 00</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjbGFzcyBvZiB0aGlzIG9iamVjdFxuY2xhc3Moc2VjcmV0X3NlcmlhbGl6ZWQpXG5gYGAifQ== -->
+<pre class="r"><code># class of this object
+class(secret_serialized)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicmF3XCJcbiJ9 -->
+<pre><code>[1] &quot;raw&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsZW5ndGggb2YgdGhpcyAncmF3JyB2ZWN0b3Jcbmxlbmd0aChzZWNyZXRfc2VyaWFsaXplZClcbmBgYCJ9 -->
+<pre class="r"><code># length of this 'raw' vector
 length(secret_serialized)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDExNDFcbiJ9 -->
+<pre><code>[1] 1141</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>And now it’s time to go ahead and finally ENCRYPT our serialized message. We will use function <strong>encrypt_envelope()</strong> from <strong>openssl</strong> package. All we need to do is to provide our “message” and our public key!!!</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBlbmNyeXB0IHRoZSBvYmplY3RcbnNlY3JldF9lbmNyeXB0ZWQgPC0gZW5jcnlwdF9lbnZlbG9wZShzZWNyZXRfc2VyaWFsaXplZCwgcHVibGljX2tleSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBlbmNyeXB0IHRoZSBvYmplY3RcbnNlY3JldF9lbmNyeXB0ZWQgPC0gZW5jcnlwdF9lbnZlbG9wZShzZWNyZXRfc2VyaWFsaXplZCwgcHVia2V5ID0gXCJwdWJsaWMua2V5XCIpXG5gYGAifQ== -->
 <pre class="r"><code># encrypt the object
-secret_encrypted &lt;- encrypt_envelope(secret_serialized, public_key)</code></pre>
+secret_encrypted &lt;- encrypt_envelope(secret_serialized, pubkey = &quot;public.key&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>This way now we have our secret!!! How does it look like?</p>
+<p>This way now we have our secret!!! How does it look like??</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHNlY3JldF9lbmNyeXB0ZWQpXG5gYGAifQ== -->
-<pre class="r"><code>str(secret_encrypted)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHNlY3JldF9lbmNyeXB0ZWQpXG5cbmBgYCJ9 -->
+<pre class="r"><code>str(secret_encrypted)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGlzdCBvZiAzXG4gJCBpdiAgICAgOiByYXcgWzE6MTZdIGM1IGI5IGZlIDljIC4uLlxuICQgc2Vzc2lvbjogcmF3IFsxOjI2M10gMDMgZGMgZTcgYzkgLi4uXG4gJCBkYXRhICAgOiByYXcgWzE6MTE1Ml0gNGIgMjAgYjUgNTUgLi4uXG4ifQ== -->
+<pre><code>List of 3
+ $ iv     : raw [1:16] c5 b9 fe 9c ...
+ $ session: raw [1:263] 03 dc e7 c9 ...
+ $ data   : raw [1:1152] 4b 20 b5 55 ...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>It is a list containing three elements and it is our message that is encrypted. We can’t now read it back without a private key.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhdHRlbXB0aW5nIHRvIHVuc2VyaWFsaXplIHdpbGwgcmVzdWx0IGluIGVycm9yXG4jb3JpZ2luYWwgPC0gdW5zZXJpYWxpemUoc2VjcmV0X2VuY3J5cHRlZCRkYXRhKVxuIyBlcnJvci4uLlxuYGBgIn0= -->
-<pre class="r"><code># attempting to unserialize will result in error
-#original &lt;- unserialize(secret_encrypted$data)
-# error...</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>To recap, this object is still now in the R Environment and it’s ENCRYPTED. From this object we can return to read it back with a series of manipulations we will discuss in the next lecture.</p>
+<p>To recap, this object is still now in the R Environment and it’s ENCRYPTED. From this object we can return to read it back with a series of manipulations which we will discuss in the next lecture.</p>
 <p>At this moment however we will proceed to the next point of our learning objective which is to store this object in a form of a file…</p>
-<p>Our objective now is to transfer this object to the file so we can keep this “message” persistently elsewhere. For example in the Computer Hard Disk or in the USB key, send by email and so on. At the end of the day we can be sure that any person with normal computer tools can not read this data without the Private Key.</p>
+<ul>
+<li>write this encrypted object to the file</li>
+</ul>
+<p>Our objective now is to transfer this object to the file so we can keep this “message” persistently elsewhere. For example in the Computer Hard Disk or in the USB key, send by email and so on. At the end of the day we can be sure that any person with normal computer tools can not read this data without the <strong>Private Key</strong>.</p>
 <p>To achieve this task in R we can use function <strong>write_rds()</strong> or <strong>saveRDS()</strong>. We will just use the first function:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -285,36 +308,57 @@ write_rds(secret_encrypted, &quot;PasswordList.Encrypted&quot;)
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>At this moment we have a file in our project directory named “PasswordList.Encrypted”. This file now containing our secret…</p>
-<p>Now let’s review steps we did by looking to our diagram… //slide// … in total we just made five steps:</p>
-<ul>
-<li>We had our file with secrets</li>
-<li>We read this file into R software and make it a data frame object</li>
-<li>We have serialized this object</li>
-<li>We have encrypted this serialized object and got a list of raw data vectors</li>
-<li>We wrote the resulted encrypted object into the file we can store or distribute</li>
-</ul>
-<p>Obviously consider that we are moving slowly and consistenlty just to have our better understanding on the process. Once we are ready to put this process in operation it will be executed almost instantly…</p>
-<p>I will summarise this process in just few R code lines below. <strong>notice that</strong> I am using a “pipe” operator that transfer the result of the function as a first argument to the next function). This way I will not leave any traces of objects that may remain in the R Environment:</p>
+<p>Probably the last thing we need to do is to eraze our secret in clear text…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdW1tYXJ5IG9mIHN0ZXBzIHRvIGdlbmVyYXRlIGVuY3J5cHRlZCBtZXNzYWdlIGFuZCBzdG9yZSBpdCB0byB0aGUgZmlsZVxubGlicmFyeSh0aWR5dmVyc2UpXG5yZWFkX2NzdjIoXCJQYXNzd29yZExpc3QuY3N2XCIpICU+JSBcbiAgIyBzZXJpYWxpemUgdGhlIG9iamVjdFxuICBzZXJpYWxpemUoY29ubmVjdGlvbiA9IE5VTEwpICU+JSBcbiAgIyBlbmNyeXB0IHRoZSBvYmplY3RcbiAgZW5jcnlwdF9lbnZlbG9wZShwdWJsaWNfa2V5KSAlPiUgXG4gICMgd3JpdGUgZW5jcnlwdGVkIGRhdGEgdG8gRmlsZVxuICB3cml0ZV9yZHMoXCJQYXNzd29yZExpc3QuRW5jcnlwdGVkXCIpXG5gYGAifQ== -->
-<pre class="r"><code># Summary of steps to generate encrypted message and store it to the file
-library(tidyverse)
-read_csv2(&quot;PasswordList.csv&quot;) %&gt;% 
-  # serialize the object
-  serialize(connection = NULL) %&gt;% 
-  # encrypt the object
-  encrypt_envelope(public_key) %&gt;% 
-  # write encrypted data to File
-  write_rds(&quot;PasswordList.Encrypted&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZW1vdmUgb3VyIG9iamVjdHNcbnJlbW92ZShsaXN0ID0gbHMoKSlcbiMgb3B0aW9uYWwgZGVsZXRlIG9yaWdpbmFsIGZpbGVcbiMgZS5nLjogZmlsZS5yZW1vdmUoXCJQYXNzd29yZHNMSVNULmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code># remove our objects
+remove(list = ls())
+# optional delete original file
+# e.g.: file.remove(&quot;PasswordsLIST.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>And with that we are perfectly ready to start backward process to actually DECRYPT our file … right in the next lecture</p>
+<p>Now let’s review steps we did by looking to our diagram… //slide// … in total we just made five steps:</p>
+<ul>
+<li>We had our file with secrets</li>
+<li>We read this file into R software and made it a data frame object</li>
+<li>We have serialized this object</li>
+<li>We have encrypted this serialized object and got a list of raw data vectors</li>
+<li>We wrote the resulted encrypted object into the file we can store or distribute</li>
+<li>We deleted our objects from R environment</li>
+</ul>
+<p>As promised, for those who are ‘advanced’ users… summarised code below</p>
+<p>I will summarise this process in just few R code lines below. <strong>notice that</strong> I am using a “pipe” operator that transfer the result of the function as a first argument to the next function). This way I will not leave any traces of objects that may remain in the R Environment:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdW1tYXJ5IG9mIHN0ZXBzIHRvIGdlbmVyYXRlIGVuY3J5cHRlZCBtZXNzYWdlIGFuZCBzdG9yZSBpdCB0byB0aGUgZmlsZVxubGlicmFyeSh0aWR5dmVyc2UpXG5yZWFkX2NzdihcIlBhc3N3b3Jkc0xJU1QuY3N2XCIpICU+JSBcbiAgIyBzZXJpYWxpemUgdGhlIG9iamVjdFxuICBzZXJpYWxpemUoY29ubmVjdGlvbiA9IE5VTEwpICU+JSBcbiAgIyBlbmNyeXB0IHRoZSBvYmplY3RcbiAgZW5jcnlwdF9lbnZlbG9wZShwdWJrZXkgPSBcInB1YmxpYy5rZXlcIikgJT4lIFxuICAjIHdyaXRlIGVuY3J5cHRlZCBkYXRhIHRvIEZpbGVcbiAgd3JpdGVfcmRzKFwiUGFzc3dvcmRMaXN0LkVuY3J5cHRlZFwiKVxuYGBgIn0= -->
+<pre class="r"><code># Summary of steps to generate encrypted message and store it to the file
+library(tidyverse)
+read_csv(&quot;PasswordsLIST.csv&quot;) %&gt;% 
+  # serialize the object
+  serialize(connection = NULL) %&gt;% 
+  # encrypt the object
+  encrypt_envelope(pubkey = &quot;public.key&quot;) %&gt;% 
+  # write encrypted data to File
+  write_rds(&quot;PasswordList.Encrypted&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBVc2VyTmFtZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRW1haWwgPSBjb2xfY2hhcmFjdGVyKCksXG4gIFBhc3N3b3JkID0gY29sX2NoYXJhY3RlcigpLFxuICBEZXNjcmlwdGlvbiA9IGNvbF9jaGFyYWN0ZXIoKVxuKVxuIn0= -->
+<pre><code>Parsed with column specification:
+cols(
+  UserName = col_character(),
+  Email = col_character(),
+  Password = col_character(),
+  Description = col_character()
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>And with that we are perfectly ready to start backward process to actually <strong>DECRYPT</strong> our file … right in the next lecture</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiS2VlcCB5b3VyIHNlY3JldHMgdW5kZXIgY29udHJvbCAtIENyeXB0b2dyYXBoeSBmb3IgQWxsIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKICB3b3JkX2RvY3VtZW50OiBkZWZhdWx0Ci0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgojIyMjIERpc2NsYW1lcgoKQnkgam9pbmluZyB0aGlzIGNvdXJzZSBvciB1c2luZyBtYXRlcmlhbCBmcm9tIHRoZSBjb3Vyc2UgeW91IGFncmVlIHRoYXQgYWxsIG1hdGVyaWFscyBvZiB0aGUgY291cnNlIGFyZSBzb2xlbHkgcHJvdmlkZWQgImFzIGlzIiB3aXRob3V0IGFueSBndWFyYW50ZWUgb2YgZnVuY3Rpb25hbGl0eS4gQWxsIG1ldGhvZHMgYXJlIHByb3ZpZGVkIGZvciB0cmFpbmluZyBwdXJwb3Nlcy4gQ291cnNlIGRldmVsb3BlZCBieSBub24gc2VjdXJpdHkgZXhwZXJ0IGJ5IGV4cGxhaW5pbmcgdGhlIHByYWN0aWNhbCB1c2Ugb2YgKipPcGVuU1NMKiogc29mdHdhcmUgbGlicmFyeSBpbiBgUiBTdGF0aXN0aWNhbCBTb2Z0d2FyZWAuIFRoZXJlIGlzIGEgcmlzayB0aGF0IHlvdSBjYW4gbG9vc2UgeW91ciBpbmZvcm1hdGlvbiBpbiBjYXNlIHlvdSBhcmUgbm90IHByb3Blcmx5IGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIG9yIGJ5IGxvb3NpbmcgeW91ciBwcml2YXRlIGtleSBvciBhbGlrZS4gTWFrZSBzdXJlIHlvdSBrbm93IHdoYXQgeW91IGRvIGF0IGFueSB0aW1lIHdoZW4gdXNpbmcgdGhlIG1hdGVyaWFsIG9mIHRoZSBjb3Vyc2UuIEFsd2F5cyB0ZXN0IHlvdXIga25vd2xlZGdlIG9uIGR1bW15IGRhdGEgYmVmb3JlIGFwcGx5aW5nIGl0IHRvIHJlYWwgZGF0YS4uLiBNZW1vcnkgYXJlYXMgZm9yIHlvdXIgcHJpdmF0ZSBrZXksIHNlY3JldHMsIG9yIHBhc3NwaHJhc2UgYXJlIG5vdCBzZWN1cmVseSBjbGVhbmVkIGFmdGVyIHVzZS4gWW91IGFyZSB1c2luZyB0aGUgbWF0ZXJpYWwgb2YgdGhlIGNvdXJzZSBhdCB5b3VyIG93biByaXNrIQoKIyMjIyBMZWN0dXJlIDggRW5jcnlwdCB5b3VyIGluZm9ybWF0aW9uIHVzaW5nIHlvdXIgUHVibGljIEtleQoKSGVsbG8gYW5kIHRoYW5rIHlvdSBmb3IgY29udGludWluZyB0aGUgY291cnNlLiAKClJpZ2h0IGFmdGVyIGxlYXJuaW5nIGFib3V0IGhvdyB0byBtYW5hZ2Ugb3VyICoqUHJpdmF0ZSoqIGFuZCAqKlB1YmxpYyoqIEtleXMgd2Ugc3RhcnRpbmcgdG8gYmUgY2xvc2VyIHRvIHRoZSBtb3N0IGZhc2NpbmF0aW5nIHBhcnQgLSBjcmVhdGluZyAqKnNlY3JldHMqKiBvciBlbmNyeXB0aW5nIGluZm9ybWF0aW9uLiBJZiB5b3UgZmVlbCB0aGF0IHdlIG1vdmUgYSBiaXQgc2xvdyBJIHdvdWxkIHJlbWluZCB5b3UgdGhhdCB0aGlzIGlzIGRvbmUgb24gcHVycG9zZSB0byBiZXR0ZXIgbGVhcm4gcHJvY2VzcyBhbmQgYmV0dGVyIHVuZGVyc3RhbmQgcmlza3MgYW5kIHByZXZlbiBsb3NzIG9yIGxlYWsgb2YgaW5mb3JtYXRpb24KCkZvciB0aGF0IG91ciBsZWFybmluZyBvYmplY3RpdmVzIHdpbGwgYmUgdGhlIGZvbGxvd2luZzoKCiogd2Ugd2lsbCByZWFkIGZpbGUgdGhhdCBjb250YWluIHNlY3JldCAoZm9yIGV4YW1wbGUgdGV4dCBmaWxlKSBpbnRvIHRoZSBSIG9iamVjdAoqIHdlIHdpbGwgc2VyaWFsaXplIGFuZCBlbmNyeXB0IHRoaXMgb2JqZWN0Ciogd2Ugd2lsbCB0aGVuIHdyaXRlIHRoaXMgZW5jcnlwdGVkIG9iamVjdCB0byB0aGUgZmlsZQoKVG8gcm9sbCB0aGluZ3MgaW50ZXJlc3RpbmcuIFdlIHdpbGwgbG9vayBhdCB0aGUgc2l0dWF0aW9uIHRoYXQgSSBoYXZlIGEgc2ltcGxlIGZpbGUgd2l0aCBwYXNzd29yZHMuIFRoaXMgd2lsbCBiZSBvdXIgKipzZWNyZXQqKiB3ZSB3aWxsIHdhbnQgdG8gZW5jcnlwdC4gVGhpcyAnZHVtbXknIHNlY3JldCBpcyBzdG9yZWQgaW4gdGhlIGZpbGUgJ1Bhc3N3b3JkTGlzdC5jc3YnLiBGZWVsIGZyZWUgdG8gb3BlbiB0aGlzIGZpbGUuIEl0IGlzIGEgdGFibGUgd2hlcmUgb25lIGNvbHVtbiBjb250YWlucyB1c2VyIG5hbWUgYW5kIGFub3RoZSBjb2x1bW4gY29udGFpbnMgcGFzc3dvcmRzLiBXaGF0IHdlIHdpbGwgbmVlZCB0byBkbyBuZXh0IGlzIHRvIHByb3ZpZGUgdGhpcyBmaWxlIHRvIGEgY29kaW5nIG1hY2hpbmUgd2hpY2ggd2lsbCBiZSBvdXIgKipSIFN0YXRpc3RpY2FsIFNvZnR3YXJlKiogYW5kIGZ1bmN0aW9ucyBwcm92aWRlZCBieSBwYWNrYWdlICoqb3BlbnNzbCoqLiBUaGlzIHNvZnR3YXJlIHdpbGwgZGlnZXN0IHRoaXMgb2JqZWN0IGFuZCBlbmNyeXB0IGl0IHVzaW5nIGEgKipwdWJsaWMga2V5KiouIEFuZCBvYnZpb3VzbHkgbmV4dCB3ZSB3aWxsIHdyaXRlIGVuY3J5cHRlZCBmaWxlIGJhY2sgdG8gdGhlIGZvbGRlciBpbiBhIGZvcm0gb2YgdGhlIGZpbGUuLi4KCkJ5IHRoZSBlbmQgb2YgdGhpcyBsZWN0dXJlIHdlIHdpbGwgcmVhY2ggdGhlIHN0YXRlIHRvIGhhdmUgb3VyIHNlY3JldCBlbmNyeXB0ZWQgYW5kIHBhY2tlZCB0byB0aGUgZmlsZSB0byBiZSBzdG9yZWQgb3Igc2hhcmVkIHNlY3VyZWx5Li4uCgpJIHdvdWxkIGxpa2UgdG8gbWVudGlvbiBmb3IgbW9yZSBleHBlcmllbmNlZCB1c2VycyB0byBzY3JvbGwgdmlkZW8gcXVpY2tlciBpZiB5b3UgdW5kZXJzdGFuZCBvdXIgY29kZSBhbmQgZm9yIG90aGVycyBwbGVhc2UgcGF1c2UgdGhlIHZpZGVvIGFuZCB0cnkgdG8gcmVwZWF0IHRoaXMgY29kZSBieSB5b3Vyc2VsZi4uLgoKV2Ugd2lsbCBzdGFydCB3aXRoIGEgcmVtaW5kZXIgbm90IHRvIHVzZSBhbnkgYnVzaW5lc3MgY3JpdGljYWwgb3IgcGVyc29uYWwgaW5mb3JtYXRpb24gZHVyaW5nIHRoZSBjb3Vyc2UuIFJlbWVtYmVyIHRoYXQgdGhpcyBjb3Vyc2UgaXMganVzdCBwcm92aWRpbmcgeW91IGVkdWNhdGlvbiBhbmQgeW91IHNob3VsZCB1c2UgZHVtbXkgZGF0YSBmb3IgcHJhY3RpY2Ugbm90IHJlYWwgb25lLiBPdGhlcndpc2UgdGhlcmUgaXMgYSBjaGFuY2UgdGhhdCB5b3UgY2FuIHJlbmRlciB5b3VyIGRhdGEgdW51c2FibGUgYW5kIGxvb3NlIGl0IGNvbXBsZXRlbHkuIE9ubHkgc3RhcnQgdXNpbmcgbWF0ZXJpYWwgZnJvbSB0aGUgY291cnNlIG9uY2UgeW91IGFyZSB0b3RhbGx5IHVuZGVyc3RhbmQgeW91ciBhY3Rpb25zCgpvbmNlIHdlIGFyZSByZWFkeSB3ZSBjYW4gc3RhcnQgYWN1dGFsbHkgdG8gcmVhZCBvdXIgZmlsZQoKYGBge3IsIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0V9CiMgb2JqZWN0IHRvIGVuY3J5cHQKbGlicmFyeSh0aWR5dmVyc2UpCnNlY3JldF9jbGVhclRleHQgPC0gcmVhZF9jc3YoIlBhc3N3b3JkTGlzdC5jc3YiKQojIHZpZXcgb3VyIHNlY3JldC4uLgpzZWNyZXRfY2xlYXJUZXh0CmBgYAoKVGhpcyB3YXkgd2UgaGF2ZSBvdXIgZGF0YSBJTlNJREUgUiBFbnZpcm9ubWVudC4gQ2hlY2sgdGhpcyBvdXQuLi4gWW91IGNhbiBjbGljayBvbiB0aGUgbmFtZSBpbiB0aGUgRW52aXJvbm1lbnQgdG8gYWN0dWFsbHkgdmlzdWFsaXplIHRoZSBvYmplY3QgaW4gYSBmb3JtIG9mIHRoZSB0YWJsZQoKYGBge3J9CiMgdmlzdWFsaXNlIHRoZSBvYmplY3QgaW4gYSBzZXBhcmF0ZSBmaWxlCiBWaWV3KHNlY3JldF9jbGVhclRleHQpCmBgYAoKUGF5IGF0dGVudGlvbiBob3cgdGhpcyBkYXRhIGlzIGxvb2sgbGlrZSEgSSBoYXZlIGluY2x1ZGVkIHRoZXJlIHNvbWUgY2hhcmFjdGVycyB0aGF0IEkgdG9vayBmcm9tIGN5cmlsaWMgYW5kIGxhdGluIGtleWJvYXJkIGxheW91dC4uLgoKYGBge3J9CnNlY3JldF9jbGVhclRleHRbMToyLCAxXQpgYGAKCgoKVGhpcyBkYXRhIG5vdyBuZWVkcyB0byBiZSBlbmNyeXB0ZWQuIEJlZm9yZSB3ZSBkbyB0aGF0IGhvd2V2ZXIgd2UgbmVlZCB0byAic2VyaWFsaXplIiB0aGlzIGRhdGEuIFRoaXMgaXMgcmVxdWlyZWQgdG8gY29udmVydCBvdXIgbWVzc2FnZSB0byAic3RhbmRhcmQiIGZvcm0gZm9yIHRoZSBhbGdvcml0aG0gdG8gZW5jcnlwdCB0aGUgIm1lc3NhZ2UiLiBXZSB3aWxsIG5vdCBnbyB0b28gZGVlcCBpbnRvIGV4cGxhbmF0aW9ucyBoZXJlIGFuZCBqdXN0IHRha2luZyB0aGlzIGFzIGdyYW50ZWQuIFdoYXQgd2Uga25vdyBob3dldmVyIGlzIHRoYXQgdGhlIHJlc3VsdCBvZiB0aGlzIG9wZXJhdGlvbi4gSXQgd2lsbCBiZSBhIHZlY3RvciBvZiBzcGVjaWZpYyBsZW5ndGguIEVsZW1lbnRzIG9mIHRoZSB2ZWN0b3Igd2lsbCBiZSBudW1iZXJzL2NoYXJhY3RlcnMKCmBgYHtyfQojIHNlcmlhbGl6ZSB0aGUgb2JqZWN0CnNlY3JldF9zZXJpYWxpemVkIDwtIHNlcmlhbGl6ZShzZWNyZXRfY2xlYXJUZXh0LCBOVUxMKQpoZWFkKHNlY3JldF9zZXJpYWxpemVkLCAyMCkKbGVuZ3RoKHNlY3JldF9zZXJpYWxpemVkKQpgYGAKCkFuZCBub3cgaXQncyB0aW1lIHRvIGdvIGFoZWFkIGFuZCBmaW5hbGx5IEVOQ1JZUFQgb3VyIHNlcmlhbGl6ZWQgbWVzc2FnZS4gV2Ugd2lsbCB1c2UgZnVuY3Rpb24gKiplbmNyeXB0X2VudmVsb3BlKCkqKiBmcm9tICoqb3BlbnNzbCoqIHBhY2thZ2UuIEFsbCB3ZSBuZWVkIHRvIGRvIGlzIHRvIHByb3ZpZGUgb3VyICJtZXNzYWdlIiBhbmQgb3VyIHB1YmxpYyBrZXkhISEKCmBgYHtyfQojIGVuY3J5cHQgdGhlIG9iamVjdApzZWNyZXRfZW5jcnlwdGVkIDwtIGVuY3J5cHRfZW52ZWxvcGUoc2VjcmV0X3NlcmlhbGl6ZWQsIHB1YmxpY19rZXkpCmBgYAoKVGhpcyB3YXkgbm93IHdlIGhhdmUgb3VyIHNlY3JldCEhISBIb3cgZG9lcyBpdCBsb29rIGxpa2U/CgpgYGB7cn0Kc3RyKHNlY3JldF9lbmNyeXB0ZWQpCmBgYAoKSXQgaXMgYSBsaXN0IGNvbnRhaW5pbmcgdGhyZWUgZWxlbWVudHMgYW5kIGl0IGlzIG91ciBtZXNzYWdlIHRoYXQgaXMgZW5jcnlwdGVkLiBXZSBjYW4ndCBub3cgcmVhZCBpdCBiYWNrIHdpdGhvdXQgYSBwcml2YXRlIGtleS4KCmBgYHtyfQojIGF0dGVtcHRpbmcgdG8gdW5zZXJpYWxpemUgd2lsbCByZXN1bHQgaW4gZXJyb3IKI29yaWdpbmFsIDwtIHVuc2VyaWFsaXplKHNlY3JldF9lbmNyeXB0ZWQkZGF0YSkKIyBlcnJvci4uLgpgYGAKClRvIHJlY2FwLCB0aGlzIG9iamVjdCBpcyBzdGlsbCBub3cgaW4gdGhlIFIgRW52aXJvbm1lbnQgYW5kIGl0J3MgRU5DUllQVEVELiBGcm9tIHRoaXMgb2JqZWN0IHdlIGNhbiByZXR1cm4gdG8gcmVhZCBpdCBiYWNrIHdpdGggYSBzZXJpZXMgb2YgbWFuaXB1bGF0aW9ucyB3ZSB3aWxsIGRpc2N1c3MgaW4gdGhlIG5leHQgbGVjdHVyZS4gCgpBdCB0aGlzIG1vbWVudCBob3dldmVyIHdlIHdpbGwgcHJvY2VlZCB0byB0aGUgbmV4dCBwb2ludCBvZiBvdXIgbGVhcm5pbmcgb2JqZWN0aXZlIHdoaWNoIGlzIHRvIHN0b3JlIHRoaXMgb2JqZWN0IGluIGEgZm9ybSBvZiBhIGZpbGUuLi4KCk91ciBvYmplY3RpdmUgbm93IGlzIHRvIHRyYW5zZmVyIHRoaXMgb2JqZWN0IHRvIHRoZSBmaWxlIHNvIHdlIGNhbiBrZWVwIHRoaXMgIm1lc3NhZ2UiIHBlcnNpc3RlbnRseSBlbHNld2hlcmUuIEZvciBleGFtcGxlIGluIHRoZSBDb21wdXRlciBIYXJkIERpc2sgb3IgaW4gdGhlIFVTQiBrZXksIHNlbmQgYnkgZW1haWwgYW5kIHNvIG9uLiBBdCB0aGUgZW5kIG9mIHRoZSBkYXkgd2UgY2FuIGJlIHN1cmUgdGhhdCBhbnkgcGVyc29uIHdpdGggbm9ybWFsIGNvbXB1dGVyIHRvb2xzIGNhbiBub3QgcmVhZCB0aGlzIGRhdGEgd2l0aG91dCB0aGUgUHJpdmF0ZSBLZXkuIAoKVG8gYWNoaWV2ZSB0aGlzIHRhc2sgaW4gUiB3ZSBjYW4gdXNlIGZ1bmN0aW9uICoqd3JpdGVfcmRzKCkqKiBvciAqKnNhdmVSRFMoKSoqLiBXZSB3aWxsIGp1c3QgdXNlIHRoZSBmaXJzdCBmdW5jdGlvbjoKCmBgYHtyfQojIHdyaXRlIGVuY3J5cHRlZCBkYXRhIHRvIEZpbGUKd3JpdGVfcmRzKHNlY3JldF9lbmNyeXB0ZWQsICJQYXNzd29yZExpc3QuRW5jcnlwdGVkIikKIyBvdGhlciBvcHRpb25zIHdpdGggc2FtZSByZXN1bHQKI3dyaXRlX3JkcyhzZWNyZXRfZW5jcnlwdGVkLCAiUGFzc3dvcmRMaXN0R1pDb21wci5FbmNyeXB0ZWQiLGNvbXByZXNzID0gImd6IikKI3NhdmVSRFMoc2VjcmV0X2VuY3J5cHRlZCwgIlBhc3N3b3JkTGlzdF9zYXZlUkRTLkVuY3J5cHRlZCIpCmBgYAoKQXQgdGhpcyBtb21lbnQgd2UgaGF2ZSBhIGZpbGUgaW4gb3VyIHByb2plY3QgZGlyZWN0b3J5IG5hbWVkICJQYXNzd29yZExpc3QuRW5jcnlwdGVkIi4gVGhpcyBmaWxlIG5vdyBjb250YWluaW5nIG91ciBzZWNyZXQuLi4gCgpOb3cgbGV0J3MgcmV2aWV3IHN0ZXBzIHdlIGRpZCBieSBsb29raW5nIHRvIG91ciBkaWFncmFtLi4uIC8vc2xpZGUvLyAuLi4gaW4gdG90YWwgd2UganVzdCBtYWRlIGZpdmUgc3RlcHM6CgoqIFdlIGhhZCBvdXIgZmlsZSB3aXRoIHNlY3JldHMKKiBXZSByZWFkIHRoaXMgZmlsZSBpbnRvIFIgc29mdHdhcmUgYW5kIG1ha2UgaXQgYSBkYXRhIGZyYW1lIG9iamVjdAoqIFdlIGhhdmUgc2VyaWFsaXplZCB0aGlzIG9iamVjdCAKKiBXZSBoYXZlIGVuY3J5cHRlZCB0aGlzIHNlcmlhbGl6ZWQgb2JqZWN0IGFuZCBnb3QgYSBsaXN0IG9mIHJhdyBkYXRhIHZlY3RvcnMKKiBXZSB3cm90ZSB0aGUgcmVzdWx0ZWQgZW5jcnlwdGVkIG9iamVjdCBpbnRvIHRoZSBmaWxlIHdlIGNhbiBzdG9yZSBvciBkaXN0cmlidXRlCgpPYnZpb3VzbHkgY29uc2lkZXIgdGhhdCB3ZSBhcmUgbW92aW5nIHNsb3dseSBhbmQgY29uc2lzdGVubHR5IGp1c3QgdG8gaGF2ZSBvdXIgYmV0dGVyIHVuZGVyc3RhbmRpbmcgb24gdGhlIHByb2Nlc3MuIE9uY2Ugd2UgYXJlIHJlYWR5IHRvIHB1dCB0aGlzIHByb2Nlc3MgaW4gb3BlcmF0aW9uIGl0IHdpbGwgYmUgZXhlY3V0ZWQgYWxtb3N0IGluc3RhbnRseS4uLgoKSSB3aWxsIHN1bW1hcmlzZSB0aGlzIHByb2Nlc3MgaW4ganVzdCBmZXcgUiBjb2RlIGxpbmVzIGJlbG93LiAqKm5vdGljZSB0aGF0KiogSSBhbSB1c2luZyBhICJwaXBlIiBvcGVyYXRvciB0aGF0IHRyYW5zZmVyIHRoZSByZXN1bHQgb2YgdGhlIGZ1bmN0aW9uIGFzIGEgZmlyc3QgYXJndW1lbnQgdG8gdGhlIG5leHQgZnVuY3Rpb24pLiBUaGlzIHdheSBJIHdpbGwgbm90IGxlYXZlIGFueSB0cmFjZXMgb2Ygb2JqZWN0cyB0aGF0IG1heSByZW1haW4gaW4gdGhlIFIgRW52aXJvbm1lbnQ6CgpgYGB7cn0KIyBTdW1tYXJ5IG9mIHN0ZXBzIHRvIGdlbmVyYXRlIGVuY3J5cHRlZCBtZXNzYWdlIGFuZCBzdG9yZSBpdCB0byB0aGUgZmlsZQpsaWJyYXJ5KHRpZHl2ZXJzZSkKcmVhZF9jc3YyKCJQYXNzd29yZExpc3QuY3N2IikgJT4lIAogICMgc2VyaWFsaXplIHRoZSBvYmplY3QKICBzZXJpYWxpemUoY29ubmVjdGlvbiA9IE5VTEwpICU+JSAKICAjIGVuY3J5cHQgdGhlIG9iamVjdAogIGVuY3J5cHRfZW52ZWxvcGUocHVibGljX2tleSkgJT4lIAogICMgd3JpdGUgZW5jcnlwdGVkIGRhdGEgdG8gRmlsZQogIHdyaXRlX3JkcygiUGFzc3dvcmRMaXN0LkVuY3J5cHRlZCIpCmBgYAoKQW5kIHdpdGggdGhhdCB3ZSBhcmUgcGVyZmVjdGx5IHJlYWR5IHRvIHN0YXJ0IGJhY2t3YXJkIHByb2Nlc3MgdG8gYWN0dWFsbHkgREVDUllQVCBvdXIgZmlsZSAuLi4gcmlnaHQgaW4gdGhlIG5leHQgbGVjdHVyZQo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiS2VlcCB5b3VyIHNlY3JldHMgdW5kZXIgY29udHJvbCAtIENyeXB0b2dyYXBoeSBmb3IgQWxsIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKICB3b3JkX2RvY3VtZW50OiBkZWZhdWx0Ci0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgojIyMjIERpc2NsYW1lcgoKQnkgam9pbmluZyB0aGlzIGNvdXJzZSBvciB1c2luZyBtYXRlcmlhbCBmcm9tIHRoZSBjb3Vyc2UgeW91IGFncmVlIHRoYXQgYWxsIG1hdGVyaWFscyBvZiB0aGUgY291cnNlIGFyZSBzb2xlbHkgcHJvdmlkZWQgImFzIGlzIiB3aXRob3V0IGFueSBndWFyYW50ZWUgb2YgZnVuY3Rpb25hbGl0eS4gQWxsIG1ldGhvZHMgYXJlIHByb3ZpZGVkIGZvciB0cmFpbmluZyBwdXJwb3Nlcy4gQ291cnNlIGRldmVsb3BlZCBieSBub24gc2VjdXJpdHkgZXhwZXJ0IGJ5IGV4cGxhaW5pbmcgdGhlIHByYWN0aWNhbCB1c2Ugb2YgKipPcGVuU1NMKiogc29mdHdhcmUgbGlicmFyeSBpbiBgUiBTdGF0aXN0aWNhbCBTb2Z0d2FyZWAuIFRoZXJlIGlzIGEgcmlzayB0aGF0IHlvdSBjYW4gbG9vc2UgeW91ciBpbmZvcm1hdGlvbiBpbiBjYXNlIHlvdSBhcmUgbm90IHByb3Blcmx5IGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIG9yIGJ5IGxvb3NpbmcgeW91ciBwcml2YXRlIGtleSBvciBhbGlrZS4gTWFrZSBzdXJlIHlvdSBrbm93IHdoYXQgeW91IGRvIGF0IGFueSB0aW1lIHdoZW4gdXNpbmcgdGhlIG1hdGVyaWFsIG9mIHRoZSBjb3Vyc2UuIEFsd2F5cyB0ZXN0IHlvdXIga25vd2xlZGdlIG9uIGR1bW15IGRhdGEgYmVmb3JlIGFwcGx5aW5nIGl0IHRvIHJlYWwgZGF0YS4uLiBNZW1vcnkgYXJlYXMgZm9yIHlvdXIgcHJpdmF0ZSBrZXksIHNlY3JldHMsIG9yIHBhc3NwaHJhc2UgYXJlIG5vdCBzZWN1cmVseSBjbGVhbmVkIGFmdGVyIHVzZS4gWW91IGFyZSB1c2luZyB0aGUgbWF0ZXJpYWwgb2YgdGhlIGNvdXJzZSBhdCB5b3VyIG93biByaXNrIQoKIyMjIyBMZWN0dXJlIDggRW5jcnlwdCB5b3VyIGluZm9ybWF0aW9uIHVzaW5nIHlvdXIgUHVibGljIEtleQoKSGVsbG8gYW5kIHRoYW5rIHlvdSBmb3IgY29udGludWluZyB0aGUgY291cnNlLiAKClJpZ2h0IGFmdGVyIGxlYXJuaW5nIGFib3V0IGhvdyB0byBtYW5hZ2Ugb3VyICoqUHJpdmF0ZSoqIGFuZCAqKlB1YmxpYyoqIEtleXMgd2Ugc3RhcnRpbmcgdG8gYmUgY2xvc2VyIHRvIHRoZSBtb3N0IGZhc2NpbmF0aW5nIHBhcnQgLSBjcmVhdGluZyAqKnNlY3JldHMqKiBvciBlbmNyeXB0aW5nIGluZm9ybWF0aW9uLiBJZiB5b3UgZmVlbCB0aGF0IHdlIG1vdmUgYSBiaXQgc2xvdyBJIHdvdWxkIHJlbWluZCB5b3UgdGhhdCB0aGlzIGlzIGRvbmUgb24gcHVycG9zZSB0byBiZXR0ZXIgbGVhcm4gcHJvY2VzcyBhbmQgYmV0dGVyIHVuZGVyc3RhbmQgcmlza3MgYW5kIHByZXZlbiBsb3NzIG9yIGxlYWsgb2YgaW5mb3JtYXRpb24KCkZvciB0aGF0IG91ciBsZWFybmluZyBvYmplY3RpdmVzIHdpbGwgYmUgdGhlIGZvbGxvd2luZzoKCiogd2Ugd2lsbCByZWFkIGZpbGUgdGhhdCBjb250YWluIHNlY3JldCAoZm9yIGV4YW1wbGUgdGV4dCBmaWxlKSBpbnRvIHRoZSBSIG9iamVjdAoqIHdlIHdpbGwgc2VyaWFsaXplIGFuZCBlbmNyeXB0IHRoaXMgb2JqZWN0Ciogd2Ugd2lsbCB0aGVuIHdyaXRlIHRoaXMgZW5jcnlwdGVkIG9iamVjdCB0byB0aGUgZmlsZQoKVG8gcm9sbCB0aGluZ3MgaW50ZXJlc3RpbmcuIFdlIHdpbGwgbG9vayBhdCB0aGUgc2l0dWF0aW9uIHRoYXQgSSBoYXZlIGEgc2ltcGxlIGZpbGUgd2l0aCBwYXNzd29yZHMuIFRoaXMgd2lsbCBiZSBvdXIgKipzZWNyZXQqKiB3ZSB3aWxsIHdhbnQgdG8gZW5jcnlwdC4gVGhpcyAnZHVtbXknIHNlY3JldCBpcyBzdG9yZWQgaW4gdGhlIGZpbGUgJ1Bhc3N3b3Jkc0xJU1QuY3N2Jy4gRmVlbCBmcmVlIHRvIG9wZW4gdGhpcyBmaWxlLiBJdCBpcyBhIHRhYmxlIHdoZXJlIG9uZSBjb2x1bW4gY29udGFpbnMgdXNlciBuYW1lIGFuZCBhbm90aGUgY29sdW1uIGNvbnRhaW5zIHBhc3N3b3Jkcy4gV2hhdCB3ZSB3aWxsIG5lZWQgdG8gZG8gbmV4dCBpcyB0byBwcm92aWRlIHRoaXMgZmlsZSB0byBhIGNvZGluZyBtYWNoaW5lIHdoaWNoIHdpbGwgYmUgb3VyICoqUiBTdGF0aXN0aWNhbCBTb2Z0d2FyZSoqIGFuZCBmdW5jdGlvbnMgcHJvdmlkZWQgYnkgcGFja2FnZSAqKm9wZW5zc2wqKi4gVGhpcyBzb2Z0d2FyZSB3aWxsIGRpZ2VzdCB0aGlzIG9iamVjdCBhbmQgZW5jcnlwdCBpdCB1c2luZyBhICoqcHVibGljIGtleSoqLiBBbmQgb2J2aW91c2x5IG5leHQgd2Ugd2lsbCB3cml0ZSBlbmNyeXB0ZWQgZmlsZSBiYWNrIHRvIHRoZSBmb2xkZXIgaW4gYSBmb3JtIG9mIHRoZSBmaWxlLi4uCgpCeSB0aGUgZW5kIG9mIHRoaXMgbGVjdHVyZSB3ZSB3aWxsIHJlYWNoIHRoZSBzdGF0ZSB0byBoYXZlIG91ciBzZWNyZXQgZW5jcnlwdGVkIGFuZCBwYWNrZWQgdG8gdGhlIGZpbGUgdG8gYmUgc3RvcmVkIG9yIHNoYXJlZCBzZWN1cmVseS4uLgoKSSB3b3VsZCBsaWtlIHRvIG1lbnRpb24gZm9yIG1vcmUgZXhwZXJpZW5jZWQgdXNlcnMgdG8gc2Nyb2xsIHZpZGVvIHF1aWNrZXIgaWYgeW91IHVuZGVyc3RhbmQgb3VyIGNvZGUgYW5kIGZvciBvdGhlcnMgcGxlYXNlIHBhdXNlIHRoZSB2aWRlbyBhbmQgdHJ5IHRvIHJlcGVhdCB0aGlzIGNvZGUgYnkgeW91cnNlbGYuLi4KCldlIHdpbGwgc3RhcnQgd2l0aCBhIHJlbWluZGVyIG5vdCB0byB1c2UgYW55IGJ1c2luZXNzIGNyaXRpY2FsIG9yIHBlcnNvbmFsIGluZm9ybWF0aW9uIGR1cmluZyB0aGUgY291cnNlLiBSZW1lbWJlciB0aGF0IHRoaXMgY291cnNlIGlzIGp1c3QgcHJvdmlkaW5nIHlvdSBlZHVjYXRpb24gYW5kIHlvdSBzaG91bGQgdXNlIGR1bW15IGRhdGEgZm9yIHByYWN0aWNlIG5vdCByZWFsIG9uZS4gT3RoZXJ3aXNlIHRoZXJlIGlzIGEgY2hhbmNlIHRoYXQgeW91IGNhbiByZW5kZXIgeW91ciBkYXRhIHVudXNhYmxlIGFuZCBsb29zZSBpdCBjb21wbGV0ZWx5LiBPbmx5IHN0YXJ0IHVzaW5nIG1hdGVyaWFsIGZyb20gdGhlIGNvdXJzZSBvbmNlIHlvdSBhcmUgdG90YWxseSB1bmRlcnN0YW5kIHlvdXIgYWN0aW9ucwoKb25jZSB3ZSBhcmUgcmVhZHkgd2UgY2FuIHN0YXJ0IGFjdXRhbGx5IHRvIHJlYWQgb3VyIGZpbGUKCmBgYHtyLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQojIG9iamVjdCB0byBlbmNyeXB0CmxpYnJhcnkodGlkeXZlcnNlKQpzZWNyZXRfY2xlYXJUZXh0IDwtIHJlYWRfY3N2KCJQYXNzd29yZHNMSVNULmNzdiIsIGxvY2FsZSA9ICkKIyB2aWV3IG91ciBzZWNyZXQuLi4Kc2VjcmV0X2NsZWFyVGV4dApgYGAKClRoaXMgd2F5IHdlIGhhdmUgb3VyIGRhdGEgSU5TSURFIFIgRW52aXJvbm1lbnQuIENoZWNrIHRoaXMgb3V0Li4uIFlvdSBjYW4gY2xpY2sgb24gdGhlIG5hbWUgaW4gdGhlIEVudmlyb25tZW50IHRvIGFjdHVhbGx5IHZpc3VhbGl6ZSB0aGUgb2JqZWN0IGluIGEgZm9ybSBvZiB0aGUgdGFibGUKCmBgYHtyfQojIHZpc3VhbGlzZSB0aGUgb2JqZWN0IGluIGEgc2VwYXJhdGUgZmlsZQogVmlldyhzZWNyZXRfY2xlYXJUZXh0KQpgYGAKClBheSBhdHRlbnRpb24gaG93IHRoaXMgZGF0YSBpcyBsb29rIGxpa2UhIEkgaGF2ZSBpbmNsdWRlZCB0aGVyZSBzb21lIGNoYXJhY3RlcnMgdGhhdCBJIHRvb2sgZnJvbSBjeXJpbGljIGFuZCBsYXRpbiBrZXlib2FyZCBsYXlvdXQuLi4KCmBgYHtyfQojIHN1YnNldCBvbmx5ICdzcGVjaWFsJyBjaGFyYWN0ZXJzLi4uCnNlY3JldF9jbGVhclRleHRbMToyLCAzXQpgYGAKClRoaXMgaXMgYmVjYXVzZSBFbmNvZGluZyBpcyBkaWZmZXJlbnQgYW5kIG5vdCBVVEYtOC4gVGhlIGZpbGUgd2Ugd2lsbCBlbmNyeXB0IHdpbGwgZ2V0IHJldHVybmVkIGFzIGl0IHdhcyBob3dldmVyIEkganVzdCB3YW50ZWQgdG8gcGF5IHlvdXIgYXR0ZW50aW9uIHRvIHRoYXQgYXMgeW91IHdpbGwgYmUgYXdhcmUKCkF0IHRoaXMgc3RhZ2Ugd2UgYXJlIGhhdmluZyBvdXIgZGF0YSBpbiB0aGUgb2JqZWN0IGNhbGxlZCAqKnNlY3JldF9jbGVhclRleHQqKi4gVGhpcyBkYXRhIG5vdyBuZWVkcyB0byBiZSBlbmNyeXB0ZWQuIEJlZm9yZSB3ZSBkbyB0aGF0IGhvd2V2ZXIgd2UgbmVlZCB0byAic2VyaWFsaXplIiB0aGlzIGRhdGEuIAoKKiBub3cgd2Ugd2lsbCBzZXJpYWxpemUgYW5kIGVuY3J5cHQgdGhpcyBvYmplY3QKClRoaXMgaXMgcmVxdWlyZWQgdG8gY29udmVydCBvdXIgbWVzc2FnZSB0byAic3RhbmRhcmQiIGZvcm0gZm9yIHRoZSBhbGdvcml0aG0gdG8gZW5jcnlwdCB0aGUgIm1lc3NhZ2UiLiBXZSB3aWxsIG5vdCBnbyB0b28gZGVlcCBpbnRvIGV4cGxhbmF0aW9ucyBoZXJlIGFuZCBqdXN0IHRha2luZyB0aGlzIGFzIGdyYW50ZWQuIFdoYXQgd2Uga25vdyBob3dldmVyIGlzIHRoYXQgdGhlIHJlc3VsdCBvZiB0aGlzIG9wZXJhdGlvbi4gSXQgd2lsbCBiZSBhIHZlY3RvciBvZiBzcGVjaWZpYyBsZW5ndGguIEVsZW1lbnRzIG9mIHRoZSB2ZWN0b3Igd2lsbCBiZSBudW1iZXJzL2NoYXJhY3RlcnMKCmBgYHtyfQojIHNlcmlhbGl6ZSB0aGUgb2JqZWN0CnNlY3JldF9zZXJpYWxpemVkIDwtIHNlcmlhbGl6ZShzZWNyZXRfY2xlYXJUZXh0LCBOVUxMKQojIHZpZXcgdG9wIDIwIGVsZW1lbnRzIG9mIHRoZSB2ZWN0b3IKaGVhZChzZWNyZXRfc2VyaWFsaXplZCwgMjApCiMgY2xhc3Mgb2YgdGhpcyBvYmplY3QKY2xhc3Moc2VjcmV0X3NlcmlhbGl6ZWQpCiMgbGVuZ3RoIG9mIHRoaXMgJ3JhdycgdmVjdG9yCmxlbmd0aChzZWNyZXRfc2VyaWFsaXplZCkKYGBgCgpBbmQgbm93IGl0J3MgdGltZSB0byBnbyBhaGVhZCBhbmQgZmluYWxseSBFTkNSWVBUIG91ciBzZXJpYWxpemVkIG1lc3NhZ2UuIFdlIHdpbGwgdXNlIGZ1bmN0aW9uICoqZW5jcnlwdF9lbnZlbG9wZSgpKiogZnJvbSAqKm9wZW5zc2wqKiBwYWNrYWdlLiBBbGwgd2UgbmVlZCB0byBkbyBpcyB0byBwcm92aWRlIG91ciAibWVzc2FnZSIgYW5kIG91ciBwdWJsaWMga2V5ISEhCgpgYGB7cn0KIyBlbmNyeXB0IHRoZSBvYmplY3QKc2VjcmV0X2VuY3J5cHRlZCA8LSBlbmNyeXB0X2VudmVsb3BlKHNlY3JldF9zZXJpYWxpemVkLCBwdWJrZXkgPSAicHVibGljLmtleSIpCmBgYAoKVGhpcyB3YXkgbm93IHdlIGhhdmUgb3VyIHNlY3JldCEhISBIb3cgZG9lcyBpdCBsb29rIGxpa2U/PwoKYGBge3J9CiMgcmV2aWV3IHN0cnVjdHVyZSBvZiBvdXIgc2VjcmV0CnN0cihzZWNyZXRfZW5jcnlwdGVkKQpgYGAKCkl0IGlzIGEgbGlzdCBjb250YWluaW5nIHRocmVlIGVsZW1lbnRzIGFuZCBpdCBpcyBvdXIgbWVzc2FnZSB0aGF0IGlzIGVuY3J5cHRlZC4gV2UgY2FuJ3Qgbm93IHJlYWQgaXQgYmFjayB3aXRob3V0IGEgcHJpdmF0ZSBrZXkuCgpUbyByZWNhcCwgdGhpcyBvYmplY3QgaXMgc3RpbGwgbm93IGluIHRoZSBSIEVudmlyb25tZW50IGFuZCBpdCdzIEVOQ1JZUFRFRC4gRnJvbSB0aGlzIG9iamVjdCB3ZSBjYW4gcmV0dXJuIHRvIHJlYWQgaXQgYmFjayB3aXRoIGEgc2VyaWVzIG9mIG1hbmlwdWxhdGlvbnMgd2hpY2ggd2Ugd2lsbCBkaXNjdXNzIGluIHRoZSBuZXh0IGxlY3R1cmUuIAoKQXQgdGhpcyBtb21lbnQgaG93ZXZlciB3ZSB3aWxsIHByb2NlZWQgdG8gdGhlIG5leHQgcG9pbnQgb2Ygb3VyIGxlYXJuaW5nIG9iamVjdGl2ZSB3aGljaCBpcyB0byBzdG9yZSB0aGlzIG9iamVjdCBpbiBhIGZvcm0gb2YgYSBmaWxlLi4uCgoqIHdyaXRlIHRoaXMgZW5jcnlwdGVkIG9iamVjdCB0byB0aGUgZmlsZQoKT3VyIG9iamVjdGl2ZSBub3cgaXMgdG8gdHJhbnNmZXIgdGhpcyBvYmplY3QgdG8gdGhlIGZpbGUgc28gd2UgY2FuIGtlZXAgdGhpcyAibWVzc2FnZSIgcGVyc2lzdGVudGx5IGVsc2V3aGVyZS4gRm9yIGV4YW1wbGUgaW4gdGhlIENvbXB1dGVyIEhhcmQgRGlzayBvciBpbiB0aGUgVVNCIGtleSwgc2VuZCBieSBlbWFpbCBhbmQgc28gb24uIEF0IHRoZSBlbmQgb2YgdGhlIGRheSB3ZSBjYW4gYmUgc3VyZSB0aGF0IGFueSBwZXJzb24gd2l0aCBub3JtYWwgY29tcHV0ZXIgdG9vbHMgY2FuIG5vdCByZWFkIHRoaXMgZGF0YSB3aXRob3V0IHRoZSAqKlByaXZhdGUgS2V5KiouIAoKVG8gYWNoaWV2ZSB0aGlzIHRhc2sgaW4gUiB3ZSBjYW4gdXNlIGZ1bmN0aW9uICoqd3JpdGVfcmRzKCkqKiBvciAqKnNhdmVSRFMoKSoqLiBXZSB3aWxsIGp1c3QgdXNlIHRoZSBmaXJzdCBmdW5jdGlvbjoKCmBgYHtyfQojIHdyaXRlIGVuY3J5cHRlZCBkYXRhIHRvIEZpbGUKd3JpdGVfcmRzKHNlY3JldF9lbmNyeXB0ZWQsICJQYXNzd29yZExpc3QuRW5jcnlwdGVkIikKIyBvdGhlciBvcHRpb25zIHdpdGggc2FtZSByZXN1bHQKI3dyaXRlX3JkcyhzZWNyZXRfZW5jcnlwdGVkLCAiUGFzc3dvcmRMaXN0R1pDb21wci5FbmNyeXB0ZWQiLGNvbXByZXNzID0gImd6IikKI3NhdmVSRFMoc2VjcmV0X2VuY3J5cHRlZCwgIlBhc3N3b3JkTGlzdF9zYXZlUkRTLkVuY3J5cHRlZCIpCmBgYAoKQXQgdGhpcyBtb21lbnQgd2UgaGF2ZSBhIGZpbGUgaW4gb3VyIHByb2plY3QgZGlyZWN0b3J5IG5hbWVkICJQYXNzd29yZExpc3QuRW5jcnlwdGVkIi4gVGhpcyBmaWxlIG5vdyBjb250YWluaW5nIG91ciBzZWNyZXQuLi4gCgpQcm9iYWJseSB0aGUgbGFzdCB0aGluZyB3ZSBuZWVkIHRvIGRvIGlzIHRvIGVyYXplIG91ciBzZWNyZXQgaW4gY2xlYXIgdGV4dC4uLiAKCmBgYHtyfQojIHJlbW92ZSBvdXIgb2JqZWN0cwpyZW1vdmUobGlzdCA9IGxzKCkpCiMgb3B0aW9uYWwgZGVsZXRlIG9yaWdpbmFsIGZpbGUKIyBlLmcuOiBmaWxlLnJlbW92ZSgiUGFzc3dvcmRzTElTVC5jc3YiKQpgYGAKCgpOb3cgbGV0J3MgcmV2aWV3IHN0ZXBzIHdlIGRpZCBieSBsb29raW5nIHRvIG91ciBkaWFncmFtLi4uIC8vc2xpZGUvLyAuLi4gaW4gdG90YWwgd2UganVzdCBtYWRlIGZpdmUgc3RlcHM6CgoqIFdlIGhhZCBvdXIgZmlsZSB3aXRoIHNlY3JldHMKKiBXZSByZWFkIHRoaXMgZmlsZSBpbnRvIFIgc29mdHdhcmUgYW5kIG1hZGUgaXQgYSBkYXRhIGZyYW1lIG9iamVjdAoqIFdlIGhhdmUgc2VyaWFsaXplZCB0aGlzIG9iamVjdCAKKiBXZSBoYXZlIGVuY3J5cHRlZCB0aGlzIHNlcmlhbGl6ZWQgb2JqZWN0IGFuZCBnb3QgYSBsaXN0IG9mIHJhdyBkYXRhIHZlY3RvcnMKKiBXZSB3cm90ZSB0aGUgcmVzdWx0ZWQgZW5jcnlwdGVkIG9iamVjdCBpbnRvIHRoZSBmaWxlIHdlIGNhbiBzdG9yZSBvciBkaXN0cmlidXRlCiogV2UgZGVsZXRlZCBvdXIgb2JqZWN0cyBmcm9tIFIgZW52aXJvbm1lbnQKCkFzIHByb21pc2VkLCBmb3IgdGhvc2Ugd2hvIGFyZSAnYWR2YW5jZWQnIHVzZXJzLi4uIHN1bW1hcmlzZWQgY29kZSBiZWxvdwoKSSB3aWxsIHN1bW1hcmlzZSB0aGlzIHByb2Nlc3MgaW4ganVzdCBmZXcgUiBjb2RlIGxpbmVzIGJlbG93LiAqKm5vdGljZSB0aGF0KiogSSBhbSB1c2luZyBhICJwaXBlIiBvcGVyYXRvciB0aGF0IHRyYW5zZmVyIHRoZSByZXN1bHQgb2YgdGhlIGZ1bmN0aW9uIGFzIGEgZmlyc3QgYXJndW1lbnQgdG8gdGhlIG5leHQgZnVuY3Rpb24pLiBUaGlzIHdheSBJIHdpbGwgbm90IGxlYXZlIGFueSB0cmFjZXMgb2Ygb2JqZWN0cyB0aGF0IG1heSByZW1haW4gaW4gdGhlIFIgRW52aXJvbm1lbnQ6CgpgYGB7cn0KIyBTdW1tYXJ5IG9mIHN0ZXBzIHRvIGdlbmVyYXRlIGVuY3J5cHRlZCBtZXNzYWdlIGFuZCBzdG9yZSBpdCB0byB0aGUgZmlsZQpsaWJyYXJ5KHRpZHl2ZXJzZSkKcmVhZF9jc3YoIlBhc3N3b3Jkc0xJU1QuY3N2IikgJT4lIAogICMgc2VyaWFsaXplIHRoZSBvYmplY3QKICBzZXJpYWxpemUoY29ubmVjdGlvbiA9IE5VTEwpICU+JSAKICAjIGVuY3J5cHQgdGhlIG9iamVjdAogIGVuY3J5cHRfZW52ZWxvcGUocHVia2V5ID0gInB1YmxpYy5rZXkiKSAlPiUgCiAgIyB3cml0ZSBlbmNyeXB0ZWQgZGF0YSB0byBGaWxlCiAgd3JpdGVfcmRzKCJQYXNzd29yZExpc3QuRW5jcnlwdGVkIikKYGBgCgpBbmQgd2l0aCB0aGF0IHdlIGFyZSBwZXJmZWN0bHkgcmVhZHkgdG8gc3RhcnQgYmFja3dhcmQgcHJvY2VzcyB0byBhY3R1YWxseSAqKkRFQ1JZUFQqKiBvdXIgZmlsZSAuLi4gcmlnaHQgaW4gdGhlIG5leHQgbGVjdHVyZQo=</div>
 
 
 

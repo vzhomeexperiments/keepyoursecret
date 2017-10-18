@@ -8,7 +8,7 @@
 library(openssl)
 library(tidyverse)
 
-#### KEY MANAGEMENT ####
+#### KEY MANAGEMENT (from previous lectures) ####
 # generate your private key (NB: make sure to do back up copy!!!)
 rsa_keygen(bits = 2099) %>% 
   write_pem(path = "private.key", password = "udemy")
