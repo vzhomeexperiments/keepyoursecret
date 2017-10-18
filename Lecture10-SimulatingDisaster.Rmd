@@ -26,6 +26,7 @@ I will group these disasters into 2 categories:
 * Encrypting with Public Key, deleting Information, not having corresponding Private Key...
 * Loosing encrypted information or Private Key
 * Forgetting passphrase to your Private Key file
+* Forgetting a method of Decryption
 
 ##### Keys becoming public...
 
@@ -186,12 +187,15 @@ Simple suggestions can be:
 * If you think that you submitted some private key to the repository - immediately decrypt your information and replace your private keys
 * Use 'pipe' operator to avoid storing extra objects in R Environment
 * Clean History, Console and R Environment
+* Have a system to periodically decrypt, generate keys, renew keys and encrypt again. Use your encrypted data periodically perhaps every 2 weeks...
+* Practice on dummy data first, especially after longer periods of not using your code...
+* Write the instructions on paper and share it to your trusted person
 
 ```{r}
 # remove the content of the R Environment
 remove(list = ls())
 ```
 
-
-
 Now it's time for me to thank you for reaching this far in the course. I would love to see you joining in to the further chapter of the course which will be the case studies where we will be discussing various practical situations of using our new CRYPTOGRAPHY expertise!!!
+
+Before that I will highly recommend you to visit the QUIZ where I put a lot of questions designed to keep yourself alerted on the risks...
