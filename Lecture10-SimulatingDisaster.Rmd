@@ -22,6 +22,7 @@ I will group these disasters into 2 categories:
 
 ##### Not possible to De-Crypt Information
 
+* Encrypting information but overwriting Private Key before encryption
 * Encrypting with Public Key, deleting Information, not having corresponding Private Key...
 * Loosing encrypted information or Private Key
 * Forgetting passphrase to your Private Key file
@@ -33,6 +34,92 @@ I will group these disasters into 2 categories:
 
 Please feel free to suggest other risks you think of either in question board of the course or by sending private message...
 
+Let's start with situations when we can encrypt but could not decrypt it anymore ...
+
+This is an example how can it happen that we can generate new private key and accidentally remove already existing one. Think if you have already have encrypted information that you can't decrypt anymore!!!:
+
+```{r}
+library(openssl)
+library(tidyverse)
+
+# 1. I have my public key in the R Project Folder
+file.exists("public.key")
+
+# 2. I would encrypt my text using that public key
+"my specially important text string" %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("myString.Encrypted")
+
+# 3. This time I would SIMULATE disaster... I am creating new pairs of keys...
+# before that I will create backup of my private key...
+file.copy("private.key", "backup_private.key")
+
+# generating and writing new private key
+rsa_keygen(bits = 2099) %>% 
+  write_pem(path = "private.key", password = "udemy")
+
+# 4. Now I will attempt to decrypt my encrypted information...
+secret_encrypted <- read_rds("myString.Encrypted")
+
+# decrypting the list from R Environment
+decrypt_envelope(data = secret_encrypted$data,
+                 iv = secret_encrypted$iv,
+                 session = secret_encrypted$session,
+                 key = "private.key",
+                 password = "udemy") %>% 
+  # getting back original object in a form of the data frame
+  unserialize() 
+```
+
+oops there is an error...
+
+Let's think how to prevent that?
+
+* One strategy if you are the owner of the information and at the same time you are encrypting this information for yourself. Simply always using Private Key!
+* If you want to use Public Key yourself you can probably check that public key 'hash' is corresponding to the one from Private Key
+
+```{r}
+# 1. I have my public key in the R Project Folder
+file.exists("public.key")
+
+# 2. I would encrypt my text using that public key, but now I will check if I have corresponding Private Key!!!
+if(identical(read_pubkey("public.key")$fingerprint,
+             read_key("private.key", password = "udemy")$pubkey$fingerprint)) {
+"my specially important text string" %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("myString.Encrypted") } else { print("You are attempting to encrypt without having proper copy of Private Key")}
+
+# 2.1. If I will use the same construct but with backup_private.key ...
+if(identical(read_pubkey("public.key")$fingerprint,
+             read_key("backup_private.key", password = "udemy")$pubkey$fingerprint)) {
+"my specially important text string" %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("myString.Encrypted") } else { print("You are attempting to encrypt without having proper copy of Private Key")}
+
+# 5. This time I will be able to decrypt my encrypted information...
+secret_encrypted <- read_rds("myString.Encrypted")
+
+# decrypting the list from R Environment
+decrypt_envelope(data = secret_encrypted$data,
+                 iv = secret_encrypted$iv,
+                 session = secret_encrypted$session,
+                 key = "backup_private.key",
+                 password = "udemy") %>% 
+  # getting back original object in a form of the data frame
+  unserialize() 
+```
 
 
 
