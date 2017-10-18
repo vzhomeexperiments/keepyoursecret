@@ -1,0 +1,146 @@
+---
+title: "Keep your secrets under control - Cryptography for All"
+output:
+  html_document: default
+  html_notebook: default
+  word_document: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+#### Disclamer
+
+By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
+
+#### Lecture 10 Decrypt your information using your Private Key
+
+Hello and welcome back to the course Keep Your Secret under Your Control. I hope you are enjoying the process, able to follow it and find something new and useful for your day to day use. 
+
+In this exciting lecture you will be doing the most fascinating part which is to decrypting your secret from the messy encrypted data...
+
+Learning objectives of this lecture will be:
+
+* reading encrypted file to the R Environment object
+* Decrypting the object, unserializing it...
+* Writing R object back to the file
+
+Just to bring you back upspeed I will show back the steps we did so far in the form of the overview slide
+
+If you not remember we read our file into R Environment, we 'serialized' this object, we used our 'public.key' file to encrypt the serialized object. Finally we stored this object to the file...
+
+Now we have our file with encrypted data that we sill need to decrypt...
+
+As in the previous lectures we will do step by step code execution to verify what is happening in the decryption process. Also in the end of this lecture we will summarize the executed code to get the overall view of all steps...
+
+The steps we will perform to decrypt our file will be almost exact opposite to the steps we used to ENCRYPT our secret //slide//. We will do the following things:
+
+* Read file with encrypted data to the R Environment
+* Bring private_key to the R Environment [optional - for demonstration purposes]
+* Decrypt our R Object using our 'private.key' file
+* unserialize our message
+* Write file with our secret back to the Computer File System
+
+First thing will be to read our file with Encrypted Information. We can do so using **read_rds()** function. 
+
+```{r}
+# read file with Encrypted Information (from Computer File System to R Environment)
+secret_encrypted <- read_rds("PasswordList.Encrypted")
+```
+
+Now you can observe now the object "secret_encrypted" directly in your R environment. We call this object exactly the same as it was before...
+
+Our private key is not kept in the R environment so we will need to have it to be able to DECRYPT our Secret. We will do that only for the demostration purposes:
+
+```{r}
+# read private key. Step is shown only for demostration purposes
+private_key <- read_key("private.key", password = "udemy")
+```
+
+Pay attention that this step is really optional because we can provide just a file with Private key to the **decrypt_envelop()** function
+
+* Decrypting the object...
+
+Now we can decrypt this object using function **decrypt_envelope()** from the **openssl** package. We must provide five arguments:
+
+* $data - or the element of the list with encrypted raw data vector
+* $iv	- or the element of the list 16 byte raw vector returned by encrypt_envelope.
+* $session - or the element of the list raw vector with encrypted session key as returned by encrypt_envelope() function.
+* key	which will be our private key or file path. we will use our file named "private.key"
+* password	string or a function to read protected keys. we will use our password "udemy"
+
+```{r}
+# decrypting the list from R Environment
+secret_serialized <- decrypt_envelope(data = secret_encrypted$data,
+                                      iv = secret_encrypted$iv,
+                                      session = secret_encrypted$session,
+                                      key = private_key)
+
+# decrypting the list from R Environment (directly with 'private.key' file)
+secret_serialized <- decrypt_envelope(data = secret_encrypted$data,
+                                      iv = secret_encrypted$iv,
+                                      session = secret_encrypted$session,
+                                      key = "private.key",
+                                      password = "udemy")
+
+```
+
+Magic, our secret was successfully decripted and we have got back the vector named `secret_serialized`
+
+It's time now to unserialize this object using function **unserialize()**
+
+```{r}
+# getting back original object in a form of the data frame
+secret_clearText <- unserialize(secret_serialized)
+```
+
+Wonderful, we can have our passwords list back!!! They are in R Environment
+
+```{r}
+# having our secrets back to R Environment
+secret_clearText
+```
+
+They are exactly the same as we left them!!!
+
+* Writing R object back to the file
+
+Final stage will be to write them back as original file named 'PasswordsLIST2.csv'
+
+```{r}
+# write dataframe to the csv file
+write_csv(secret_clearText, "PasswordsLIST2.csv")
+```
+
+Let's have a look back to our files... yes they are exactly the same. Even special characters are returned back as they were 
+
+For sake of to get a summary we will make a short and elegant summary of R code that does the same process in one chunk of R code...
+
+```{r}
+# read file with Encrypted Information (from Computer File System to R Environment)
+secret_encrypted <- read_rds("PasswordList.Encrypted")
+
+# decrypting the list from R Environment
+decrypt_envelope(data = secret_encrypted$data,
+                                      iv = secret_encrypted$iv,
+                                      session = secret_encrypted$session,
+                                      key = "private.key",
+                                      password = "udemy") %>% 
+  # getting back original object in a form of the data frame
+  unserialize(secret_serialized) %>% 
+  # write dataframe to the csv file
+  write_csv("PasswordsLIST2.csv")
+
+# remove secret_encrypted object
+rm(secret_encrypted)
+```
+
+Great! It's time to conclude this lecture with a quick overview of steps we just took in this lecture to complete our decryption process...
+
+Simply put we read our file containing encrypted information into R Environment, after reading we got a list of raw vectors. then we decrypted this list using private key file. We unserialized the decrypted vector into the human readable dataframe and finally we wrote this table into comma separated value file as we got it...
+
+
+That is all! We were able to complete the process from reading sensitive data, encrypting it, decrypting and reading it again. We did it in the step=by=step manner so you perfectly understood the process. Not to the very deep internals of course but just enough to achieve the purpose to keep our secret secure...
+
+Basically these lectures is all you need to start encrypting/decrypting your secrets, however I will have to warn you and welcome you first to live the 'disaster'. Luckily it will be a fake disaster. We will need it to properly understand risks of loosing information... I will be waiting you in the next lecture!
+
+Now it's time for me to thank you for reaching this far in the course. I would love to see you joining in to the further chapter of the course which will be the case studies where we will be discussing various practical situations of using our new CRYPTOGRAPHY expertise!!!
