@@ -26,7 +26,7 @@ read_key(file = "private.key", password = "udemy") %>%
 # -------------------------------------------------------------------------------------------
 
 # -------------------------------------------------------------------------------------------
-#### ENCRYPT ####
+#### ENCRYPT (from previous lectures) ####
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
 
@@ -84,6 +84,4 @@ secret_mtcars <- unserialize(secret_serialized)
 # use function identical() to compare the two objects
 identical(mtcars, secret_mtcars)
 
-# remove secret_encrypted object
-rm(secret_encrypted)
 # -------------------------------------------------------------------------------------------
