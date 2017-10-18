@@ -121,7 +121,76 @@ decrypt_envelope(data = secret_encrypted$data,
   unserialize() 
 ```
 
+* Loosing encrypted information or Private Key
 
+```{r}
+# encrypt mtcars dataset and delete Private Key...
+# 2.1. If I will use the same construct but with backup_private.key ...
+if(identical(read_pubkey("public.key")$fingerprint,
+             read_key("backup_private.key", password = "udemy")$pubkey$fingerprint)) {
+mtcars %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("mtcars.Encrypted") } else { print("You are attempting to encrypt without having proper copy of Private Key")}
+
+# # deleting encrypted object (NB: !!!simulating disaster!!!)
+# file.remove("mtcars.Encrypted")
+# 
+# # deleting Private Key
+# file.remove("backup_private.key")
+```
+
+
+Probably the best strategy to avoid loosing information that is encrypted is to have a solid method of storing this information. Things to consider:
+
+* keeping backup copy in the folder 'One Drive' synchronized to the server
+* keeping a system to have Private Keys in separate physycally protected box (safe)
+* have a content of the Private Key ... printed on paper???
+
+
+* Forgetting passphrase to your Private Key file
+
+```{r}
+# NB: !!!simulating disaster, forgot passphrase!!! 
+secret_encrypted <- read_rds("mtcars.Encrypted")
+
+# decrypting the list from R Environment
+decrypt_envelope(data = secret_encrypted$data,
+                 iv = secret_encrypted$iv,
+                 session = secret_encrypted$session,
+                 key = "backup_private.key",
+                 password = "forgot...") %>% 
+  # getting back original object in a form of the data frame
+  unserialize() 
+```
+
+oops, error...
+
+try to record it somewhere... ???
+
+
+The last disaster that can happen is about keeping your data leak. Perhaps unintentionally...
+
+For example:
+
+* you can submit your private keys to the version control public repository
+* you may use public computer with R installed and you would not delete history or content of Console leaking passphrase or even private key
+* you can save your .History file to the version control public repository ...
+
+Simple suggestions can be:
+
+* Use .gitignore to exclude some files from public repositories
+* If you think that you submitted some private key to the repository - immediately decrypt your information and replace your private keys
+* Use 'pipe' operator to avoid storing extra objects in R Environment
+* Clean History, Console and R Environment
+
+```{r}
+# remove the content of the R Environment
+remove(list = ls())
+```
 
 
 
