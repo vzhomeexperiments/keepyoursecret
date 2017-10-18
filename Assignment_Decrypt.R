@@ -59,17 +59,28 @@ if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordsLIST.csv")}
 
 # -------------------------------------------------------------------------------------------
 #### DECRYPT ####
-# read file with Encrypted Information (from Computer File System to R Environment)
-secret_encrypted <- read_rds("PasswordList.Encrypted")
 
-# decrypting the list from R Environment
-decrypt_envelope(data = secret_encrypted$data,
-                 iv = secret_encrypted$iv,
-                 session = secret_encrypted$session,
-                 key = "private.key",
-                 password = "udemy") %>% 
-  # getting back original object in a form of the data frame
-  unserialize() %>% 
+## Task 1 - read your encrypted secret object 'mtcars.Encrypted'.
+# read file with encrypted information to R Environment, assign it to the object 
+secret_encrypted <- read_rds("mtcars.Encrypted")
+
+## Task 2 - review what is inside this object
+# view the structure of the object 'secret_encrypted' with str() function
+str(secret_encrypted)
+
+## Task 3 - decrypt this object with 'private.key' file
+# provide required arguments to the function decrypt_envelope()
+secret_serialized <- decrypt_envelope(data = secret_encrypted$data,
+                                      iv = secret_encrypted$iv,
+                                      session = secret_encrypted$session,
+                                      key = "private.key",
+                                      password = "udemy") 
+
+## Task 4 - Unserialize the object
+# Use function unserialize() and assign the result to the object secret_mtcars
+secret_mtcars <- unserialize(secret_serialized) 
+
+## Task 5 - Compare objects 
   # write dataframe to the csv file
   write_csv("PasswordsLIST.csv")
 
