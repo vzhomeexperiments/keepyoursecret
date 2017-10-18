@@ -9,10 +9,14 @@ library(openssl)
 library(tidyverse)
 
 #### KEY MANAGEMENT ####
-# generate your private key (NB: make sure to do back up copy!!!)
-rsa_keygen(bits = 2099) %>% 
-  write_pem(path = "private.key", password = "udemy")
 
+# check if private.key object is not exist...
+if(!file.exists("private.key")){
+  rsa_keygen(bits = 2099) %>% 
+    # function writes your private key to the file, optional to specify passphrase
+    write_pem(path = "private.key", password = "udemy")} else {
+      print("You are attempting to overwrite your Private Key. Manually remove your key first!")
+    }
 
 # generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
 read_key(file = "private.key", password = "udemy") %>% 
