@@ -8,10 +8,16 @@
 library(openssl)
 library(tidyverse)
 
-#### KEY MANAGEMENT ####
-# generate your private key (NB: make sure to do back up copy!!!)
-rsa_keygen(bits = 2099) %>% 
-  write_pem(path = "private.key", password = "udemy")
+#### KEY MANAGEMENT (from previous lectures) ####
+
+# check if private.key object is not exist...
+if(!file.exists("private.key")){
+  rsa_keygen(bits = 2099) %>% 
+    # function writes your private key to the file, optional to specify passphrase
+    write_pem(path = "private.key", password = "udemy")} else {
+      print("You are attempting to overwrite your Private Key. Manually remove your key first!")
+    }
+
 # generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
 read_key(file = "private.key", password = "udemy") %>% 
   # extract element of the list and write to file
@@ -25,7 +31,7 @@ read_key(file = "private.key", password = "udemy") %>%
 if(file.exists("PasswordList.Encrypted")){file.remove("PasswordList.Encrypted")}
 
 ## Encrypt with PUBLIC key (e.g. send this code to collaborator)
-read_csv2("PasswordList.csv") %>% 
+read_csv("PasswordsLIST.csv") %>% 
   # serialize the object
   serialize(connection = NULL) %>% 
   # encrypt the object
@@ -33,15 +39,19 @@ read_csv2("PasswordList.csv") %>%
   # write encrypted data to File
   write_rds("PasswordList.Encrypted")
 
-## Encrypt with PRIVATE key (e.g. use this code yourself)
-read_csv2("PasswordList.csv") %>% 
-  # serialize the object
-  serialize(connection = NULL) %>% 
-  # encrypt the object
-  encrypt_envelope("private.key") %>% 
-  # write encrypted data to File
-  write_rds("PasswordList.Encrypted")
+# ## Encrypt with PRIVATE key (e.g. use this code yourself)
+# read_csv("PasswordsLIST.csv") %>% 
+#   # serialize the object
+#   serialize(connection = NULL) %>% 
+#   # encrypt the object, NB: R will interactively ask you password
+#   encrypt_envelope("private.key") %>% 
+#   # write encrypted data to File
+#   write_rds("PasswordList.Encrypted")
 
+
+# NB: remove original file with secrets
+# check first if encrypted data is exist
+if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordsLIST.csv")}
 
 # NB: remove original file with secrets
 # check first if encrypted data is exist
