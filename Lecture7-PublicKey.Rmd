@@ -1,9 +1,9 @@
 ---
 title: "Keep your secrets under control - Cryptography for All"
 output:
-  word_document: default
-  html_notebook: default
   html_document: default
+  html_notebook: default
+  word_document: default
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
@@ -14,7 +14,9 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 7 generate your public key with your private key
 
-Hello and thank you for continuing this course. In the last lecture we have created our private key and stored it to the file. Let's now move closer to understand how to generate a public key using a private key.
+Hello Thank you for continuing this course. In the last lecture we have created our private key and stored it to the file. Let's now move closer to understand how to generate a public key using a private key.
+
+Feel free to 'pull' content of the repository or just copy and paste the code attached to this lecture...
 
 This lecture will have three learning objectives:
 
@@ -22,27 +24,45 @@ This lecture will have three learning objectives:
 * generating our public key
 * writing our public key to the file
 
-At this stage we have our private key written in the file. Once it's in the file we can't really use it we must load it to some program. As you remember our program of choice will be our R Statistical SOftware.
+I will start to graphically illustrate what will we do... so easy to see, let's make it!
 
-Once again we will start R studio and load our library openssl. Now we can start reading the file. Let's doublecheck that our environment is now empty. I have here my usb key which I will connect to computer now. in my script I will write: private_key, assigment operator my function read underscore key and I will specify the path to the file. If I have specified password I must now provide it here:
+//slide//
+
+I will start by reading my private key from file. I will be using function **read_key()**
 
 ```{r}
+#load libraries...
+library(openssl)
+library(tidyverse)
+
+# run this code below to generate private.key file (in case it was deleted from previous lecture)
+# check if private.key object is not exist...
+if(!file.exists("private.key")){
+  rsa_keygen(bits = 2099) %>% 
+    # function writes your private key to the file, optional to specify passphrase
+    write_pem(path = "private.key", password = "udemy")} else {
+      print("You are attempting to overwrite your Private Key. Manually remove your key first!")
+    }
+
+# finally bring object private_key to the R Environment
 private_key <- read_key(file = "private.key", password = "udemy")
 ```
 
 If I would not provide my password argument R Studio will ask me this password in the interactive mode
 
 ```{r}
+# reading private key from file
 #private_key <- read_key(file = "private.key")
 ```
 
 Now check it out in the Environment our exact same key will be back!!!
 
 ```{r}
+# show structure of private key, notice where is the $pubkey element...
 str(private_key)
 ```
 
-We are ready to the second objective of our lecture which is to create public key. As a reminder public key is required to encrypt or lock our secret... because public key was part of a private key we can always just extract it from our private key. To do this we need to add dollar pubkey and assign the result to the object public underscore key
+We are ready to the second objective of our lecture which is to create public key. As a reminder public key is required to encrypt or lock our secret... because public key was part of a private key we can always just extract it from our private key. To do this we need to add **$pubkey** and assign the result to the object `public_key`:
 
 ```{r}
 # one possibility:
@@ -50,6 +70,7 @@ public_key <- private_key$pubkey
 # alternative from documentation
 public_key2 <- as.list(private_key)$pubkey
 # result is the same...
+identical(public_key, public_key2)
 ```
 
 let's check out what is in our key:
@@ -58,24 +79,28 @@ let's check out what is in our key:
 str(public_key)
 ```
 
+Finally we need to write our `public_key` to the file. As you remember we may need to send this public_key to our friend who will use it to encrypt secret. For example user credentials. More on the use cases we will discuss in the next chapter of the course.
+
+To write it to the file we can just use function **write_pem()**
+
+```{r}
+write_pem(public_key, "public.key")
+```
+
+For those more experienced users I will summarise entire executed code in the form of the simple code chunk (very elegantly isn't it?):
+
+```{r}
+# generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
+read_key(file = "private.key", password = "udemy") %>% 
+  # extract element of the list and write to file
+  `[[`("pubkey") %>% write_pem("public.key")
+```
+
+Before to end up this lecture I would like to mention very important thing. Because of the fact that Private Key will be needed to DECRYPT the secret, we MUST use only **CORRESPONDING** Public Key. For this you have this statement -> "Wrong Public Key == Loosing Your Data". Keep that in mind. Good news is that you will be 'exposed' to this 'disaster' in the training mode of course.
 
 
 At this moment let's conclude our lecture with a quick summary:
 
-* reading our private key
-To read our private key from the file we use function read_key and we are reading our private key back. We can keep our private key in the file
-* generating our public key
-because public key is a part of the private key we can extract it as a part of the list.
-
-For those more experienced users I will summarise entire executed code in the form of the simple code chunk:
-
-```{r}
-# read key
-public_key <- read_key(file = "private.key", password = "udemy") %>% 
-  # extract element of the list
-  `[[`("pubkey")
-```
-
-very elegantly isn't it?
+In this lecture we read our Private Key from file, extracted Public Key from it and Wrote our Public Key to the file. So simple...
 
 And with that we are perfectly ready to start creating secrets... right in the next lecture
