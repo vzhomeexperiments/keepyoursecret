@@ -12,95 +12,110 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 
 By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
 
-#### Lecture 7 generate your public key with your private key
+#### Lecture 8 Encrypt your information using your Public Key
 
-Hello Thank you for continuing this course. In the last lecture we have created our private key and stored it to the file. Let's now move closer to understand how to generate a public key using a private key.
+Hello and thank you for continuing the course. Now we starting to be closer to the most interesting part - creating secrets or encrypting information. Now I have prepared my secret message which I will need to encrypt. For this example let it be a table where one column contains user name and anothe column contains passwords. This file is stored in the file PasswordLIstETraining dot r t f. What we will need to do next is to provide this file to a coding machine which will be our R Statistical Software and functions provided by package openssl. This software will digest this object and encrypt it using a public key. And obviously next we will write encrypted file back to the folder in a form of the file...
 
-Feel free to 'pull' content of the repository or just copy and paste the code attached to this lecture...
+For that our learning objectives will be the following:
 
-This lecture will have three learning objectives:
+* reminder on data loss risk
+* we will read file that contain secret (for example text file) into the object
+* we will serialize and encrypt this object
+* we will then write this encrypted object to the file
 
-* reading our private key from file
-* generating our public key
-* writing our public key to the file
+By the end of this lecture we will reach the state to have our secret encrypted and packed to the file to be stored or shared securely...
 
-I will start to graphically illustrate what will we do... so easy to see, let's make it!
+I would like to mention for more experienced users to scroll video quicker if you understand our code and for others please pause the video and try to repeat this code by yourself...
 
-//slide//
+We will start with a reminder not to use any business critical or personal information during the course. Remember that this course is just providing you education and you should use dummy data for practice not real one. Otherwise there is a chance that you can render your data unusable and loose it completely. Only start using material from the course once you are totally understand your actions
 
-I will start by reading my private key from file. I will be using function **read_key()**
+once we are ready we can start acutally to read our file
 
-```{r}
-#load libraries...
-library(openssl)
+```{r, message=TRUE, warning=TRUE}
+# object to encrypt
 library(tidyverse)
-
-# run this code below to generate private.key file (in case it was deleted from previous lecture)
-# check if private.key object is not exist...
-if(!file.exists("private.key")){
-  rsa_keygen(bits = 2099) %>% 
-    # function writes your private key to the file, optional to specify passphrase
-    write_pem(path = "private.key", password = "udemy")} else {
-      print("You are attempting to overwrite your Private Key. Manually remove your key first!")
-    }
-
-# finally bring object private_key to the R Environment
-private_key <- read_key(file = "private.key", password = "udemy")
+secret_clearText <- read_csv2("PasswordList.csv")
+# view our secret...
+secret_clearText
 ```
 
-If I would not provide my password argument R Studio will ask me this password in the interactive mode
+This way we have our data INSIDE R Environment. Check this out... You can click on the name in the Environment to actually visualize the object in a form of the table
 
 ```{r}
-# reading private key from file
-#private_key <- read_key(file = "private.key")
+# visualise the object in a separate file
+ View(secret_clearText)
 ```
 
-Now check it out in the Environment our exact same key will be back!!!
+This data now needs to be encrypted. Before we do that however we need to "serialize" this data. This is required to convert our message to "standard" form for the algorithm to encrypt the "message". We will not go too deep into explanations here and just taking this as granted. What we know however is that the result of this operation. It will be a vector of specific length. Elements of the vector will be numbers/characters
 
 ```{r}
-# show structure of private key, notice where is the $pubkey element...
-str(private_key)
+# serialize the object
+secret_serialized <- serialize(secret_clearText, NULL)
+head(secret_serialized, 20)
+length(secret_serialized)
 ```
 
-We are ready to the second objective of our lecture which is to create public key. As a reminder public key is required to encrypt or lock our secret... because public key was part of a private key we can always just extract it from our private key. To do this we need to add **$pubkey** and assign the result to the object `public_key`:
+And now it's time to go ahead and finally ENCRYPT our serialized message. We will use function **encrypt_envelope()** from **openssl** package. All we need to do is to provide our "message" and our public key!!!
 
 ```{r}
-# one possibility:
-public_key <- private_key$pubkey
-# alternative from documentation
-public_key2 <- as.list(private_key)$pubkey
-# result is the same...
-identical(public_key, public_key2)
+# encrypt the object
+secret_encrypted <- encrypt_envelope(secret_serialized, public_key)
 ```
 
-let's check out what is in our key:
+This way now we have our secret!!! How does it look like?
 
 ```{r}
-str(public_key)
+str(secret_encrypted)
 ```
 
-Finally we need to write our `public_key` to the file. As you remember we may need to send this public_key to our friend who will use it to encrypt secret. For example user credentials. More on the use cases we will discuss in the next chapter of the course.
-
-To write it to the file we can just use function **write_pem()**
+It is a list containing three elements and it is our message that is encrypted. We can't now read it back without a private key.
 
 ```{r}
-write_pem(public_key, "public.key")
+# attempting to unserialize will result in error
+#original <- unserialize(secret_encrypted$data)
+# error...
 ```
 
-For those more experienced users I will summarise entire executed code in the form of the simple code chunk (very elegantly isn't it?):
+To recap, this object is still now in the R Environment and it's ENCRYPTED. From this object we can return to read it back with a series of manipulations we will discuss in the next lecture. 
+
+At this moment however we will proceed to the next point of our learning objective which is to store this object in a form of a file...
+
+Our objective now is to transfer this object to the file so we can keep this "message" persistently elsewhere. For example in the Computer Hard Disk or in the USB key, send by email and so on. At the end of the day we can be sure that any person with normal computer tools can not read this data without the Private Key. 
+
+To achieve this task in R we can use function **write_rds()** or **saveRDS()**. We will just use the first function:
 
 ```{r}
-# generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
-read_key(file = "private.key", password = "udemy") %>% 
-  # extract element of the list and write to file
-  `[[`("pubkey") %>% write_pem("public.key")
+# write encrypted data to File
+write_rds(secret_encrypted, "PasswordList.Encrypted")
+# other options with same result
+#write_rds(secret_encrypted, "PasswordListGZCompr.Encrypted",compress = "gz")
+#saveRDS(secret_encrypted, "PasswordList_saveRDS.Encrypted")
 ```
 
-Before to end up this lecture I would like to mention very important thing. Because of the fact that Private Key will be needed to DECRYPT the secret, we MUST use only **CORRESPONDING** Public Key. For this you have this statement -> "Wrong Public Key == Loosing Your Data". Keep that in mind. Good news is that you will be 'exposed' to this 'disaster' in the training mode of course.
+At this moment we have a file in our project directory named "PasswordList.Encrypted". This file now containing our secret... 
 
+Now let's review steps we did by looking to our diagram... //slide// ... in total we just made five steps:
 
-At this moment let's conclude our lecture with a quick summary:
+* We had our file with secrets
+* We read this file into R software and make it a data frame object
+* We have serialized this object 
+* We have encrypted this serialized object and got a list of raw data vectors
+* We wrote the resulted encrypted object into the file we can store or distribute
 
-In this lecture we read our Private Key from file, extracted Public Key from it and Wrote our Public Key to the file. So simple...
+Obviously consider that we are moving slowly and consistenlty just to have our better understanding on the process. Once we are ready to put this process in operation it will be executed almost instantly...
 
-And with that we are perfectly ready to start creating secrets... right in the next lecture
+I will summarise this process in just few R code lines below. **notice that** I am using a "pipe" operator that transfer the result of the function as a first argument to the next function). This way I will not leave any traces of objects that may remain in the R Environment:
+
+```{r}
+# Summary of steps to generate encrypted message and store it to the file
+library(tidyverse)
+read_csv2("PasswordList.csv") %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope(public_key) %>% 
+  # write encrypted data to File
+  write_rds("PasswordList.Encrypted")
+```
+
+And with that we are perfectly ready to start backward process to actually DECRYPT our file ... right in the next lecture
