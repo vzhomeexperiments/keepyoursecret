@@ -12,13 +12,11 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 
 By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
 
-#### Lecture 10 Decrypt your information using your Private Key
+#### Lecture 10 Simulating Disaster (Understanding Risks of loosing information)
 
-Hello and welcome back to the course Keep Your Secret under Your Control. I hope you are enjoying the process, able to follow it and find something new and useful for your day to day use. 
+Hello and welcome back to the course Keep Your Secret under Your Control. I do hope that you are learning new things and enjoying fantastic manipulations happenning with your data. Additionally you are able to exactly follow steps that are happening during manipulations in R. In my personal view the only reason you want to know these details is because you don't want to get into the situation that you doing something wrong... for this I thought to prepare for you a special lecture that will help you to experience situations that you doing something wrong. Making mistakes and then realise that something is wrong... upps. This is why I thought it will be better to simulate the disaster and prevent them accordinly...
 
-In this exciting lecture you will be doing the most fascinating part which is to decrypting your secret from the messy encrypted data...
-
-Learning objectives of this lecture will be:
+We will review following situations that can lead to disaster:
 
 * reading encrypted file to the R Environment object
 * Decrypting the object, unserializing it...
