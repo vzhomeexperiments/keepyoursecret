@@ -80,9 +80,9 @@ secret_serialized <- decrypt_envelope(data = secret_encrypted$data,
 # Use function unserialize() and assign the result to the object secret_mtcars
 secret_mtcars <- unserialize(secret_serialized) 
 
-## Task 5 - Compare objects 
-  # write dataframe to the csv file
-  write_csv("PasswordsLIST.csv")
+## Task 5 - Compare objects: are they identical?
+# use function identical() to compare the two objects
+identical(mtcars, secret_mtcars)
 
 # remove secret_encrypted object
 rm(secret_encrypted)
