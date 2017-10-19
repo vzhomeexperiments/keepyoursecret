@@ -12,18 +12,18 @@ library(tidyverse)
 # provided public, private keys
 
 ## Task 2 - Check presence of Public Key in the R Project Folder
-# Use function file.exists() to verify if file 'public.key' does exist (run provided code)
+# Use function file.exists() to verify if file 'public.key' does exist
 file.exists("public.key")
 
 # do the same for the 'private.key'
-
+file.exists("private.key")
 
 ## Task 3 - Create dummy data object
 # Assign to 'DummyData' content of 'mtcars' dataframe
 DummyData <- mtcars
 
 ## Task 4 - Encrypt your 'DummyData'
-# Use available 'public.key' file and create encrypted object 'dummy.Encrypted' (run provided code)
+# Use available 'public.key' file and create encrypted object 'dummy.Encrypted'
 DummyData %>% 
   # serialize the object
   serialize(connection = NULL) %>% 
@@ -34,13 +34,13 @@ DummyData %>%
 
 ## Task 5 - Delete 'SuperSecret' non encrypted info object 'DummyData'
 # Use function 'remove()' or 'rm()' to delete object from R Environment
-
+rm(DummyData)
 
 ## Task 6 - Attempt to Decrypt 'dummy.Encrypted
 # use code snippet to decrypt the object
 secret_encrypted <- read_rds("dummy.Encrypted")
 
-# decrypting the list from R Environment (run provided code)
+# decrypting the list from R Environment
 DummyData <- decrypt_envelope(data = secret_encrypted$data,
                  iv = secret_encrypted$iv,
                  session = secret_encrypted$session,
@@ -54,10 +54,13 @@ rm(secret_encrypted)
 
 ## Task 7 - Verify if provided public.key is the one corresponding to your private.key
 # read both keys and extract objects
-public_keyI <- read_key("...", "udemy")$pubkey
-public_keyV <- read_pubkey("...")
+public_keyI <- read_key("private.key", "udemy")$pubkey
+public_keyV <- read_pubkey("public.key")
 # identicality check
 identical(public_keyI, public_keyV)
 
 ## Task 8 - Find what is exactly different
-# use $fingerprint of the list to find out...just print results to Console
+# use $fingerprint of the list to find out...
+public_keyI$fingerprint
+public_keyV$fingerprint
+
