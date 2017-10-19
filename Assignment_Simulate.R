@@ -8,6 +8,32 @@
 library(openssl)
 library(tidyverse)
 
+## Task 1 - Place required objects into R Project Folder (alternatively use Lecture10 branch)
+# provided public, private keys
+
+## Task 2 - Check presence of Public Key in the R Project Folder
+# Use function file.exists() to verify if file 'public.key' does exist
+file.exists("public.key")
+
+# do the same for the 'private.key'
+file.exists("private.key")
+
+## Task 3 - Create dummy data object
+# Assign to 'DummyData' content of 'mtcars' dataframe
+DummyData <- mtcars
+
+## Task 4 - Encrypt your 'DummyData'
+# Use available 'public.key' file and create encrypted object 'dummy.Encrypted'
+
+
+
+
+
+
+
+
+
+
 # ------------------------------------------------------------------------------------
 #### KEY MANAGEMENT ####
 # generate your private key (NB: make sure to do back up copy!!!)
