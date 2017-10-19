@@ -37,6 +37,7 @@ once we are ready we can start acutally to read our file
 ```{r, message=FALSE, warning=FALSE}
 # object to encrypt
 library(tidyverse)
+library(openssl)
 secret_clearText <- read_csv("PasswordsLIST.csv")
 # view our secret...
 secret_clearText
