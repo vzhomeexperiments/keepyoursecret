@@ -24,12 +24,33 @@ DummyData <- mtcars
 
 ## Task 4 - Encrypt your 'DummyData'
 # Use available 'public.key' file and create encrypted object 'dummy.Encrypted'
+DummyData %>% 
+  # serialize the object
+  serialize(connection = NULL) %>% 
+  # encrypt the object
+  encrypt_envelope("public.key") %>% 
+  # write encrypted data to File
+  write_rds("dummy.Encrypted")
 
+## Task 5 - Delete 'SuperSecret' non encrypted info object 'DummyData'
+# Use function 'remove()' or 'rm()' to delete object from R Environment
+rm(DummyData)
 
+## Task 6 - Attempt to Decrypt 'dummy.Encrypted
+# use code snippet to decrypt the object
+secret_encrypted <- read_rds("dummy.Encrypted")
 
+# decrypting the list from R Environment
+DummyData <- decrypt_envelope(data = secret_encrypted$data,
+                 iv = secret_encrypted$iv,
+                 session = secret_encrypted$session,
+                 key = "private.key",
+                 password = "udemy") %>% 
+  # getting back original object in a form of the data frame
+  unserialize() 
 
-
-
+# remove secret_encrypted object
+rm(secret_encrypted)
 
 
 
