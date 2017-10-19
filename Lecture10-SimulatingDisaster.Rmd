@@ -22,9 +22,8 @@ I will group these disasters into 2 categories:
 
 ##### Not possible to De-Crypt Information
 
-* Encrypting information but overwriting Private Key before encryption
 * Encrypting with Public Key, deleting Information, not having corresponding Private Key...
-* Loosing encrypted information or Private Key
+* Loosing encrypted information or Private Key (e.g. overwriting them)
 * Forgetting passphrase to your Private Key file
 * Forgetting a method of Decryption
 
@@ -52,7 +51,8 @@ library(tidyverse)
 file.exists("public.key")
 
 # 2. I would encrypt my text using that public key
-"my specially important text string" %>% 
+mySECRET <- "my specially important text string"
+mySECRET %>% 
   # serialize the object
   serialize(connection = NULL) %>% 
   # encrypt the object
@@ -60,10 +60,10 @@ file.exists("public.key")
   # write encrypted data to File
   write_rds("myString.Encrypted")
 
-# 3. This time I would SIMULATE disaster... I am creating new pairs of keys...
-# before that I will create backup of my private key...
-file.copy("private.key", "backup_private.key")
+# 3. Delete information...
+rm(mySECRET)
 
+# 3. This time I would SIMULATE disaster... I am creating new pairs of keys...
 # generating and writing new private key
 rsa_keygen(bits = 2099) %>% 
   write_pem(path = "private.key", password = "udemy")
@@ -85,9 +85,13 @@ oops there is an error...
 
 Let's think how to prevent that?
 
-* One strategy if you are the owner of the information and at the same time you are encrypting this information for yourself. Simply always using Private Key!
-* If you want to use Public Key yourself you can probably check that public key 'hash' is corresponding to the one from Private Key
+* One strategy if you are the owner of the information and at the same time you are encrypting this information for yourself. Simply always using Private Key! Or generate Public Key everytime you need to Encrypt
+* Use 'hash' md5 fingerprint is corresponding to the one from Private Key
 * One option will be to name the Private Key file in a way that the name is always unique. For example perhaps we can name the private key file using md5 sum or fingerprint hash...
+* Another interesting option is to try decrypting information before you delete original data...
+* You can perhaps name more? Add your ideas to discussion board of the course!!!
+
+Probably among different strategies the best one is the one that allows automation...
 
 ```{r}
 # 1. I have my public key in the R Project Folder
@@ -104,31 +108,11 @@ if(identical(read_pubkey("public.key")$fingerprint,
   # write encrypted data to File
   write_rds("myString.Encrypted") } else { print("You are attempting to encrypt without having proper copy of Private Key")}
 
-# 2.1. If I will use the same construct but with backup_private.key ...
-if(identical(read_pubkey("public.key")$fingerprint,
-             read_key("backup_private.key", password = "udemy")$pubkey$fingerprint)) {
-"my specially important text string" %>% 
-  # serialize the object
-  serialize(connection = NULL) %>% 
-  # encrypt the object
-  encrypt_envelope("public.key") %>% 
-  # write encrypted data to File
-  write_rds("myString.Encrypted") } else { print("You are attempting to encrypt without having proper copy of Private Key")}
-
-# 5. This time I will be able to decrypt my encrypted information...
-secret_encrypted <- read_rds("myString.Encrypted")
-
-# decrypting the list from R Environment
-decrypt_envelope(data = secret_encrypted$data,
-                 iv = secret_encrypted$iv,
-                 session = secret_encrypted$session,
-                 key = "backup_private.key",
-                 password = "udemy") %>% 
-  # getting back original object in a form of the data frame
-  unserialize() 
 ```
 
 * Loosing encrypted information or Private Key
+
+You can simply delete your encrypted information or overwrite them!
 
 ```{r}
 # encrypt mtcars dataset and delete Private Key...
@@ -201,6 +185,8 @@ Simple suggestions can be:
 # remove the content of the R Environment
 remove(list = ls())
 ```
+
+As you may see managing your secrets is really difficult today!!! Just a side note!!!
 
 Now it's time for me to thank you for reaching this far in the course. I would love to see you joining in to the further chapter of the course which will be the case studies where we will be discussing various practical situations of using our new CRYPTOGRAPHY expertise!!!
 
