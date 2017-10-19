@@ -8,6 +8,7 @@
 library(openssl)
 library(tidyverse)
 
+# ------------------------------------------------------------------------------------
 #### KEY MANAGEMENT ####
 # generate your private key (NB: make sure to do back up copy!!!)
 rsa_keygen(bits = 2099) %>% 
@@ -17,6 +18,7 @@ read_key(file = "private.key", password = "udemy") %>%
   # extract element of the list and write to file
   `[[`("pubkey") %>% write_pem("public.key")
 
+# ------------------------------------------------------------------------------------
 #### ENCRYPT ####
 # You can encrypt both using private or public key
 # NB: Make sure you have valid copy of Private Key matching your Public Key
@@ -47,7 +49,7 @@ read_csv2("PasswordList.csv") %>%
 # check first if encrypted data is exist
 if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
 
-
+# ------------------------------------------------------------------------------------
 #### DECRYPT ####
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
