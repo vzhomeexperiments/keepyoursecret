@@ -32,6 +32,11 @@ I will group these disasters into 2 categories:
 
 * Submitting your private key or passphrases to public repository
 * Loosing control on USB keys or computers with Private Key
+* In general wrong management of Public and Private keys
+
+Please pause the video and read those situations very, very attentively. This lecture is just about that to let you think on the consequences of loosing information or leaking sensitive information. There might be money involved or businesses. 
+
+Please remember that this course is provided to you as is and if you are deciding to apply knowledge from this course to your real data you are doing so at your own risk.
 
 Please feel free to suggest other risks you think of either in question board of the course or by sending private message...
 
@@ -82,6 +87,7 @@ Let's think how to prevent that?
 
 * One strategy if you are the owner of the information and at the same time you are encrypting this information for yourself. Simply always using Private Key!
 * If you want to use Public Key yourself you can probably check that public key 'hash' is corresponding to the one from Private Key
+* One option will be to name the Private Key file in a way that the name is always unique. For example perhaps we can name the private key file using md5 sum or fingerprint hash...
 
 ```{r}
 # 1. I have my public key in the R Project Folder
