@@ -46,6 +46,8 @@ read_csv2("PasswordList.csv") %>%
 # NB: remove original file with secrets
 # check first if encrypted data is exist
 if(file.exists("PasswordList.Encrypted")) {file.remove("PasswordList.csv")}
+
+
 #### DECRYPT ####
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
