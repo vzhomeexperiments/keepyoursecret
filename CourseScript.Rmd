@@ -86,9 +86,9 @@ I am looking forward to see you in the course keep your secrets under control...
 
 #### Lecture 1 Introduction
 
-Hello and warm welcome to the course.
+Hello and warm welcome to the course. Do you feel overwhelmed with number of passwords that you need to remember? Does anybody told you that your password should contain at least one number one character as a capital letter, one special character and be necessarily 15 characters long? Someone told you to never recycle your passwords??? QUite funny but I have build this course because I wanted to solve this problem for me!!!
 
-In a very quick summary this course is about applied cryptography. You will learn how to use open source R Statistical Software to be able to encrypt and decrypt your information using Public Key Cryptography. You will learn how to create your own Private and Public Keys. You will be able to exactly follow steps that are required to encrypt/decrypt send store your information. Even collaborate online using GitHub and securely keeping usercredentials. I will cover the part related to encryption of passwords in your R-Server applications such as ShinyApp. Of course you may ask me what is that special thing that in that course?! Why not just use ready to use solutions for cryptography? Why we should take this course? 
+In a very quick summary this course is about applied cryptography. You will learn how to use open source and free R Statistical Software to be able to encrypt and decrypt your information using Public Key Cryptography. You will learn how to create your own Private and Public Keys. You will be able to exactly follow steps that are required to encrypt/decrypt send store your information. Even collaborate online using GitHub and securely keeping usercredentials. I will cover the part related to encryption of passwords in your R-Server applications such as ShinyApp. Of course you may ask me what is that special thing that in that course?! Why not just use ready to use solutions for cryptography? Why we should take this course? 
 
 I believe this course is providing a value in three dimensions: **open**, **practical**, **transparetn**
 
@@ -1548,6 +1548,12 @@ https://www.youtube.com/watch?v=earYvB_nRi4
 
 
 ### Section 5 Conclusion
+
+You did that! Do you feel now satisfied because now you can do new and powerful things? Are you inspired to apply your new knowledge for your projects??? Then I am sure that you did a great job and put enough effort to learn in this course.
+
+I would love to get connected with you via Linkedin or even through the simple message on Udemy. Feel free to share your achievements inspired by this course!!!
+
+The main takaway for this course for me is that Keeping secrets under your control is quite demanding. I hope this course helped you with that
 
 #### Lecture 17 Summary
 
