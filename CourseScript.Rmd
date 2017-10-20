@@ -141,28 +141,25 @@ I am looking forward to see you in the class!!!
 
 #### Lecture 3 Disclamer
 
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. Author of the course may express opinions that may be not confirmed by deep software analysis. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk! 
-
+see in the file **DISCLAMER**
 
 Further risks and ways to mitigate them:
 
 A. Encrypting information with Public key while not having proper corresponding copy of Private Key. In this case you loose your information if you are deleting the original data after encryption. To minimize this risk: Possibly Only use Private Key all the time; Always delete and renew corresponding public key when exchanging Private Key. Regularly review your Keys and update them all at once.
 
-B. Losing a copy of Private Key. Risk may materialize when you keep your key in Laptop that is stolen or broken. Always keep at least one copy of Private Key in a secure place. For example keep a copy of Private Key on your USB Key. Regularly review your Keys and update them all at once.
+B. Losing a copy of Private Key. Risk may materialize when you keep your key in Laptop that is stolen or broken. Always keep at least one copy of Private Key in a secure place. For example keep a copy of Private Key on your USB Key. Regularly review your Keys and update them all at once. Remember to Decrypt your Encrypted information before you delete your old Private Key
 
-C. Loosing a password to your Private Key File. When you write your private key to a file and setting a password you may forget it. To minimize this risk it may be recommended to keep a copy of Private Key either stored without password or simply stored as a file with function **saveRDS()**. Regularly review your Keys and update them all at once.
+C. Loosing a password to your Private Key File. When you write your private key to a file and setting a password you may forget it. Make sure you remember this password. You may want to choose to keep a copy of Private Key if you are not sure.
 
-D. Loosing encrypted information. You may be loosing control over encrypted information. For example, you can simply forget where it is stored and with which key it was encrypted. In order to minimize this risk you should create solid storage system with specific rules and regularly review (use) the data you encrypt. Do not hesitate to keep a copy of encrypted information in the cloud storage such as OneDrive or Google Drive, etc
+D. Loosing encrypted information. You may be loosing control over encrypted information. For example, you can simply forget where it is stored and with which key it was encrypted. In order to minimize this risk you should create solid storage system with specific rules and regularly review (use) the data you encrypt. Do not hesitate to keep a copy of encrypted information in the cloud storage such as OneDrive or Google Drive, etc. Remember to decrypt all encrypted information when you exchange your Private Key
 
 E. Forgetting the method of Decryption. You may loose your information if you performing wrong operations of Encryption/Decryption. As a rule of thumb you must write the procedure on the paper, set up reminder and decrypt / encrypt this information every 3 month. When you don't use encryption/decryption method for a long period of time always use a dummy data to practice and 'remember' the method!!!
 
 F. Special characters. You may accidentally loose text information during encryption process. Make sure to check on dummy data first
 
-G. Storing your private key public or keepin it together with encrypted information. Make sure you don't 'commit' private key to a public repository when using Version Control
+G. Render your passphrase or event also your private keys public. Make sure you don't 'commit' private key to a public repository when using Version Control. Do not store .History file inside the commits. Always delete content of the History and Console
 
-H. Memory areas of computer storing the key are not securely cleaned after use. This may pose a risk to your data integrity when using this method on public computer
-
-
+H. Memory areas of computer storing the key are not securely cleaned after use. In order to securely clean your data you need to write new information to the memory, delete it and perform this process several times. This is out of scope of this course
 
 
 ### Section 2 Basics on encryption and tools
