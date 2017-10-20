@@ -1,5 +1,11 @@
 DISCLAMER
 
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... 
+By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. Author of the course may express opinions that may be not confirmed by deep software analysis. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course and beyond. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. 
 
-Author of this course can not be responsible for any direct or indirect damage due to loss of information
+You are using the material of the course at your own risk! Author of this course can not be responsible for any direct or indirect damage due to loss or leak of information
+
+Further on, you must not use the course or the materials from the course in case when usage of cryptography software is not permitted by any laws or regulations in your country. 
+
+Legalities [quote from openssl web site]
+
+Please remember that export/import and/or use of strong cryptography software, providing cryptography hooks, or even just communicating technical details about cryptography software is illegal in some parts of the world. So when you import this package to your country, re-distribute it from there or even just email technical suggestions or even source patches to the authors or other people you are strongly advised to pay close attention to any laws or regulations which apply to you. The authors of OpenSSL are not liable for any violations you make here. So be careful, it is your responsibility.
