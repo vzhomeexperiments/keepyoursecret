@@ -85,23 +85,40 @@ I am looking forward to see you in the course keep your secrets under control...
 
 #### Lecture 2 How to take full advantage of the course
 
-You will need for the course:
+Hello and welcome to the course Keep Your Secrets under Control.
 
-* usb key
-* mac or pc windows, probably linux will work as well
-* internet connection
-* r statistical software
-* from 1 to 4 hours of your time to complete the course
-* read disclamer, risk of loosing information!!!
-* optional fork github repository
-* two ways of completing the course:
--- start with theory if you prefer 
--- start with case study lecture if you prefer start exploring possibilities and want to solve this problems quick (get the solution and start using it)
+In this lecture I would like to give you a hint of how to get the most advantage of the course.
 
-Assess your situation:
-A. Beginner -> proceed slowly
-B. Advanced & want to get things done quick -> Disclamer -> Lecture "Summary Encryption Process in 5 minutes" -> Pick up desired solution for your use
-C. Expert -> All steps from B & adapt and extend desired solution
+Study says that there are 4 learning styles.
+
+* There are people who like to know the details, they would love to have all technical and scientific backgrounds...
+* Some people would like to try things getting done fast and do not really care about internals. Get the job done!!!
+* There are people who are in between and love to first understand the things and then do
+* and some people are just opposite first try and then return to theory if I would fail...
+
+I tried to design the course in the way to address the need of all groups, even further the great advantage of the course is about the fact that you will have a way to always go back, keep your records, comments and improvements for yourself
+
+So let's review the structure of the course all together!
+
+This introductory section is required to set up the rules, learn what is this course is all about and learn the important disclamer part.
+
+Then we will have a bit of theoretical part. Exactly for two groups who would like to know theory first! We will get to know what is cryptography and which tools we are going to need to exploit that. Once again I can't promise you to go so much deep into the theoretical part. I am not a computer security expert, yet the user of cryptography tools. Theory will be short...
+
+Next, we will look about **Practical** side of things! Here we will be progressing a bit slow for the ones who love to get things done slow and understandable. However for the fun of the Early Adopters there will be a very short summary at the end of every lecture. This way you will be able to start immediately experimenting and have more fun... Because of the fact that cryptography that you will do can lead to risks of loosing information you will have a short assignment at the end of each lecture. With that you will be able to understand and practice to make sure you are totally understanding risks
+
+Once you will get a core practical knowledge and practice the best section of the course is going to come! You will be able to learn about handy tricks on usage cryptography on a dayto day basis! Many different application use cases will be explained and provided for your possible use. THis section of the course will be gradually built over time of the course development...
+
+And finally we will have a simple conclusion and final thank you for joining the course
+
+Thinking about hte tools and time you would need I may say the following
+
+First of all you could use both PC or Mac and perhaps also Linux for the course. As long as it can R Statistical Software you should be fine...
+
+Go and find some old USB keys as it might be useful to keep your Private Keys backups and get some time secured to complete the cousrs... The time of course is really important resource. However please let me recommend you to really spend your time and read  the disclamer first. Remember cryptography poses serious risk of loosing information!!!
+
+In any case, I am confident that you will learn a lot and get useful new knowledge!
+
+I am looking forward to see you in the class!!!
 
 #### Lecture 3 Disclamer
 
