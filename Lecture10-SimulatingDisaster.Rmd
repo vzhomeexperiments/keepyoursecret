@@ -118,7 +118,7 @@ You can simply delete your encrypted information or overwrite them!
 # encrypt mtcars dataset and delete Private Key...
 # 2.1. If I will use the same construct but with backup_private.key ...
 if(identical(read_pubkey("public.key")$fingerprint,
-             read_key("backup_private.key", password = "udemy")$pubkey$fingerprint)) {
+             read_key("private.key", password = "udemy")$pubkey$fingerprint)) {
 mtcars %>% 
   # serialize the object
   serialize(connection = NULL) %>% 
@@ -131,7 +131,7 @@ mtcars %>%
 # file.remove("mtcars.Encrypted")
 # 
 # # deleting Private Key
-# file.remove("backup_private.key")
+# file.remove("private.key")
 ```
 
 
@@ -152,8 +152,8 @@ secret_encrypted <- read_rds("mtcars.Encrypted")
 decrypt_envelope(data = secret_encrypted$data,
                  iv = secret_encrypted$iv,
                  session = secret_encrypted$session,
-                 key = "backup_private.key",
-                 password = "forgot...") %>% 
+                 key = "private.key",
+                 password = "forgotten") %>% 
   # getting back original object in a form of the data frame
   unserialize() 
 ```
