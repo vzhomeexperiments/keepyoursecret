@@ -1503,7 +1503,16 @@ TDL
 
 #### Lecture 14 Share your secrets securely with collaborators
 
-Explain package 'secret'
+Hello and welcome back to the Case Studies section of this course. In this lecture we will look on one use case of **public key cryptography** for developing things in **R**. In particular, how would you deal with projects that require to access data storage? In case you would need to use passwords to access data and at the same time you can not store those passwords in the public accounts on GitHub! However there is a solution! It's developed by Gabor Gsardi and can be used using R package 'secret'
+
+The basic idea is to simply encrypt part of your R project. Both you and your colleagues can decrypt this information using their private keys.
+
+Let's see how is this implemented:
+
+```{r}
+
+```
+
 
 #### Lecture 15 User Interface to your secrets
 
