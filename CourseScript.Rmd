@@ -54,16 +54,15 @@ Well, I don't want to re-invent the wheel but at least I want to make sure that 
 
 So please check it up and see how we can tackle this problem!
 
-### Section 1 Introduction
 
-#### Lecture 1 Introduction
+#### Course Landing Page
 
 I am not going to overcomplicate things. I would like to stress the fact that I am not a security expert. My goal is to let you easily use cryptography to your advantage. I believe you should just know **WHAT** this process is all about and to know **HOW** to use it. 
 We will not be covering **WHY** this process is working like that. However if you are curious and want to learn more you may of course learn more deeper in details yourself.
 
 Hello and thank you for spending your time here. This is an introduction video to the course keep your secrets under control. In the next few minutes my goal is to explain you what will be in this course and how can you benefit from it
 
-what:
+hat:
 The main goal of this course is to create a way all of us can use open source encryption algorithm to keep and protect our secrets. Passwords, sensitive records and so on will be protected without usage of paid or free locked software. We will achieve our objective without reinventing the wheel or new encryption algorythm but just using existing open source and free R Statistical Software. To make our life easier we will make a nice user friendly interface in a form of Shiny App. You will learn how to generate and use your own private keys. Even further you will learn how to share your secrets with your colleagues or loved ones... This will be very practical and interactive course where you can practice and follow along. Entire material will be available to you and you can keep experimenting futher to reach desired results
 
 why: 
@@ -82,6 +81,24 @@ finally you will highly reduce the risk of not being hacked because your secrets
 at the moment I am creating this course I plan to release it for free so you have nothing to loose but just get benefits. In any case your passwords or secrets are yours and it's really up to you how you would keep them. My goal is just suggest you one method to use.
 
 I am looking forward to see you in the course keep your secrets under control...
+
+### Section 1 Introduction
+
+#### Lecture 1 Introduction
+
+Hello and warm welcome to the course.
+
+In a very quick summary this course is about applied cryptography. You will learn how to use open source R Statistical Software to be able to encrypt and decrypt your information using Public Key Cryptography. You will learn how to create your own Private and Public Keys. You will be able to exactly follow steps that are required to encrypt/decrypt send store your information. Even collaborate online using GitHub and securely keeping usercredentials. I will cover the part related to encryption of passwords in your R-Server applications such as ShinyApp. Of course you may ask me what is that special thing that in that course?! Why not just use ready to use solutions for cryptography? Why we should take this course? 
+
+I believe this course is providing a value in three dimensions: **open**, **practical**, **transparetn**
+
+**open** means you know exactly what is happening when you encrypt your information or generate keys. You rely on software that is open. The guarantee is that thousands of eyes are able to see that nothing wrong is inside. You don't risk that some worm or trojan is sitting in your locked encryption software  
+
+**practical**
+
+**transparent**
+
+
 
 #### Lecture 2 How to take full advantage of the course
 
@@ -122,7 +139,7 @@ I am looking forward to see you in the class!!!
 
 #### Lecture 3 Disclamer
 
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
+By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. Author of the course may express opinions that may be not confirmed by deep software analysis. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk! 
 
 
 Further risks and ways to mitigate them:
