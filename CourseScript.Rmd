@@ -94,9 +94,11 @@ I believe this course is providing a value in three dimensions: **open**, **prac
 
 **open** means you know exactly what is happening when you encrypt your information or generate keys. You rely on software that is open. The guarantee is that thousands of eyes are able to see that nothing wrong is inside. You don't risk that some worm or trojan is sitting in your locked encryption software  
 
-**practical**
+**practical** because you can see what is happening exactly with your data. You can find practical use and applications of the course in your day to day live. Especially if you are using R and want to keep some part of your data encrypted during your research...
 
-**transparent**
+**transparent** is about to also know about pitfals and risks. What is the use of cryptography if you can loose your information or worse if someone else will get access to it??? Good news that we will tackle this in the course
+
+WIth that said I would welcome you to enjoy this course about such a fascinating topic which is Cryptography!!! See you in the class!!!
 
 
 
