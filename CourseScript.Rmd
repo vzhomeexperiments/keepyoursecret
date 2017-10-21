@@ -88,7 +88,7 @@ I am looking forward to see you in the course keep your secrets under control...
 
 Hello and warm welcome to the course!!!
 
-Do you feel overwhelmed with number of passwords that you need to remember? Does anybody told you that your password should contain at least one number one character as a capital letter, one special character and be necessarily 15 characters long? Someone told you to never recycle your passwords???
+Do you feel overwhelmed with number of passwords that you need to remember? Does anybody told you that your password should contain at least one number one character as a capital letter, one special character and be necessarily 15 characters long? Someone told you to never recycle your passwords, but you must also replace them every 3 months???
 
 I have the same problem and for me the only solution is Cryptography...
 
