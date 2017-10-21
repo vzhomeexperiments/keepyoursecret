@@ -109,9 +109,9 @@ I believe this course is providing a value in three dimensions: open, practical,
 
 **transparent** is about to also know about pitfals and risks. What is the use of cryptography if you can loose your information or worse if someone else will get access to it??? Good news that we will tackle this in the course 
 
-Quite funny but I have build this course because I wanted to solve this problem for me!!!
+Quite funny but I have build this course because I wanted to take advantage of Cryptography!!! I did a research and now I can easily keep my secrets under control
 
-WIth that said I would welcome you to enjoy this course about such a fascinating topic which is Cryptography!!! See you in the class!!!
+WIth that said I would welcome you to enjoy this course about such a fascinating topic!!! See you in the class!!!
 
 #### Lecture 2 How to take full advantage of the course
 
