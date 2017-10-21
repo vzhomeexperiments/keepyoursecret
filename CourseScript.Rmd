@@ -97,7 +97,7 @@ And this course is just about that.
 You will learn how to use Open Source and Free R Statistical Software to be able to encrypt and decrypt your information using Public Key Cryptography. 
 You will learn how to create your own Private and Public Keys. 
 You will be able to exactly follow steps that are required to encrypt/decrypt send store your information.
-Even collaborate online using GitHub and securely keeping user credentials. 
+Even collaborate online using GitHub and securely keeping user credentials in a team. 
 I will cover the part related to encryption of passwords in your R-Server applications such as ShinyApp.
 Of course you may ask me what is that special thing that in that course?! Why not just use ready to use solutions for cryptography? Why we should take this course? 
 
