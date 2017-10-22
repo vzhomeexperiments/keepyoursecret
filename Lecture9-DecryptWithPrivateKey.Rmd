@@ -42,7 +42,9 @@ The steps we will perform to decrypt our file will be almost exact opposite to t
 
 First thing will be to read our file with Encrypted Information. We can do so using **read_rds()** function. 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(openssl)
 # read file with Encrypted Information (from Computer File System to R Environment)
 secret_encrypted <- read_rds("PasswordList.Encrypted")
 ```
@@ -126,7 +128,7 @@ decrypt_envelope(data = secret_encrypted$data,
                                       key = "private.key",
                                       password = "udemy") %>% 
   # getting back original object in a form of the data frame
-  unserialize(secret_serialized) %>% 
+  unserialize() %>% 
   # write dataframe to the csv file
   write_csv("PasswordsLIST2.csv")
 
