@@ -1,9 +1,9 @@
 ---
 title: "Keep your secrets under control - Cryptography for All"
 output:
-  word_document: default
-  html_notebook: default
   html_document: default
+  html_notebook: default
+  word_document: default
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
