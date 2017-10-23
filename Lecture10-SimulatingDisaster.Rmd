@@ -14,11 +14,11 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 10 Simulating Disaster (Understanding Risks of loosing information)
 
-Hello and welcome back to the course Keep Your Secret under Your Control. I do hope that you are learning new things and enjoying fantastic manipulations happenning with your data. Additionally you are able to exactly follow steps that are happening during manipulations in R. In my personal view the only reason you want to know these details is because you don't want to get into the situation that you doing something wrong... for this I thought to prepare for you a special lecture that will help you to experience situations that you doing something wrong. Making mistakes and then realise that something is wrong... upps. This is why I thought it will be better to simulate the disaster and prevent them accordinly...
+Hello and welcome back to the course Keep Your Secret under Your Control. As you probably already captured in a previous lectures Encrypting and Decrypting process takes seconds. However what if due to several reasons something goes wrong? Realise that later may be painful. This is why I thought it will be better to simulate such situations. Let's call them 'disasters'. Let's re-create them before they happens and prevent them accordinly...
 
-We will review following situations that can lead to disaster and think about possible strategies on how to prevent the disasters...
+We will review following situations that can lead to disaster and think about possible strategies on how to prevent the disasters... additionally I will welcome you to visit the assignment part of the lecture. There you will have these "cheat-sheets" available to you as a pdf file. Try to reflect on those and critically think what can go wrong...
 
-I will group these disasters into 2 categories: 
+From my personal point of view these disasters may fall into 2 categories: 
 
 ##### Not possible to De-Crypt Information
 
@@ -33,11 +33,7 @@ I will group these disasters into 2 categories:
 * Loosing control on USB keys or computers with Private Key
 * In general wrong management of Public and Private keys
 
-Please pause the video and read those situations very, very attentively. This lecture is just about that to let you think on the consequences of loosing information or leaking sensitive information. There might be money involved or businesses. 
-
-Please remember that this course is provided to you as is and if you are deciding to apply knowledge from this course to your real data you are doing so at your own risk.
-
-Please feel free to suggest other risks you think of either in question board of the course or by sending private message...
+Please pause the video and read those situations very, very attentively. This lecture is just about that to let you think on the consequences of loosing information or leaking sensitive information. 
 
 Let's start with situations when we can encrypt but could not decrypt it anymore ...
 
@@ -137,9 +133,8 @@ mtcars %>%
 
 Probably the best strategy to avoid loosing information that is encrypted is to have a solid method of storing this information. Things to consider:
 
-* keeping backup copy in the folder 'One Drive' synchronized to the server
+* keeping backup oe encrypted information copy in the folder 'One Drive' synchronized to the server
 * keeping a system to have Private Keys in separate physycally protected box (safe)
-* have a content of the Private Key ... printed on paper???
 
 
 * Forgetting passphrase to your Private Key file
@@ -169,7 +164,7 @@ For example:
 
 * you can submit your private keys to the version control public repository
 * you may use public computer with R installed and you would not delete history or content of Console leaking passphrase or even private key
-* you can save your .History file to the version control public repository ...
+* you can save your **.Rhistory** file to the version control public repository ...
 
 Simple suggestions can be:
 
