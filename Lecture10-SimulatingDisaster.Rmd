@@ -14,11 +14,11 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 10 Simulating Disaster (Understanding Risks of loosing information)
 
-Hello and welcome back to the course Keep Your Secret under Your Control. As you probably already captured in a previous lectures Encrypting and Decrypting process takes seconds. However what if due to several reasons something goes wrong? Realise that later may be painful. This is why I thought it will be better to simulate such situations. Let's call them 'disasters'. Let's re-create them before they happens and prevent them accordinly...
+Hello and welcome back to the course Keep Your Secret under Your Control. As you probably already captured in a previous lectures **Encrypting** and **Decrypting** process takes seconds. However what if due to several reasons something goes wrong? Realise that later may be painful. This is why I thought it will be better to simulate such situations. Let's call them 'disasters'. Let's re-create some of these before they happens and prevent them accordinly...
 
-We will review following situations that can lead to disaster and think about possible strategies on how to prevent the disasters... additionally I will welcome you to visit the assignment part of the lecture. There you will have these "cheat-sheets" available to you as a pdf file. Try to reflect on those and critically think what can go wrong...
+We will review following situations that can lead to disaster and think about possible strategies on how to prevent them... additionally I will welcome you to visit the assignment part of the lecture. There you will have these `cheat-sheets` available to you as a `pdf` file. Try to reflect on those and critically think what can go wrong...
 
-From my personal point of view these disasters may fall into 2 categories: 
+From my personal point of view these disasters may fall into **2 categories**: 
 
 ##### Not possible to De-Crypt Information
 
@@ -36,6 +36,8 @@ From my personal point of view these disasters may fall into 2 categories:
 Please pause the video and read those situations very, very attentively. This lecture is just about that to let you think on the consequences of loosing information or leaking sensitive information. 
 
 Let's start with situations when we can encrypt but could not decrypt it anymore ...
+
+##### Encrypting with Public Key, deleting Information, not having corresponding Private Key...
 
 This is an example how can it happen that we can generate new private key and accidentally remove already existing one. Think if you have already have encrypted information that you can't decrypt anymore!!!:
 
@@ -59,12 +61,12 @@ mySECRET %>%
 # 3. Delete information...
 rm(mySECRET)
 
-# 3. This time I would SIMULATE disaster... I am creating new pairs of keys...
+# 4. This time I would SIMULATE disaster... I am creating new pairs of keys...
 # generating and writing new private key
 rsa_keygen(bits = 2099) %>% 
   write_pem(path = "private.key", password = "udemy")
 
-# 4. Now I will attempt to decrypt my encrypted information...
+# 5. Now I will attempt to decrypt my encrypted information...
 secret_encrypted <- read_rds("myString.Encrypted")
 
 # decrypting the list from R Environment
@@ -106,7 +108,7 @@ if(identical(read_pubkey("public.key")$fingerprint,
 
 ```
 
-* Loosing encrypted information or Private Key
+##### Loosing encrypted information or Private Key
 
 You can simply delete your encrypted information or overwrite them!
 
@@ -137,7 +139,7 @@ Probably the best strategy to avoid loosing information that is encrypted is to 
 * keeping a system to have Private Keys in separate physycally protected box (safe)
 
 
-* Forgetting passphrase to your Private Key file
+##### Forgetting passphrase to your Private Key file
 
 ```{r}
 # NB: !!!simulating disaster, forgot passphrase!!! 
@@ -160,18 +162,19 @@ try to record it somewhere... ???
 
 The last disaster that can happen is about keeping your data leak. Perhaps unintentionally...
 
-For example:
+##### Examples of passphrase / private key leaks:
 
-* you can submit your private keys to the version control public repository
-* you may use public computer with R installed and you would not delete history or content of Console leaking passphrase or even private key
+* you can submit your private keys to the `Version Control` public repository
+* you may use public computer with R installed and you would not delete history or content of Console leaking `passphrase` or even `private key`
 * you can save your **.Rhistory** file to the version control public repository ...
 
-Simple suggestions can be:
+##### Simple suggestions can be:
 
-* Use .gitignore to exclude some files from public repositories
-* If you think that you submitted some private key to the repository - immediately decrypt your information and replace your private keys
+* Use `.gitignore` to exclude some files from public repositories
+* If you think that you submitted some private key to the repository - immediately decrypt your information and replace your private keys, delete old 'commits'
 * Use 'pipe' operator to avoid storing extra objects in R Environment
 * Clean History, Console and R Environment
+* Delete .Rhistory file
 * Have a system to periodically decrypt, generate keys, renew keys and encrypt again. Use your encrypted data periodically perhaps every 2 weeks...
 * Practice on dummy data first, especially after longer periods of not using your code...
 * Write the instructions on paper and share it to your trusted person
@@ -181,8 +184,8 @@ Simple suggestions can be:
 remove(list = ls())
 ```
 
-As you may see managing your secrets is really difficult today!!! Just a side note!!!
+ Just a side note!!! As you may see managing your secrets is really difficult today!!!
 
-Now it's time for me to thank you for reaching this far in the course. I would love to see you joining in to the further chapter of the course which will be the case studies where we will be discussing various practical situations of using our new CRYPTOGRAPHY expertise!!!
+Now it's time for me to thank you for reaching this far in the course. I would love to see you joining in to the further chapter of the course which will be the case studies where we will be discussing various practical situations of using our new *CRYPTOGRAPHY* expertise!!!
 
-Before that I will highly recommend you to visit the QUIZ where I put a lot of questions designed to keep yourself alerted on the risks...
+Before that I will highly recommend you to visit the last Assignment and QUIZ where I put a lot of questions designed to keep yourself alerted on the risks...
