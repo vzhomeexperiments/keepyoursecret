@@ -39,7 +39,7 @@ Let's start with situations when we can encrypt but could not decrypt it anymore
 
 This is an example how can it happen that we can generate new private key and accidentally overwrite already existing one. Please take a moment and possibly execute this chunc of code below
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 library(openssl)
 library(tidyverse)
 
@@ -89,7 +89,7 @@ Let's think how to prevent that?
 
 Probably among different strategies the best one is the one that allows automation... for example, I would check presence of my corresponding private key before I can encrypt
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # 1. I have my public key in the R Project Folder
 file.exists("public.key")
 
@@ -110,7 +110,7 @@ if(identical(read_pubkey("public.key")$fingerprint,
 
 You can simply delete your encrypted information or overwrite them!
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # encrypt mtcars dataset and delete Private Key...
 # 2.1. If I will use the same construct but with backup_private.key ...
 if(identical(read_pubkey("public.key")$fingerprint,
@@ -139,7 +139,7 @@ Probably the best strategy to avoid loosing information that is encrypted is to 
 
 ##### Forgetting passphrase to your Private Key file
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # NB: !!!simulating disaster, forgot passphrase!!! 
 secret_encrypted <- read_rds("mtcars.Encrypted")
 
