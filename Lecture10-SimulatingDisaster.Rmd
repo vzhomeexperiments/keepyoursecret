@@ -14,9 +14,7 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 10 Simulating Disaster (Understanding Risks of loosing information)
 
-Hello and welcome back to the course Keep Your Secret under Your Control. As you probably already captured in a previous lectures **Encrypting** and **Decrypting** process takes seconds. However what if due to several reasons something goes wrong? Realise that later may be painful. This is why I thought it will be better to simulate such situations. Let's call them 'disasters'. Let's re-create some of these before they happens and prevent them accordinly...
-
-We will review following situations that can lead to disaster and think about possible strategies on how to prevent them... additionally I will welcome you to visit the assignment part of the lecture. There you will have these `cheat-sheets` available to you as a `pdf` file. Try to reflect on those and critically think what can go wrong...
+Hello and welcome back to the course Keep Your Secret under Your Control. As you probably already captured in a previous lectures **Encrypting** and **Decrypting** process takes seconds. However what if due to several reasons something goes wrong? Realise that later may be painful. This is why I thought it will be better to simulate such situations. Let's call them 'disasters'. Let's re-create some of these before they happens and prevent them accordinly... additionally I will welcome you to visit the assignment part of the lecture. There you will have these `cheat-sheets` available to you as a `pdf` file. Try to reflect on those and critically think what can go wrong...
 
 From my personal point of view these disasters may fall into **2 categories**: 
 
@@ -33,22 +31,22 @@ From my personal point of view these disasters may fall into **2 categories**:
 * Loosing control on USB keys or computers with Private Key
 * In general wrong management of Public and Private keys
 
-Please pause the video and read those situations very, very attentively. This lecture is just about that to let you think on the consequences of loosing information or leaking sensitive information. 
+Please pause the video and carefully read those situations
 
 Let's start with situations when we can encrypt but could not decrypt it anymore ...
 
 ##### Encrypting with Public Key, deleting Information, not having corresponding Private Key...
 
-This is an example how can it happen that we can generate new private key and accidentally remove already existing one. Think if you have already have encrypted information that you can't decrypt anymore!!!:
+This is an example how can it happen that we can generate new private key and accidentally overwrite already existing one. Please take a moment and possibly execute this chunc of code below
 
 ```{r}
 library(openssl)
 library(tidyverse)
 
-# 1. I have my public key in the R Project Folder
+# 1. in this situation I have my public key in the R Project Folder
 file.exists("public.key")
 
-# 2. I would encrypt my text using that public key
+# 2. I would then create and encrypt my text using that public key
 mySECRET <- "my specially important text string"
 mySECRET %>% 
   # serialize the object
@@ -58,7 +56,7 @@ mySECRET %>%
   # write encrypted data to File
   write_rds("myString.Encrypted")
 
-# 3. Delete information...
+# 3. and delete information...
 rm(mySECRET)
 
 # 4. This time I would SIMULATE disaster... I am creating new pairs of keys...
@@ -89,7 +87,7 @@ Let's think how to prevent that?
 * Another interesting option is to try decrypting information before you delete original data...
 * You can perhaps name more? Add your ideas to discussion board of the course!!!
 
-Probably among different strategies the best one is the one that allows automation...
+Probably among different strategies the best one is the one that allows automation... for example, I would check presence of my corresponding private key before I can encrypt
 
 ```{r}
 # 1. I have my public key in the R Project Folder
