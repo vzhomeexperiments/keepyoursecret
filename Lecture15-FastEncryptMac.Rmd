@@ -30,11 +30,11 @@ For example, to find out where our Rscript program is installed you can execute
 which Rscript
 ```
 
-in my case, the path is: /usr/local/bin/Rscript
+in my case, the path of our Rscript program is: **/usr/local/bin/Rscript**
 
 This is by the way exactly what we need. We can simply write in our Terminal this path and provide as an argument the name of our R script
 
-In this case I will insert my 
+Next, I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. One way to find it is to go to the **Disk Utility** program and click on Info. You will be able to find the address of that USB Disk. It is **/Volumes/PRIVATE**. We will then need to use this address in our R Script. Another way, also a bit cumbersome is to select file or folder, hit **CMD+i**. This way we have a get info window. Select the path near **where** and press **CMD+c**. Then you can paste this to the R Script...
 
 
 After that all you need is to write a private and public keys there. The code to do this is available for you in the script `keys.R` that you can find in the branch CaseStudy-USB-Key:
