@@ -36,6 +36,10 @@ This is by the way exactly what we need. We can simply write in our Terminal thi
 
 Next, I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. One way to find it is to go to the **Disk Utility** program and click on Info. You will be able to find the address of that USB Disk. It is **/Volumes/PRIVATE**. We will then need to use this address in our R Script. Another way, also a bit cumbersome is to select file or folder, hit **CMD+i**. This way we have a get info window. Select the path near **where** and press **CMD+c**. Then you can paste this to the R Script...
 
+Have a look to the scripts EncryptM.R and DecryptM.R. You will find that I have defined paths to the private, public keys, passwords in clear text and encrypted form. The rest of code is exact same as in the previous lecture about doing so on Windows
+
+
+
 
 After that all you need is to write a private and public keys there. The code to do this is available for you in the script `keys.R` that you can find in the branch CaseStudy-USB-Key:
 

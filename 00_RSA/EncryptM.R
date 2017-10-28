@@ -23,8 +23,8 @@ if(identical(read_pubkey(pathPubKeyUSB)$fingerprint,
     # write encrypted data to File
     write_rds(pathEncryFILE) } else { print("You are attempting to encrypt without having proper copy of Private Key")}
 
-## remove secret
-remove(list = ls())
-
 ## clean non encrypted file if encrypted file does exist and history...
 if(file.exists(pathEncryFILE)) {file.remove(pathPasswFILE)}
+
+## remove variables
+remove(list = ls())

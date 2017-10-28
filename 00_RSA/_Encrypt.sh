@@ -1,2 +1,2 @@
-@echo off
-"C:\Program Files\R\R-3.2.5\bin\Rscript.exe" "C:\00_RSA\Encrypt.R"
+# script command for Mac
+/usr/local/bin/Rscript /Users/Slava1/Desktop/00_RSA/EncryptM.R
