@@ -14,7 +14,7 @@ https://www.udemy.com/keep-your-secrets-under-control
 
 By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
 
-#### Lecture 13 Format USB Stick and keep your Private/Public Keys on it!!!
+#### Lecture 15 Format USB Stick and keep your Private/Public Keys on it!!!
 
 Hello and welcome back! In this short lecture we will cover quite simple concept. Keeping your Private and Public Keys on the USB Stick. It's not a rocket science of course. The main reason of creating this lecture was mostly to insure we can use it for both Mac and Windows. Another learning objective will be to see how to write your keys directly from the script.
 
