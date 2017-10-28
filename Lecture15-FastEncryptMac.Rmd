@@ -16,13 +16,17 @@ By joining this course or using material from the course you agree that all mate
 
 #### Lecture 15 Fast Encryp and Decrypt on Mac with 'bash' scripts
 
-Hello and welcome back to one another lecture about practical use of cryptography! This lecture is dedicated for Mac users. If you only use Windows you may simply skip it.
+Hello and welcome back to one another lecture about practical use of Public Key Cryptography! This lecture is dedicated for Mac users. If you only use Windows you may simply skip it.
 
 Our goal will be to re-create the concept of usage executable files like we did on Windows machine but now on Mac. Just a side note, Mac OS already uses OpenSSL library but we will want to use it via R Statistical Software.
 
-What I would do now is to create a folder on my Desktop in Mac. This folder will be named '00_RSA'. This folder will contain my passwords, R scripts and executable files.
+What I would do now is to create a folder on my Desktop in Mac. This folder will be named '00_RSA'. This folder will contain my passwords, R scripts and executable files. Like in the previous lecture we can encrypt and decrypt our passwords within seconds.
 
-On Mac executable files are also named 'bash' scripts. It is a kind of a way to get more direct assess to the Operating System and program installed on it. To try it out you can open 'Terminal' on mac to execute some code.
+Same idea: fit in the usb key containing Private Key, press one button and get our passwords decrypted. We can then open the file with passwords, check it, close it. Once done we can encrypt our file back by pressing the script Encrypt.sh
+
+This lecture will be about to know how to execute our R scripts from Mac 
+
+On Mac executable files are also named 'shell' scripts. It is a kind of a way to get more direct assess to the Operating System and programs installed on it. To try it out you can open 'Terminal' on your Mac. You can practice to execute some code there.
 
 For example, to find out where our Rscript program is installed you can execute
 
