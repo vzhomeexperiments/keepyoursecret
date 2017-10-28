@@ -18,12 +18,23 @@ By joining this course or using material from the course you agree that all mate
 
 Hello and welcome back to one another lecture about practical use of cryptography! This lecture is dedicated for Mac users. If you only use Windows you may simply skip it.
 
-Our goal will be to re-create the concept of usage executable files like we did on Windows machine but now on Mac.
+Our goal will be to re-create the concept of usage executable files like we did on Windows machine but now on Mac. Just a side note, Mac OS already uses OpenSSL library but we will want to use it via R Statistical Software.
 
 What I would do now is to create a folder on my Desktop in Mac. This folder will be named '00_RSA'. This folder will contain my passwords, R scripts and executable files.
 
-On Mac executable files are also named 'bash' scripts
+On Mac executable files are also named 'bash' scripts. It is a kind of a way to get more direct assess to the Operating System and program installed on it. To try it out you can open 'Terminal' on mac to execute some code.
 
+For example, to find out where our Rscript program is installed you can execute
+
+```{bash}
+which Rscript
+```
+
+in my case, the path is: /usr/local/bin/Rscript
+
+This is by the way exactly what we need. We can simply write in our Terminal this path and provide as an argument the name of our R script
+
+In this case I will insert my 
 
 
 After that all you need is to write a private and public keys there. The code to do this is available for you in the script `keys.R` that you can find in the branch CaseStudy-USB-Key:
