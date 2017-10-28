@@ -14,13 +14,17 @@ https://www.udemy.com/keep-your-secrets-under-control
 
 By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
 
-#### Lecture 15 Format USB Stick and keep your Private/Public Keys on it!!!
+#### Lecture 15 Fast Encryp and Decrypt on Mac with 'bash' scripts
 
-Hello and welcome back! In this short lecture we will cover quite simple concept. Keeping your Private and Public Keys on the USB Stick. It's not a rocket science of course. The main reason of creating this lecture was mostly to insure we can use it for both Mac and Windows. Another learning objective will be to see how to write your keys directly from the script.
+Hello and welcome back to one another lecture about practical use of cryptography! This lecture is dedicated for Mac users. If you only use Windows you may simply skip it.
 
-The best way of formatting usb keys is probably from Windows PC. Here I have my usb stick labelled PRIVATE. It has a capacity of 8 gigabytes and formatted to FAT32 file system. If you are just using Mac you may format your USB key using Disk Utility.
+Our goal will be to re-create the concept of usage executable files like we did on Windows machine but now on Mac.
 
-What you need to do is to simply right click and choose Format... You can choose File system to NTFS and exFat but I really recommend you to stick to FAT32. This format will be good enough to our purpose. Set up your label and press start. Following that you should be just fine.
+What I would do now is to create a folder on my Desktop in Mac. This folder will be named '00_RSA'. This folder will contain my passwords, R scripts and executable files.
+
+On Mac executable files are also named 'bash' scripts
+
+
 
 After that all you need is to write a private and public keys there. The code to do this is available for you in the script `keys.R` that you can find in the branch CaseStudy-USB-Key:
 
