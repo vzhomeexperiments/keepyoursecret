@@ -28,7 +28,7 @@ This lecture will be about to know how to execute our R scripts from Mac
 
 On Mac executable files are also named 'shell' scripts. It is a kind of a way to get more direct assess to the Operating System and programs installed on it. To try it out you can open 'Terminal' on your Mac. You can practice to execute some code there.
 
-For example, to find out where our Rscript program is installed you can execute
+For example, let's use Termanal to find out where our Rscript program is installed.  You can type 
 
 ```{bash}
 which Rscript
@@ -36,42 +36,26 @@ which Rscript
 
 in my case, the path of our Rscript program is: **/usr/local/bin/Rscript**
 
-This is by the way exactly what we need. We can simply write in our Terminal this path and provide as an argument the name of our R script
+We can simply write in our Terminal this path and provide as an argument the name of our R script to run...
 
-Next, I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. One way to find it is to go to the **Disk Utility** program and click on Info. You will be able to find the address of that USB Disk. It is **/Volumes/PRIVATE**. We will then need to use this address in our R Script. Another way, also a bit cumbersome is to select file or folder, hit **CMD+i**. This way we have a get info window. Select the path near **where** and press **CMD+c**. Then you can paste this to the R Script...
+Our next goal will be to adapt scripts we had before to run on Mac... You can find these scripts in the repository for this lecture.
 
-Have a look to the scripts EncryptM.R and DecryptM.R. You will find that I have defined paths to the private, public keys, passwords in clear text and encrypted form. The rest of code is exact same as in the previous lecture about doing so on Windows
+The whole idea will be to replace the paths we have to the ones we have on Mac. I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. Select the file you want the path and press **CMD+i**. This will bring you the info window. There, find 'where' clause and select the path. Once done press **CMD+c**. You can now paste this path with **CMD+v**. It is **/Volumes/PRIVATE/private.key**. We will then need to use this address in our R Script. 
 
+Finally I have modified scripts EncryptM.R and DecryptM.R. You will find that I have defined paths to the private, public keys, passwords in clear text and encrypted form. The rest of code is exact same as in previous lecture.
 
+Final goal will be to learn how to execute our shell script by doubleclicking on it.
 
+Execute this command on Terminal:
 
-After that all you need is to write a private and public keys there. The code to do this is available for you in the script `keys.R` that you can find in the branch CaseStudy-USB-Key:
-
-```{r, eval=FALSE, include=TRUE}
-# Used Libraries:
-library(openssl)
-library(tidyverse)
-
-#### KEY MANAGEMENT ####
-# save that to USB Key (Windows)
-pathPrvKeyUSB <- file.path("D:/private.key")
-pathPubKeyUSB <- file.path("D:/public.key")
-# generate your private key (NB: make sure to do back up copy!!!)
-rsa_keygen(bits = 2099) %>% 
-  write_pem(path = pathPrvKeyUSB, password = "simple")
-# generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
-read_key(file = pathPrvKeyUSB, password = "simple") %>% 
-  # extract element of the list and write to file
-  `[[`("pubkey") %>% write_pem(pathPubKeyUSB)
-
+```{bash}
+chmod a+x /Users/Slava1/Desktop/00_RSA/_Encrypt.sh
 ```
 
-You should of course customize the code the way you want it... Remember to only run this code once!!!
+Then right click and select Open With... click on 'Always open with' select Enable 'All Applications'. Find 'Utilities', Terminal and click open...
 
-Finally after you have run your code make sure to make keys backups. I would recommend you to use another USB key and store it in the physically safe place. Of course private key can also be stored under control of the Computer File System. It's totally fine to keep your backup there.
+You can see that script will be executed...
 
-Just to conclude, this lecture was a bit simple to explain how to format your USB keys to be compatible for both windows and Mac. You now even have a code to write your private and public keys there.
+To summarise, in this lecture we have achieved the functionality to encrypt, decrypt our passwords by clicking on the shell script. We got to know how to find path of files in Mac and how to execute R scipts from Shell Scripts...
 
-To be honest this lecture is just a preparation for the next one where we will have a look how to use private and public keys to quickly encrypt and decrypt your passwords in very userfriendly way!!! I am looking forward to see your there!!!
-
-
+I hope that you have learnt something new and useful. We have few more concepts to cover. Next one will be about to keep encrypted dataset submitted in the Version Control...
