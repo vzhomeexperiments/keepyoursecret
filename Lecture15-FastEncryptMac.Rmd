@@ -3,6 +3,7 @@ title: "Keep your secrets under control - Cryptography for All"
 output:
   html_document: default
   html_notebook: default
+  pdf_document: default
   word_document: default
 ---
 
@@ -71,7 +72,7 @@ Notice that I have created the files _Decrypt.sh and _Encrypt.sh
 
 Execute this command on Terminal:
 
-```{bash}
+```{bash, eval=FALSE, include=TRUE}
 # Making executable shell files (adapt to your user and your path)
 chmod a+x /Users/Slava1/Desktop/00_RSA/_Encrypt.sh
 ```
