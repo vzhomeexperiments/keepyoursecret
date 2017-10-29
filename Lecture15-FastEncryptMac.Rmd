@@ -24,37 +24,61 @@ What I would do now is to create a folder on my Desktop in Mac. This folder will
 
 Same idea: fit in the usb key containing Private Key, press one button and get our passwords decrypted. We can then open the file with passwords, check it, close it. Once done we can encrypt our file back by pressing the script Encrypt.sh
 
-This lecture will be about to know how to execute our R scripts from Mac 
+This lecture will be about to learn about R on Mac:
 
-On Mac executable files are also named 'shell' scripts. It is a kind of a way to get more direct assess to the Operating System and programs installed on it. To try it out you can open 'Terminal' on your Mac. You can practice to execute some code there.
+* Learn to use Bash terminal
+* Learn how to adapt our R scripts to work in this Operating System. 
+* Learn to execute our R scripts from Mac with shell script
 
-For example, let's use Termanal to find out where our Rscript program is installed.  You can type 
+##### Learn to use Bash Terminal
+
+On Mac you can find analogy of **CMD** on windows which known to be as **Terminal**. You can execute commands there or even store those commands into executable files that are also named 'shell' scripts. Terminal is a kind of a way to get more direct assess to the Operating System and programs installed on it. To try it out you can open 'Terminal' on your Mac. You can practice to execute some code there.
+
+For example, let's use Termanal to find out where our **Rscript** program is installed.  You can type 
 
 ```{bash}
+#command 'which' finds where the Rscript application is installed
 which Rscript
 ```
 
 in my case, the path of our Rscript program is: **/usr/local/bin/Rscript**
 
-We can simply write in our Terminal this path and provide as an argument the name of our R script to run...
+We can simply write in our Terminal this path and provide as an argument the name of our R script to run... We will do that with our R scripts for this lecture but first we need to adapt them to work with this OS
 
-Our next goal will be to adapt scripts we had before to run on Mac... You can find these scripts in the repository for this lecture.
+##### Adapt R Scripts for Mac
 
-The whole idea will be to replace the paths we have to the ones we have on Mac. I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. Select the file you want the path and press **CMD+i**. This will bring you the info window. There, find 'where' clause and select the path. Once done press **CMD+c**. You can now paste this path with **CMD+v**. It is **/Volumes/PRIVATE/private.key**. We will then need to use this address in our R Script. 
+Our next goal will be to adapt R scripts we had before to run on Mac... You can find these scripts in the repository for this lecture.
 
-Finally I have modified scripts EncryptM.R and DecryptM.R. You will find that I have defined paths to the private, public keys, passwords in clear text and encrypted form. The rest of code is exact same as in previous lecture.
+The whole idea will be to replace the paths we have to the ones we have on Mac. I will insert my USB key with a **Private.key**. I will then need to find the path of my **private.key**. It's a bit of a cumbersome in Mac. Select the file you want the path and press **CMD+i**. This will bring you the info window. There, find 'where' clause and select the path. Once done press **CMD+c**. You can now paste this path with **CMD+v** to yor Script. It is **/Volumes/PRIVATE/private.key**. We will then need to use this address in our R Script. 
+
+Finally I have modified scripts EncryptM.R and DecryptM.R. You will find that I have defined paths to the private, public keys, passwords in clear text and encrypted form. 
+
+```{r}
+# saving path to keys and files
+pathPrvKeyUSB <- file.path("/Volumes/PRIVATE/private.key")
+pathPubKeyUSB <- file.path("/Volumes/PRIVATE/public.key")
+pathPasswFILE <- file.path("/Users/Slava1/Desktop/00_RSA", "passwords.csv")
+pathEncryFILE <- file.path("/Users/Slava1/Desktop/00_RSA", "password.Encrypted")
+```
+
+The rest of code is exact same as in previous lecture.
 
 Final goal will be to learn how to execute our shell script by doubleclicking on it.
+
+##### Execute our R scripts from Mac with shell script
+
+Notice that I have created the files _Decrypt.sh and _Encrypt.sh
 
 Execute this command on Terminal:
 
 ```{bash}
+# Making executable shell files (adapt to your user and your path)
 chmod a+x /Users/Slava1/Desktop/00_RSA/_Encrypt.sh
 ```
 
-Then right click and select Open With... click on 'Always open with' select Enable 'All Applications'. Find 'Utilities', Terminal and click open...
+Then right click and select 'Open With...' click on 'Always open with' select Enable 'All Applications'. Find 'Utilities', Terminal and click open...
 
-You can see that script will be executed...
+You can see that script will be executed... so you can repeat the same for '_Decrypt.sh'
 
 To summarise, in this lecture we have achieved the functionality to encrypt, decrypt our passwords by clicking on the shell script. We got to know how to find path of files in Mac and how to execute R scipts from Shell Scripts...
 
