@@ -1,19 +1,19 @@
 Why to bother?
 --------------
 
-Have your heard this term 'password chaos'? This is when you exposed to necessity to keep creating stronger passwords, not re-using them across resourses, replacing them every now and then and so on. The only solution seems to be using special programs to encrypt/decrypt your passwords. Of course there are programs designed to do this, they may even be already present by default in your Mac. Sometime it would be necessary to add one extra program, paid or free.
+Have your heard this term 'password chaos'? This is when you exposed to necessity to keep creating stronger passwords, not re-using them across resourses, replacing them every now and then and so on. The only solution seems to be using special programs to encrypt/decrypt your passwords. Of course there are programs designed to do this, they may even be already present by default in your computer. If not it would be necessary to add one extra program, paid or free.
 
-I had a different idea, why can't we to use Public Key Cryptography to enrypt simple text or data tables with R Statistical Software? Indeed it appeared to be extremely easy. All you need is 10 lines of code... Just read the text below to get a feel
+I had a different idea. Why can't we use **Public Key Cryptography** to enrypt simple text or data tables with *R* Statistical Software? Indeed, it appeared to be extremely easy. All you need is **10 lines of code**... Just read the text below to get a feel
 
 Cryptography
 ------------
 
-Goint to internals of **Cryptography** is something really not for everybody. It smells complex math and must be a lot of code behind... It's also something related to conspiracy stories, spy scandals, NSA and so on. But it's also exciting new technologies like blockchain, new businesses, new opportunity! Sometimes people are even using this technology without even noticing it... think about end to end encryption on your What's Up messenger...
+Going to internals of **Cryptography** is something really not for everybody. It smells complex math and must be a lot of code behind... It's also something related to conspiracy stories, spy scandals, NSA and so on. But it's also exciting new technologies like blockchain, new businesses, new opportunity! Sometimes people are even using this technology without even noticing it... think about end to end encryption on your **What's Up** messenger...
 
 Public Key Cryptography
 -----------------------
 
-**Public Key Cryptography** is a type of Cryptographic system that uses set's of keys Public and Private. These keys in combination with a fixed algorithm are used to Encrypt aka Lock information or Decrypt aka Unlock information. Let's have a quick summary of what are those and how they are made. And we will also look into the process itself by encrypting a popular phrase 'Hello World'. I will be using **R** package **openssl** to demonstrate that. For the sake of make things 'easy' and not generating intermediate objects I will also load **tidyverse** package
+**Public Key Cryptography** is a type of Cryptographic system that uses set's of keys. They are known to be Public and Private. These keys in combination with a fixed algorithm are used to Encrypt or Lock information and to Decrypt or Unlock information. Let's have a quick summary of what are those and how are they made. In order to make things really interesting lets look into the process itself by encrypting and decrypting a popular phrase **'Hello World'**. I will be using **R** package **openssl** to demonstrate that. For the sake of make things 'easy' and not generating intermediate objects I will also load **tidyverse** package to use the `pipe|%>%`
 
 ``` r
 library(openssl)
@@ -24,7 +24,7 @@ library(tidyverse)
 
 ### Private Key
 
-Private Key is generated from a large random number. Private Key can be easily generated in R and written as a file persistently. You can specify how 'big' your key should be with a 'bits' argument. Password argument is optional, but highly recommended and it is required to 'unlock' private key when you use it from file:
+Private Key is generated from a large random number. Below code in R will generate the Private Key and write it as a file persistently. You can specify how 'big' your key should be with a 'bits' argument. Password argument is optional, but highly recommended and it is required to 'unlock' private key when you use it from file:
 
 ``` r
 # generate your private key (NB: make sure to do back up copy!!!)
@@ -35,6 +35,7 @@ rsa_keygen(bits = 2099) %>%
 Just for the sake to understand what is that 'animal' we can read it back and see how this key is composed:
 
 ``` r
+# read private key from file and output structure of the object
 read_key("my_key.pem",password = "") %>% str()
 ```
 
@@ -44,24 +45,24 @@ read_key("my_key.pem",password = "") %>% str()
     ##  $ pubkey:List of 5
     ##   ..$ type       : chr "rsa"
     ##   ..$ size       : int 2099
-    ##   ..$ ssh        : chr "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABBwUMM1uDj ..."
-    ##   ..$ fingerprint:Classes 'hash', 'md5'  raw [1:16] 88 50 14 51 ...
+    ##   ..$ ssh        : chr "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABBwZ0jN7Kd ..."
+    ##   ..$ fingerprint:Classes 'hash', 'md5'  raw [1:16] a0 44 5b d9 ...
     ##   ..$ data       :List of 2
     ##   .. ..$ e:Class 'bignum'  raw [1:3] 01 00 01
-    ##   .. ..$ n:Class 'bignum'  raw [1:263] 05 0c 33 5b ...
+    ##   .. ..$ n:Class 'bignum'  raw [1:263] 06 74 8c de ...
     ##  $ data  :List of 8
     ##   ..$ e :Class 'bignum'  raw [1:3] 01 00 01
-    ##   ..$ n :Class 'bignum'  raw [1:263] 05 0c 33 5b ...
-    ##   ..$ p :Class 'bignum'  raw [1:132] 03 37 a4 fd ...
-    ##   ..$ q :Class 'bignum'  raw [1:132] 01 91 a2 38 ...
-    ##   ..$ d :Class 'bignum'  raw [1:263] 04 ef 4b 9a ...
-    ##   ..$ dp:Class 'bignum'  raw [1:131] 2a de 40 78 ...
-    ##   ..$ dq:Class 'bignum'  raw [1:131] 1d 8e 99 a2 ...
-    ##   ..$ qi:Class 'bignum'  raw [1:132] 00 9d ef 96 ...
+    ##   ..$ n :Class 'bignum'  raw [1:263] 06 74 8c de ...
+    ##   ..$ p :Class 'bignum'  raw [1:132] 03 6f fc 74 ...
+    ##   ..$ q :Class 'bignum'  raw [1:132] 01 e0 bf dc ...
+    ##   ..$ d :Class 'bignum'  raw [1:263] 00 a1 d5 51 ...
+    ##   ..$ dp:Class 'bignum'  raw [1:132] 03 01 43 b5 ...
+    ##   ..$ dq:Class 'bignum'  raw [1:131] 5e 91 df 81 ...
+    ##   ..$ qi:Class 'bignum'  raw [1:132] 01 41 0f 0d ...
 
 You can already notice object ***p**u**b**k**e**y* \* \**w**h**i**c**h**h**a**s**a* \* \*data** elements that are exactly the same as elements of the data elements of the **private key**
 
-**Takeaway \#1** : Private Key contains Public Key
+**Takeaway \#1** : `Private Key` contains `Public Key`
 
 ### Public Key
 
@@ -113,9 +114,9 @@ This vector of numbers can be encrypt with function **encrypt\_envelope()** pass
 ```
 
     ## List of 3
-    ##  $ iv     : raw [1:16] ba 09 84 b5 ...
-    ##  $ session: raw [1:263] 00 00 4f a2 ...
-    ##  $ data   : raw [1:48] 62 96 dc 60 ...
+    ##  $ iv     : raw [1:16] c3 36 ad 67 ...
+    ##  $ session: raw [1:263] 02 17 8d 83 ...
+    ##  $ data   : raw [1:48] dd e6 fd b4 ...
 
 You always get a list of raw vectors as an R object. We can store this object using **read\_rds()** function
 
