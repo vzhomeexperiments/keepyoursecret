@@ -37,3 +37,6 @@ vignettes/*.pdf
 Blog/my_key.pem
 Blog/message.enc
 Blog/my_key.pub
+
+# banished .DS_Store
+.DS_Store
