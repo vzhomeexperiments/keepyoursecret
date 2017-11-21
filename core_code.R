@@ -4,9 +4,12 @@
 # (C) 2017 Vladimir Zhbanko, vz.home.experiments@gmail.com
 # Enjoying the code? Join the course https://udemy.com/keep-secret-under-control
 
-# Used Libraries:
+### Used Libraries:
+# install.packages("openssl")
+# install.packages("tidyverse")
 library(openssl)
 library(tidyverse)
+
 
 #### KEY MANAGEMENT ####
 # generate your private key (NB: make sure to do back up copy!!!)

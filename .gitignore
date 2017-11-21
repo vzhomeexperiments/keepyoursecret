@@ -40,3 +40,6 @@ Blog/my_key.pub
 
 # banished .DS_Store
 .DS_Store
+
+# course script
+CourseScript.Rmd
