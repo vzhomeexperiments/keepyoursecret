@@ -19,7 +19,7 @@ Purpose of this lecture is to give a very basic `start up` into `R`
 
 #### Verify Packages Installed
 
-```{r, eval=FALSE, include=TRUE}
+```{r}
 # Used Libraries:
 library(openssl)
 library(tidyverse)
