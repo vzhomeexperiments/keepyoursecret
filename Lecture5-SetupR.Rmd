@@ -1,38 +1,86 @@
 ---
-title: "Keep your secrets under control - Cryptography for All"
+title: "Some Basics notion and practice about R"
 output:
-  html_document: default
   html_notebook: default
+  html_document: default
   word_document: default
 ---
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
-#### Disclamer
-
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
-
-#### Lecture 5 Getting started with R
+#### Getting started with R
 
 Purpose of this lecture is to give a very basic `start up` into `R`
 
 
-#### Verify Packages Installed
-
-```{r}
-# Used Libraries:
-library(openssl)
-library(tidyverse)
-
-
-
-```
-
-
-##### R Script 'Sender.R'
+#### Verify Packages Installed and basic commands
 
 ```{r, eval=FALSE, include=TRUE}
+######################## This is a comment
+# Note that you can select the code and press CTRL + ENTER / CMD + ENTER (Mac)
 
-## clean console and history...
+# to install packages
+install.packages("tidyverse")
 ```
 
+```{r}
+# to load packages
+library(tidyverse)
+```
+
+```{r}
+# to check packages loaded and write them to the vector
+myPackagesLoaded <- search()
+```
+
+```{r}
+# to visualize the vector
+print(myPackagesLoaded)
+```
+
+```{r}
+# or just with
+myPackagesLoaded
+```
+
+```{r}
+# dataframe is important data object in R. Different columns can have different data types (e.g. string, numeric, etc)
+myDataFrame <- iris
+
+# visualize 'head' or 'tail' of the object
+head(myDataFrame, 4) # you can specify number of object to visualize
+```
+
+```{r}
+# to delete objects from global environment
+rm(myPackagesLoaded, myDataFrame)
+
+# to see help page of the function
+?rm
+
+```
+
+#### Concept of 'pipes'
+
+Probably very powerful concept in R is to use 'pipe' or `%>%` construct. It is allowing you to pass the result of the function as a first argument of the following function:
+
+```{r}
+# extracting species column
+species1 <- myDataFrame %>% select(Species)
+```
+
+is the same as to do:
+
+```{r}
+# without a 'pipe'
+species2 <- select(myDataFrame, Species)
+```
+
+The result is the same
+
+```{r}
+# check if the objects are identical
+identical(species1, species2)
+```
+
+#### 
