@@ -1,8 +1,8 @@
 ---
 title: "Some Basics notion and practice about R"
 output:
-  html_notebook: default
   html_document: default
+  html_notebook: default
   word_document: default
 ---
 
@@ -95,22 +95,16 @@ myDataFrame %>%
   
 ```
 
-```{r}
-# to delete objects from global environment
-rm(myPackagesLoaded, myDataFrame)
-# to delete everything from environment
-rm(list = ls())
-```
 
 #### Your turn
 
 1. This construct below is made for package 'tidyverse'. Adapt it for package 'openssl'!!!
 
 ```{r}
-# check if you have package 'tidyverse' installed
-if ("tidyverse" %in% rownames(installed.packages())) { 
-  print("Package tidyverse is installed") } else {
-    install.packages("tidyverse")
+# check if you have package 'openssl' installed
+if ("openssl" %in% rownames(installed.packages())) { 
+  print("Package openssl is installed") } else {
+    install.packages("openssl")
   }
 ```
 
@@ -127,8 +121,12 @@ specialDF <- myDataFrame %>%
   select(Species, RatioSP)
 
 # use dataset 'specialDF' to manipulate with the data. Hint: use function 'filter()'
-#specialDF %>% 
- #...
+specialDF %>% 
+ filter(Species == 'setosa') %>% 
+  filter(RatioSP > 4) %>% 
+  filter(RatioSP < 6) %>% 
+  count()
 
 ```
+
 
