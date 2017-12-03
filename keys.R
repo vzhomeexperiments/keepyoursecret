@@ -1,7 +1,8 @@
 # ONLY FOR TRAINING PURPOSES
-# UDEMY Course: "Keep Your Secrets Under Your Control"
+# UDEMY Course: "Cryptography is more fun with R!"
 # (C) 2017 Vladimir Zhbanko, vz.home.experiments@gmail.com
 # Enjoying the code? Join the course https://udemy.com/keep-secret-under-control
+
 
 # Used Libraries:
 library(openssl)
