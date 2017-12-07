@@ -1,4 +1,4 @@
-L18
+Lecture 18 Slides
 ========================================================
 author: Vladimir Zhbanko
 date: 
@@ -41,10 +41,12 @@ Data <- getDataFromSQL("DB_NAME.dbo.WRK_TABLENAME")
 Solution Preparation - place our Private Key to the dedicated folder
 ============================================================
 
-In order to make everything happen you should generate your private key and place it to the specific folder. 
-For example, I will create a folder named `"~/ShinyApps/.rsa/"` and will place my private key `"key.me"`. Working application or script can get access to this folder using the following path: `"~/ShinyApps/.rsa/key.me"`
 
-Notice that by using `'.'` before the folder name will make this folder hidden. You may potentially not seeing it... This is small additional protection for your key...
+* Create a folder named **"~/ShinyApps/.rsa/"**
+* place private key **"key.pem"** 
+* Access with path: **"~/ShinyApps/.rsa/key.pem"**
+
+**Note:**  `'.'` - make folder hidden!
 
 
 
@@ -61,7 +63,7 @@ library(tidyverse)
   # serialize the object
   serialize(connection = NULL) %>% 
   # encrypt the object
-  encrypt_envelope("~/ShinyApps/.rsa/key.me") %>% 
+  encrypt_envelope("~/ShinyApps/.rsa/key.pem") %>% 
   # write encrypted data to File
   write_rds("Public.rds")
 ```
@@ -105,8 +107,8 @@ Solution P3: Retrieve the password
 out <- readRDS("Public.rds")
 
 # decrypting the password using public data list and private key
-pass <- unserialize(decrypt_envelope(out$data, out$iv, out$session, "~/ShinyApps/.rsa/key.me", password = ""))
-
+pass <- decrypt_envelope(out$data, out$iv, out$session, "~/ShinyApps/.rsa/key.pem", password = "") %>% 
+  unserialize()
 ```
 
 Solution P4: Get the data and clear password
