@@ -18,14 +18,14 @@ By joining this course or using material from the course you agree that all mate
 
 Hello and welcome back to the course. 
 
-This lecture is optional and it is intended to have fun doing some research in R
+This lecture is optional and it is intended to have fun doing some research in *R*
 
 #### How long will it take?
 
-This little experiment will be dedicated to understanding how long will it take to encrypt information if we change two variables:
+This will be an experiment to understanding how long will it take to encrypt information if we change two variables:
 
 * if we use larger dataset
-* if we use longer key
+* if we use longer ke
 
 #### Inputs
 
@@ -34,7 +34,7 @@ A. I will use csv dataset containing many rows, namely
 ```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 # import
-ConsumerComplaints <- read_csv("~/6_CoursesUdemy/05_Keepyoursecret/keepyoursecret/ConsumerComplaints.csv")
+ConsumerComplaints <- read_csv("ConsumerComplaints.csv")
 # view dimensions
 dim(ConsumerComplaints)
 ```
@@ -95,12 +95,6 @@ Encrypt_Decrypt <- function(x, key){
 
 ```
 
-Just test function first...
-
-```{r}
-# seems to be very fast!
-res <- Encrypt_Decrypt(ConsumerComplaints_quart, key_2)
-```
 
 #### Benchmarking experiment
 
@@ -134,7 +128,7 @@ res <- benchmark_io(runs = 1, size = 5)
 ```
 
 ```{r}
-plot(res)
+res
 ```
 
 #### Benchmarking experiment
@@ -144,7 +138,10 @@ plot(res)
 library(microbenchmark)
 ```
 
-```{r}
+Let's run our experiment! By default each configuration will run 100 times so we will have 900 registrations to do... It might take a while:)
+
+```{r, eval=FALSE, include=TRUE}
+# running the experiment 100 times each!
 experiment <- microbenchmark(sol1 = Encrypt_Decrypt(ConsumerComplaints_quart, key_1),
                              sol2 = Encrypt_Decrypt(ConsumerComplaints_half, key_1),
                              sol3 = Encrypt_Decrypt(ConsumerComplaints, key_1),
@@ -154,18 +151,30 @@ experiment <- microbenchmark(sol1 = Encrypt_Decrypt(ConsumerComplaints_quart, ke
                              sol7 = Encrypt_Decrypt(ConsumerComplaints_quart, key_3),
                              sol8 = Encrypt_Decrypt(ConsumerComplaints_half, key_3),
                              sol9 = Encrypt_Decrypt(ConsumerComplaints, key_3),
-                             times = 10
+                             times = 100
                             )
+write_rds(experiment, "experiment.rds") 
+```
+
+```{r}
+# see the plot
+experiment <- read_rds("experiment.rds") 
+plot(experiment, xlab = "Configuration ID", ylab = "Time in nanoseconds")
 ```
 
 
 
+```{r}
+# the longest solution:
+microbenchmark(so = Encrypt_Decrypt(ConsumerComplaints, key_3))
+```
 
+#### Results
 
+Time to encrypt and decrypt does not seem to be related to the size of the key but it is related on the size of the dataset
+It is roughly need 1/2 second to encrypt, write the file, read the file and decrypt information
 
-
-
-
+Enough research! Thanks for reading! 
 
 
 
