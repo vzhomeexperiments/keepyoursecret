@@ -1,30 +1,11 @@
----
-title: "Cryptorgraphy is more fun with R - Learn and use Public Key Cryptography with R Statistical Software"
-output:
-  html_document: default
-  html_notebook: default
-  word_document: default
----
+L18
+========================================================
+author: Vladimir Zhbanko
+date: 
+autosize: true
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-https://www.udemy.com/keep-your-secrets-under-control
-
-#### Disclamer
-
-By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of **OpenSSL** software library in `R Statistical Software`. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. You are using the material of the course at your own risk!
-
-#### Lecture 18 Stop exposing your passwords in clear text!
-
-Hello and welcome back to the course. 
-
-This lecture will be dedicated to achieve simple goal: "How to avoid keeping password in our scripts we checking in to the Version Control Repositories". This lecture also compliment previous lecture about using Public Version control repository. In fact if you use package `secret` then you should be already fine. This lecture is only useful if you don't plan to collaborate and just want to avoid exposing password in your code directly using `openssl`
-
-#### Scenario
-
-Usually in your R script or shiny App you may have a function that contact SQL server or alike. This function may need user credentials such as *User Name* and *Passwords*. In this lecture we will expose one way avoiding this by encrypting your password in your project and keeping your private key inside of your Server File System.
-
-Let's expose original code containing password in clear text:
+Scenario: Password is in clear text
+========================================================
 
 ```{r, eval=FALSE, include=TRUE}
 # in this example we use function from RODBC library
@@ -56,22 +37,25 @@ Data <- getDataFromSQL("DB_NAME.dbo.WRK_TABLENAME")
 
 ```
 
-You don't want to keep this code in your Version Control Repository or even in your Documentation!!!
 
-#### Solution
-
-##### Preparation - place our Private Key to the dedicated folder
+Solution Preparation - place our Private Key to the dedicated folder
+============================================================
 
 In order to make everything happen you should generate your private key and place it to the specific folder. 
 For example, I will create a folder named `"~/ShinyApps/.rsa/"` and will place my private key `"key.me"`. Working application or script can get access to this folder using the following path: `"~/ShinyApps/.rsa/key.me"`
 
 Notice that by using `'.'` before the folder name will make this folder hidden. You may potentially not seeing it... This is small additional protection for your key...
 
-##### Encrypt you password - do this once!
+
+
+Solution P1: Encrypt you password - do this once!
+============================================================
 
 Next thing we need to proceed is to encrypt our password. We know how to do this already:
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
+library(openssl)
+library(tidyverse)
 ## Encrypt with PRIVATE key (e.g. use this code yourself)
 "YourNotExposedPassword" %>% 
   # serialize the object
@@ -86,11 +70,11 @@ Next thing we need to proceed is to encrypt our password. We know how to do this
 
 When you run this code file 'Public.rds' will be generated. It will contain our password. You can decide if you want to check it it to version control or not. This object must be available for your Script or ShinyApp
 
-##### Adapting function
-
+Solution P2: Adapting function
+==============================================================
 We rewrite this function and simply remove the password
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # function that connects to SQL and return DF object, there is no password in clear text...!!!
 getDataFromSQL <- function(wrkTableName = "WRK_TABLE_NAME",
                            connection = "SQL_SERVER_NAME",
@@ -113,11 +97,10 @@ getDataFromSQL <- function(wrkTableName = "WRK_TABLE_NAME",
 ```
 
 
-##### Retrieve the password
+Solution P3: Retrieve the password
+===============================================================
 
-Finally we can retrieve our key
-
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # retrieve password
 out <- readRDS("Public.rds")
 
@@ -126,25 +109,18 @@ pass <- unserialize(decrypt_envelope(out$data, out$iv, out$session, "~/ShinyApps
 
 ```
 
-And finally we can use our code to get the data
+Solution P4: Get the data and clear password
+===============================================================
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # data frame containing flow information
 DF_Data <- getDataFromSQL("DB_NAME.dbo.WRK_TABLENAME", passID = pass)
 
 ```
 
-##### Clear password
-
-The last thing we must do is to remove passwords from the memory
-
-```{r}
+```{r, eval=FALSE, include=TRUE}
 # remove password object
 rm(pass, out)
 ```
 
-
-#### Conclusion
-
-We can 
 
