@@ -1,4 +1,4 @@
-DISCLAMER
+DISCLAIMER
 
 By joining this course or using material from the course you agree that all materials of the course are solely provided "as is" without any guarantee of functionality. All methods are provided for training purposes. Course developed by non security expert by explaining the practical use of OpenSSL software library in R Statistical Language. Author of the course may express opinions that may be not confirmed by deep software analysis. There is a risk that you can loose your information in case you are not properly follow the instructions or by loosing your private key or alike. Make sure you know what you do at any time when using the material of the course and beyond. Always test your knowledge on dummy data before applying it to real data... Memory areas for your private key, secrets, or passphrase are not securely cleaned after use. 
 
