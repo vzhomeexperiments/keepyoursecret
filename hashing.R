@@ -1,9 +1,12 @@
 # hash - generating random passwords
+# (C) 2017,2022 Vladimir Zhbanko,
+# Join/Share with https://www.udemy.com/course/keep-your-secrets-under-control/?referralCode=5B78D58E7C06AFFD80AE
 library(openssl)
-library(tidyverse)
+library(magrittr)
+library(readr)
 
 # check help
-?hashing
+?openssl::hashing
 
 # this is 'googleable' what you should not do!
 "john" %>% sha512()
@@ -31,6 +34,7 @@ generate_password <- function(salt = "Cryptography is cool!", pass_begin = 3, pa
     substring(first = pass_begin, last = pass_end) %>%
     as.data.frame.character() %>%
     write_tsv(file_name)
+  print("Password was written to the file: p.txt")
 }
 
 # using function

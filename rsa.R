@@ -1,8 +1,8 @@
 # generating keys with openssl
 # ONLY FOR TRAINING PURPOSES
 # UDEMY Course: "Cryptography is more fun with R!"
-# (C) 2017 Vladimir Zhbanko, vz.home.experiments@gmail.com
-# Enjoying the code? Join the course https://udemy.com/keep-secret-under-control
+# (C) 2017,2022 Vladimir Zhbanko,
+# Join/Share with https://www.udemy.com/course/keep-your-secrets-under-control/?referralCode=5B78D58E7C06AFFD80AE
 # library openssl
 library(openssl)
 
@@ -40,4 +40,4 @@ out <- readRDS("public.data")
 # decrypted password
 orig <- unserialize(decrypt_envelope(out$data, out$iv, out$session, read_key("key.me",der = TRUE)))
 
-# OPTION1: read the provided file from the user, use Shiny inputFile Function
+
