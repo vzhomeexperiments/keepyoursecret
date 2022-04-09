@@ -1,21 +1,25 @@
 # R Script to Encrypt/Decrypt information
 # ONLY FOR TRAINING PURPOSES
 # UDEMY Course: "Cryptography is more fun with R!"
-# (C) 2017 Vladimir Zhbanko, vz.home.experiments@gmail.com
-# Enjoying the code? Join the course https://udemy.com/keep-secret-under-control
+# (C) 2017,2022 Vladimir Zhbanko,
+# Join/Share with https://www.udemy.com/course/keep-your-secrets-under-control/?referralCode=5B78D58E7C06AFFD80AE
 
 # Used Libraries:
 library(openssl)
-library(tidyverse)
+library(magrittr)
+library(readr)
+
+# create temporary path (check output of tempdir() to check the result)
+path_data <- normalizePath(tempdir(),winslash = "/")
 
 #### KEY MANAGEMENT ####
-## generate your private key (NB: make sure to do back up copy!!!)
-rsa_keygen(bits = 2099) %>% 
-  write_pem(path = "private.key", password = "udemy")
+# generate your private key (NB: make sure to do back up copy!!!)
+rsa_keygen(bits = 2999) %>% 
+  write_pem(path = file.path(path_data, "private.key"), password = "")
 # generate your public key (NB: optional. Use Private Key to encrypt/decrypt)
-read_key(file = "private.key", password = "udemy") %>% 
+read_key(file = file.path(path_data, "private.key"), password = "") %>% 
   # extract element of the list and write to file
-  `[[`("pubkey") %>% write_pem("public.key")
+  `[[`("pubkey") %>% write_pem(path = file.path(path_data, "public.key"))
 
 ## Storing your key on the USB Drive
 # writing private key on Mac USB key
